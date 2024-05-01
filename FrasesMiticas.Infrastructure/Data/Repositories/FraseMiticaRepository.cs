@@ -18,7 +18,7 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
 
         public void Update(FraseMitica entity) => repository.Update(entity);
 
-        public IEnumerable<FraseMitica> Get() => repository.Get();
+        public IEnumerable<FraseMitica> Get() => repository.Get().OrderByDescending(e => e.Date);
 
         public FraseMitica Get(int id) => repository.Where(e => e.Id == id).SingleOrDefault();
 
