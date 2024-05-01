@@ -7,12 +7,14 @@
             <mat-label for="username">Nombre de usuario</mat-label>
             <input id="username" type="text" matInput placeholder="Nombre de usuario" formControlName="username" required>
             @if (errorEmptyUsername) { <mat-error>Debes indicar un nombre de usuario</mat-error> }
+            @if (errorLogin) { <mat-error>Usuario o contraseña inválidos</mat-error> }
         </mat-form-field>
 
         <mat-form-field>
             <mat-label for="password">Contraseña</mat-label>
             <input id="password" type="password" matInput placeholder="Contraseña" formControlName="password" required>
             @if (errorEmptyPassword) { <mat-error>Debes indicar una contraseña</mat-error> }
+            @if (errorLogin) { <mat-error>Usuario o contraseña inválidos</mat-error> }
         </mat-form-field>
 
         <button

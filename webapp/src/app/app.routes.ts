@@ -11,7 +11,7 @@ export const routes: Routes =
         component: PhrasesComponent
     },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    //{ path: 'register', component: RegisterComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '**', redirectTo: '/home', pathMatch: 'full' }
 ];

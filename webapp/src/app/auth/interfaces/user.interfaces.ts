@@ -13,3 +13,10 @@ export interface UserRegister
     fullName: string;
     isSuperAdmin: boolean;
 }
+
+export interface Auth
+{
+    data: { token: string };
+    success: boolean;
+    message: string | null;
+}
