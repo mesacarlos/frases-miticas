@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FrasesMiticas.Core.Dtos.AppUsers;
-using FrasesMiticas.Web.ViewModels.Responses;
+using FrasesMiticas.Api.ViewModels.Responses;
 
-namespace FrasesMiticas.Web.Mapping
+namespace FrasesMiticas.Api.Mapping
 {
     public class AppUserResponseProfile : Profile
     {

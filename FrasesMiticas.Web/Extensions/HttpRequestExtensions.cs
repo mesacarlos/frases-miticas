@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrasesMiticas.Web.Extensions
+namespace FrasesMiticas.Api.Extensions
 {
     public static class HttpRequestExtensions
     {

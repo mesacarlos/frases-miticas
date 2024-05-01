@@ -2,12 +2,12 @@
 using FrasesMiticas.Core.Dtos.FrasesMiticas;
 using FrasesMiticas.Core.Interfaces;
 using FrasesMiticas.Core.Interfaces.Services;
-using FrasesMiticas.Web.Filters;
-using FrasesMiticas.Web.ViewModels.Requests;
+using FrasesMiticas.Api.Filters;
+using FrasesMiticas.Api.ViewModels.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FrasesMiticas.Web.Controllers
+namespace FrasesMiticas.Api.Controllers
 {
     [Route("api/frases-miticas")]
     [ApiController]

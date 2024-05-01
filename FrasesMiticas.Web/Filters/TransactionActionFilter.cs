@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FrasesMiticas.Web.Filters
+namespace FrasesMiticas.Api.Filters
 {
     public class TransactionActionFilter : IActionFilter
     {

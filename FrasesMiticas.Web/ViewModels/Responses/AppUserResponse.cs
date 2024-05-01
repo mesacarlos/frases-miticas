@@ -1,6 +1,6 @@
 ﻿using FrasesMiticas.Core.Dtos;
 
-namespace FrasesMiticas.Web.ViewModels.Responses
+namespace FrasesMiticas.Api.ViewModels.Responses
 {
     public record AppUserResponse
     {

@@ -2,7 +2,7 @@
 using FrasesMiticas.Core.Interfaces.Tokens;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace FrasesMiticas.Web.Filters
+namespace FrasesMiticas.Api.Filters
 {
     public class AuthenticationFilter : IAuthorizationFilter
     {

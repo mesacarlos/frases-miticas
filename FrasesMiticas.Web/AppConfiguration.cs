@@ -3,7 +3,7 @@ using FrasesMiticas.Core.Interfaces.Configuration;
 using Microsoft.Extensions.Configuration;
 using IMsConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
-namespace FrasesMiticas.Web
+namespace FrasesMiticas.Api
 {
     public class AppConfiguration : IAppConfiguration
     {

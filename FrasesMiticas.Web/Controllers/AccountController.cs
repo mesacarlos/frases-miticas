@@ -4,15 +4,15 @@ using FrasesMiticas.Core.Interfaces;
 using FrasesMiticas.Core.Interfaces.Encryption;
 using FrasesMiticas.Core.Interfaces.Services;
 using FrasesMiticas.Core.Interfaces.Tokens;
-using FrasesMiticas.Web.Filters;
-using FrasesMiticas.Web.ViewModels.Requests;
-using FrasesMiticas.Web.ViewModels.Responses;
+using FrasesMiticas.Api.Filters;
+using FrasesMiticas.Api.ViewModels.Requests;
+using FrasesMiticas.Api.ViewModels.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FrasesMiticas.Web.Controllers
+namespace FrasesMiticas.Api.Controllers
 {
     [Route("api")]
     [ApiController]

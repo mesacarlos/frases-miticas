@@ -1,4 +1,4 @@
-﻿namespace FrasesMiticas.Web.ViewModels.Requests
+﻿namespace FrasesMiticas.Api.ViewModels.Requests
 {
     public record AppUserUpdateRequest
     {

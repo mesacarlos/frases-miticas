@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace FrasesMiticas.Web.Authentication
+namespace FrasesMiticas.Api.Authentication
 {
     public class AuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

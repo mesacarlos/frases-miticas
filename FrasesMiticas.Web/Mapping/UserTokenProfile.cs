@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FrasesMiticas.Core.Interfaces.Tokens;
-using FrasesMiticas.Web.ViewModels.Responses;
+using FrasesMiticas.Api.ViewModels.Responses;
 
-namespace FrasesMiticas.Web.Mapping
+namespace FrasesMiticas.Api.Mapping
 {
     public class UserTokenProfile : Profile
     {

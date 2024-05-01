@@ -1,7 +1,7 @@
-using FrasesMiticas.Web.Extensions;
-using FrasesMiticas.Web.Filters;
-using FrasesMiticas.Web.Formatters;
-using FrasesMiticas.Web.Middlewares;
+using FrasesMiticas.Api.Extensions;
+using FrasesMiticas.Api.Filters;
+using FrasesMiticas.Api.Formatters;
+using FrasesMiticas.Api.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;

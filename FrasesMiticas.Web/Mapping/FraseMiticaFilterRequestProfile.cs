@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FrasesMiticas.Core.Dtos.FrasesMiticas;
-using FrasesMiticas.Web.ViewModels.Requests;
+using FrasesMiticas.Api.ViewModels.Requests;
 
-namespace FrasesMiticas.Web.Mapping
+namespace FrasesMiticas.Api.Mapping
 {
     public class FraseMiticaFilterRequestProfile : Profile
     {

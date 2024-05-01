@@ -1,5 +1,5 @@
 ﻿using FrasesMiticas.Core.Exceptions;
-using FrasesMiticas.Web.ViewModels.Responses;
+using FrasesMiticas.Api.ViewModels.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace FrasesMiticas.Web.Formatters
+namespace FrasesMiticas.Api.Formatters
 {
     public class ResponseFormatter : SystemTextJsonOutputFormatter
     {

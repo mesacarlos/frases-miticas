@@ -1,4 +1,4 @@
-﻿namespace FrasesMiticas.Web.ViewModels.Responses
+﻿namespace FrasesMiticas.Api.ViewModels.Responses
 {
     public record Response
     {

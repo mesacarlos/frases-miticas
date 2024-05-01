@@ -10,9 +10,9 @@ using FrasesMiticas.Infrastructure.Authentication.Encryption;
 using FrasesMiticas.Infrastructure.Authentication.Tokens;
 using FrasesMiticas.Infrastructure.Data;
 using FrasesMiticas.Infrastructure.Data.Repositories;
-using FrasesMiticas.Web.Authentication;
-using FrasesMiticas.Web.Filters;
-using FrasesMiticas.Web.ViewModels.Responses;
+using FrasesMiticas.Api.Authentication;
+using FrasesMiticas.Api.Filters;
+using FrasesMiticas.Api.ViewModels.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +22,7 @@ using System.Linq;
 using System.Reflection;
 
 
-namespace FrasesMiticas.Web.Extensions
+namespace FrasesMiticas.Api.Extensions
 {
     public static class IServiceCollectionExtensions
     {
