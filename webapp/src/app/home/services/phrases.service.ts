@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { GetPhrases } from "../interfaces/phrases.interfaces";
+import { AddPhrase, GetPhrases } from "../interfaces/phrases.interfaces";
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
 
@@ -22,19 +22,36 @@ export class PhrasesService
         return this.http.get<any>(
             `${ environments.API_GATEWAY }/frases-miticas?PageSize=${ pageSize }&PageIndex=${ pageIndex }`,
             { headers: this.headers }
-        )
-            .pipe(
-                map(response =>
-                    {
-                        const phrases: GetPhrases = {
-                            phrases: response.data.data,
-                            totalItems: response.data.totalItems
-                         };
+        ).pipe(
+            map(response =>
+                {
+                    const phrases: GetPhrases = {
+                        phrases: response.data.data,
+                        totalItems: response.data.totalItems
+                        };
 
-                        return phrases;
-                    }
-                ),
-                catchError(() => of(null))
-            );
+                    return phrases;
+                }
+            ),
+            catchError(() => of(null))
+        );
+    }
+
+    public addPhrase(phrase: AddPhrase): Observable<boolean>
+    {
+        return this.http.post<any>(
+            `${ environments.API_GATEWAY }/frases-miticas`,
+            {
+                "author": phrase.author,
+                "date": phrase.date.toISOString(),
+                "text": phrase.text,
+                "context": phrase.text
+            },
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response
+            ),
+            catchError(() => of(false))
+        );
     }
 }

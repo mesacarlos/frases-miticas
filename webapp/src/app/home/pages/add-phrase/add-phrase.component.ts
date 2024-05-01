@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { MaterialModules } from '../../../../material/material.modules';
 import { AddPhrase } from '../../interfaces/phrases.interfaces';
+import { PhrasesService } from '../../services/phrases.service';
+import { AlertAddPhraseComponent } from '../alert-add-phrase/alert-add-phrase.component';
 
 @Component({
     selector: 'app-add-phrase',
@@ -22,8 +25,15 @@ import { AddPhrase } from '../../interfaces/phrases.interfaces';
 })
 export class AddPhraseComponent
 {
+    @Output()
+    public sendEvent = new EventEmitter<any>();
     public errorEmptyAuthor: boolean = false;
     public errorEmptyText: boolean = false;
+
+    constructor(
+        private phrasesService: PhrasesService,
+        private snackBar: MatSnackBar
+    ) {}
 
     public phraseForm = new FormGroup({
         author:     new FormControl<string>(''),
@@ -36,6 +46,17 @@ export class AddPhraseComponent
     {
         if (this.thereAreEmptyFields())
             return;
+
+        this.phrasesService.addPhrase(this.currentPhrase)
+            .subscribe(response =>
+            {
+                if (response)
+                {
+                    this.showAlert();
+                    this.phraseForm.reset();
+                    this.sendEvent.emit();
+                }
+            });
     }
 
     get currentPhrase(): AddPhrase
@@ -56,5 +77,12 @@ export class AddPhraseComponent
             this.errorEmptyText = false;
 
         return this.errorEmptyAuthor || this.errorEmptyText;
+    }
+
+    public showAlert(): void
+    {
+        this.snackBar.openFromComponent(AlertAddPhraseComponent, {
+            duration: 4000
+        });
     }
 }
