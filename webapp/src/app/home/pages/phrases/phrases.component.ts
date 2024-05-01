@@ -66,6 +66,8 @@ export class PhrasesComponent implements OnInit
 
     private loadPhrases(pageSize: number = -1, pageIndex: number = 1)
     {
+        this.loading = true;
+
         this.phrasesService.getPhrases(pageSize, pageIndex)
             .subscribe(response =>
             {
