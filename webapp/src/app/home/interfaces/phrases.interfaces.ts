@@ -1,9 +1,10 @@
 export interface Phrase
 {
+    id: number;
     author: string;
-    date: Date;
+    date: string;
     text: string;
-    context: string;
+    context: string | null;
 }
 
 export interface AddPhrase
@@ -12,4 +13,10 @@ export interface AddPhrase
     date: Date;
     text: string;
     context: string;
+}
+
+export interface GetPhrases
+{
+    phrases: Phrase[];
+    totalItems: number;
 }

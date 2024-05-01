@@ -14,7 +14,7 @@ import { MaterialModules } from '../../../../material/material.modules';
 export class CardComponent
 {
     @Input()
-    phrase: Phrase = { author: '', date: new Date(), text: '', context: '' };
+    phrase: Phrase = { id: 0, author: '', date: '', text: '', context: '' };
 
     // implements on init and check if publication like
     public likeIcon: string = 'favorite_border';

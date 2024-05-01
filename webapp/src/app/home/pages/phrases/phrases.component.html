@@ -4,7 +4,19 @@
     <button mat-flat-button color="primary" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
 </div>
 
+@if (loading) {
+    <div class="flex justify-center align-middle mt-60">
+        <mat-spinner></mat-spinner>
+    </div>
+}
+
+@if (phrases.length === 0 && !loading) {
+    <h1 class="text-center text-white text-5xl mt-20">No hay ninguna frase para mostrar</h1>
+}
+
 <div class="mt-4 m-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-5 xl:max-w-screen-xl">
+
+
     @for (phrase of phrases; track $index) {
         <app-card [phrase]="phrase" />
     }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { MaterialModules } from '../../../material/material.modules';
 
@@ -13,6 +13,14 @@ import { MaterialModules } from '../../../material/material.modules';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent
+{
+    constructor(private router: Router) {}
+
+    public logout()
+    {
+        localStorage.clear();
+        this.router.navigate(['/login']);
+    }
 
 }

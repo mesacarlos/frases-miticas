@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
@@ -6,10 +6,13 @@ import { Phrase } from '../../interfaces/phrases.interfaces';
 import { CardComponent } from '../card/card.component';
 import { MaterialModules } from '../../../../material/material.modules';
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
+import { CommonModule } from '@angular/common';
+import { PhrasesService } from '../../services/phrases.service';
 
 @Component({
     standalone: true,
     imports: [
+        CommonModule,
         NavbarComponent,
         CardComponent,
         ...MaterialModules
@@ -17,30 +20,27 @@ import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
     templateUrl: './phrases.component.html',
     styles: ``
 })
-export class PhrasesComponent
+export class PhrasesComponent implements OnInit
 {
-    constructor (public dialog: MatDialog) {}
+    public phrases: Phrase[] = [];
+    public loading: boolean = true;
 
-    public phrases: Phrase[] = [
-        {
-            author: "John Doe",
-            date: new Date("2024-04-30"),
-            text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            context: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        },
-        {
-            author: "Jane Smith",
-            date: new Date("2024-04-29"),
-            text: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            context: ""
-        },
-        {
-            author: "Alice Johnson",
-            date: new Date("2024-04-28"),
-            text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            context: ""
-        }
-    ];
+    constructor (
+        public dialog: MatDialog,
+        private phrasesService: PhrasesService
+    ) {}
+
+    ngOnInit(): void
+    {
+        this.phrasesService.getPhrases()
+            .subscribe(response =>
+            {
+                if (response)
+                    this.phrases = response.phrases;
+
+                this.loading = false;
+            });
+    }
 
     public addPhrase()
     {
