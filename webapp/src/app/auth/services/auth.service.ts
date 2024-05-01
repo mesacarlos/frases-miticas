@@ -26,4 +26,9 @@ export class AuthService
                 catchError(() => of(false))
             );
     }
+
+    public isAuthenticated(): boolean
+    {
+        return !!localStorage.getItem('token');
+    }
 }
