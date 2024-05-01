@@ -1,0 +1,50 @@
+<app-navbar />
+<div class="h-5/6 grid content-center" id="form">
+    <form [formGroup]="userForm" class="flex flex-col content-center mx-auto w-full p-5 lg:p-0 lg:w-5/12">
+        <h1 class="text-4xl text-center mb-4 text-dark dark:text-white">Registro</h1>
+
+        <mat-form-field>
+            <mat-label for="name">Nombre</mat-label>
+            <input type="text" id="name" matInput placeholder="Nombre" formControlName="name" required>
+            @if (errorEmptyName) { <mat-error>Debes indicar un nombre</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="username">Nombre de usuario</mat-label>
+            <input type="text" id="username" matInput placeholder="Nombre de usuario" formControlName="username" required>
+            @if (errorEmptyUsername) { <mat-error>Debes indicar un nombre de usuario</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="email">Correo electrónico</mat-label>
+            <input type="text" id="email" matInput placeholder="Correo electrónico" formControlName="email" required>
+            @if (errorEmptyEmail) { <mat-error>Debes indicar un correo electrónico</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="password">Contraseña</mat-label>
+            <input type="password" id="password" matInput placeholder="Contraseña" formControlName="password" required>
+            @if (errorEmptyPassword) { <mat-error>Debes indicar una contraseña</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="confirmPassword">Repite la contraseña</mat-label>
+            <input type="password" id="confirmPassword" matInput placeholder="Repite la contraseña" formControlName="confirmPassword" required>
+            @if (errorEmptyConfirmPassword) { <mat-error>Debes repetir la contraseña</mat-error> }
+        </mat-form-field>
+
+        <button
+            mat-button
+            mat-flat-button
+            color="primary"
+            (click)="onRegister()"
+        >
+            <mat-icon>add</mat-icon>
+            Crear cuenta
+        </button>
+
+        <div class="flex justify-end mt-5 text-dark dark:text-white">
+            <a routerLink="/login">¿Ya tienes una cuenta?</a>
+        </div>
+    </form>
+</div>

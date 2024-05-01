@@ -1,0 +1,37 @@
+<div class="h-5/6 grid content-center" id="form">
+    <form [formGroup]="phraseForm" class="flex flex-col content-center w-full p-5">
+        <mat-form-field>
+            <mat-label for="author">Autor</mat-label>
+            <input id="author" type="text" matInput placeholder="Autor" formControlName="author" required>
+            @if (errorEmptyAuthor) { <mat-error>Debes indicar un autor</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="text">Frase mítica</mat-label>
+            <textarea matInput placeholder="Frase mítica..." formControlName="text" required></textarea>
+            @if (errorEmptyText) { <mat-error>Debes indicar la frase mítica</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="context">Contexto</mat-label>
+            <textarea matInput placeholder="Contexto..." formControlName="context"></textarea>
+        </mat-form-field>
+
+        <button
+            mat-button
+            mat-flat-button
+            color="primary"
+            (click)="addPhrase()"
+        >
+            <mat-icon>add</mat-icon>
+            Añadir
+        </button>
+    </form>
+</div>
