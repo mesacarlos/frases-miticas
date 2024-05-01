@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { MaterialModules } from '../../../../material/material.modules';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+
+import { MaterialModules } from '../../../../material/material.modules';
 import { UserLogin } from '../../interfaces/user.interfaces';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
@@ -43,15 +44,8 @@ export class LoginComponent
 
     private thereAreEmptyFields(): boolean
     {
-        if (this.currentUser.username === '')
-            this.errorEmptyUsername = true;
-        else
-            this.errorEmptyUsername = false;
-
-        if (this.currentUser.password === '')
-            this.errorEmptyPassword = true;
-        else
-            this.errorEmptyPassword = false;
+        this.errorEmptyUsername = this.currentUser.username === '';
+        this.errorEmptyPassword = this.currentUser.password === '';
 
         return this.errorEmptyUsername || this.errorEmptyPassword;
     }

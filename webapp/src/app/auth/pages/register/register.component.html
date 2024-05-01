@@ -4,9 +4,9 @@
         <h1 class="text-4xl text-center mb-4 text-dark dark:text-white">Registro</h1>
 
         <mat-form-field>
-            <mat-label for="name">Nombre</mat-label>
-            <input type="text" id="name" matInput placeholder="Nombre" formControlName="name" required>
-            @if (errorEmptyName) { <mat-error>Debes indicar un nombre</mat-error> }
+            <mat-label for="fullName">Nombre completo</mat-label>
+            <input type="text" id="fullName" matInput placeholder="Nombre completo" formControlName="fullName" required>
+            @if (errorEmptyFullName) { <mat-error>Debes indicar un nombre</mat-error> }
         </mat-form-field>
 
         <mat-form-field>

@@ -6,9 +6,10 @@ export interface UserLogin
 
 export interface UserRegister
 {
-    name: string;
     username: string;
     email: string;
     password: string;
     confirmPassword: string;
+    fullName: string;
+    isSuperAdmin: boolean;
 }

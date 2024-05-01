@@ -21,18 +21,19 @@ import { UserRegister } from '../../interfaces/user.interfaces';
 })
 export class RegisterComponent
 {
-    public errorEmptyName:              boolean = false;
     public errorEmptyUsername:          boolean = false;
     public errorEmptyEmail:             boolean = false;
     public errorEmptyPassword:          boolean = false;
     public errorEmptyConfirmPassword:   boolean = false;
+    public errorEmptyFullName:          boolean = false;
 
     public userForm = new FormGroup({
-        name:               new FormControl<string>(''),
         username:           new FormControl<string>(''),
         email:              new FormControl<string>(''),
         password:           new FormControl<string>(''),
-        confirmPassword:    new FormControl<string>('')
+        confirmPassword:    new FormControl<string>(''),
+        fullName:           new FormControl<string>(''),
+        isSuperAdmin:       new FormControl<boolean>(false)
     });
 
     get currentCreateUser(): UserRegister
@@ -51,31 +52,12 @@ export class RegisterComponent
 
     private thereAreEmptyFields(): boolean
     {
-        if (this.currentCreateUser.name === '')
-            this.errorEmptyName = true;
-        else
-            this.errorEmptyName = false;
+        this.errorEmptyUsername = this.currentCreateUser.username === '';
+        this.errorEmptyEmail = this.currentCreateUser.email === '';
+        this.errorEmptyPassword = this.currentCreateUser.password === '';
+        this.errorEmptyConfirmPassword = this.currentCreateUser.confirmPassword === '';
+        this.errorEmptyFullName = this.currentCreateUser.fullName === '';
 
-        if (this.currentCreateUser.username === '')
-            this.errorEmptyUsername = true;
-        else
-            this.errorEmptyUsername = false;
-
-        if (this.currentCreateUser.email === '')
-            this.errorEmptyEmail = true;
-        else
-            this.errorEmptyEmail = false;
-
-        if (this.currentCreateUser.password === '')
-            this.errorEmptyPassword = true;
-        else
-            this.errorEmptyPassword = false;
-
-        if (this.currentCreateUser.confirmPassword === '')
-            this.errorEmptyConfirmPassword = true;
-        else
-            this.errorEmptyConfirmPassword = false;
-
-        return this.errorEmptyName || this.errorEmptyUsername || this.errorEmptyEmail || this.errorEmptyPassword || this.errorEmptyConfirmPassword;
+        return this.errorEmptyUsername || this.errorEmptyEmail || this.errorEmptyPassword || this.errorEmptyConfirmPassword || this.errorEmptyFullName;
     }
 }
