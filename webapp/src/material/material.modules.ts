@@ -14,6 +14,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
 
 export const MaterialModules = [
@@ -34,7 +35,8 @@ export const MaterialModules = [
     MatToolbarModule,
     MatDatepickerModule,
     DatePipe,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule
 ];
 
 export const appDateFormat = {

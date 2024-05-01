@@ -1,7 +1,19 @@
 <app-navbar />
 
 <div class="flex justify-end m-4 xl:mr-64">
-    <button mat-flat-button color="primary" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
+    <div class="flex flex-col justify-end">
+        <mat-paginator
+            (page)="handlePageEvent($event)"
+            [length]="length"
+            [pageSize]="itemsPerPage"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [showFirstLastButtons]="true"
+            aria-label="Select page"
+        >
+        </mat-paginator>
+        <br>
+        <button mat-flat-button color="primary" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
+    </div>
 </div>
 
 @if (loading) {
@@ -15,8 +27,6 @@
 }
 
 <div class="mt-4 m-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-5 xl:max-w-screen-xl">
-
-
     @for (phrase of phrases; track $index) {
         <app-card [phrase]="phrase" />
     }
