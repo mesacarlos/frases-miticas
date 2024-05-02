@@ -1,4 +1,6 @@
-﻿using FrasesMiticas.Core.Interfaces;
+﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+using FrasesMiticas.Core.Interfaces;
+using System.Collections.Generic;
 
 namespace FrasesMiticas.Core.Aggregates.AppUsers
 {
@@ -13,5 +15,9 @@ namespace FrasesMiticas.Core.Aggregates.AppUsers
         public string FullName { get; set; }
 
         public bool IsSuperAdmin { get; set; }
+
+        public string ProfilePictureUrl { get; set; }
+
+        public virtual ICollection<FraseMitica> InvolvedPhrases { get; set; }
     }
 }

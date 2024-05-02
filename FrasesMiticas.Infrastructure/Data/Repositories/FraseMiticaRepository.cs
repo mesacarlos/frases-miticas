@@ -19,12 +19,16 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
 
         public void Update(FraseMitica entity) => repository.Update(entity);
 
-        public IEnumerable<FraseMitica> Get() => repository.Get().OrderByDescending(e => e.Date);
+        public IEnumerable<FraseMitica> Get() => repository
+                                                    .Get()
+                                                    .Include(e => e.InvolvedUsers)
+                                                    .OrderByDescending(e => e.Date);
 
         public FraseMitica Get(int id) => repository
                                             .Where(e => e.Id == id)
+                                            .Include(e => e.InvolvedUsers)
                                             .Include(e => e.Comments)
-                                            .ThenInclude(e => e.User)
+                                                .ThenInclude(e => e.User)
                                             .SingleOrDefault();
 
         public void Delete(int id) => repository.Delete(id);

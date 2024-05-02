@@ -31,6 +31,9 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                     v => v ? 1 : 0,
                     v => v == 1);
 
+            builder.Property(a => a.ProfilePictureUrl)
+                .HasColumnName("profile_pic_url");
+
             base.Configure(builder);
             builder.ToTable("users");
         }

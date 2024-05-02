@@ -9,5 +9,6 @@ namespace FrasesMiticas.Api.ViewModels.Responses
         string Author,
         DateTime Date,
         string Text,
-        string Context);
+        string Context,
+        IEnumerable<InvolvedUserDto> InvolvedUsers);
 }

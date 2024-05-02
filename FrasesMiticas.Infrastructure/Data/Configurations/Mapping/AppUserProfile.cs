@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FrasesMiticas.Core.Aggregates.AppUsers;
 using FrasesMiticas.Core.Dtos.AppUsers;
+using FrasesMiticas.Core.Dtos.FrasesMiticas;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
 {
@@ -9,6 +10,7 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
         public AppUserProfile()
         {
             CreateMap<AppUser, AppUserDto>().ReverseMap();
+            CreateMap<AppUser, InvolvedUserDto>();
         }
     }
 }

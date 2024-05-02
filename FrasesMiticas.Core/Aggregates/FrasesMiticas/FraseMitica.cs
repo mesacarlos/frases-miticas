@@ -1,4 +1,5 @@
-﻿using FrasesMiticas.Core.Interfaces;
+﻿using FrasesMiticas.Core.Aggregates.AppUsers;
+using FrasesMiticas.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 
@@ -15,5 +16,6 @@ namespace FrasesMiticas.Core.Aggregates.FrasesMiticas
         public string Context { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<AppUser> InvolvedUsers { get; set; }
     }
 }

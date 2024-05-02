@@ -59,7 +59,7 @@ namespace FrasesMiticas.Core.Services
                 var dtos = entities.Select(e => mapper.Map<FraseMiticaDto>(e)).ToList();
                 return new PagedResultDto<FraseMiticaDto>(dtos, 1, -1, totalItems);
             }
-
+            
             //Return queried page
             var pagedDtos = entities
                .Skip((filter.PageIndex - 1) * filter.PageSize)

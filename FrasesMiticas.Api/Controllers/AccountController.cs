@@ -51,7 +51,7 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpPost("account/change-password")]
         [Authorization]
-        public ActionResult<LoginResponse> Login([FromBody] ChangePasswordRequest request)
+        public ActionResult Login([FromBody] ChangePasswordRequest request)
         {
             var succeeded = accountService.ChangePassword(
                 userToken.UserId,

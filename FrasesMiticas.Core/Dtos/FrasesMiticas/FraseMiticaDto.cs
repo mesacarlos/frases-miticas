@@ -5,14 +5,15 @@ namespace FrasesMiticas.Core.Dtos.FrasesMiticas
 {
     public record FraseMiticaDto : EntityDto<int>
     {
-        public string Author { get; set; }
+        public string Author { get; init; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; init; }
 
-        public string Text { get; set; }
+        public string Text { get; init; }
 
-        public string Context { get; set; }
+        public string Context { get; init; }
 
-        public IEnumerable<CommentDto> Comments { get; set; }
+        public IEnumerable<CommentDto> Comments { get; init; }
+        public IEnumerable<InvolvedUserDto> InvolvedUsers { get; init; }
     }
 }
