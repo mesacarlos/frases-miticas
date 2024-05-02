@@ -6,6 +6,5 @@ namespace FrasesMiticas.Api.ViewModels.Requests
         string Author,
         DateTime Date,
         string Text,
-        string Context,
-        string Subtitle);
+        string Context);
 }

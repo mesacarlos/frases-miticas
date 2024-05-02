@@ -41,7 +41,6 @@ namespace FrasesMiticas.Core.Services
             entity.Date = dto.Date;
             entity.Text = dto.Text;
             entity.Context = dto.Context;
-            entity.Subtitle = dto.Subtitle;
 
             //Save to persistence
             repository.Update(entity);
@@ -86,6 +85,51 @@ namespace FrasesMiticas.Core.Services
         public void Delete(int id)
         {
             repository.Delete(id);
+        }
+
+        public CommentDto AddComment(int fraseMiticaId, CommentDto dto)
+        {
+            FraseMitica entity = repository.Get(fraseMiticaId);
+            if (entity == null)
+                throw new EntityNotFoundException($"A FraseMitica with ID {fraseMiticaId} was not found");
+
+            var newComment = mapper.Map<Comment>(dto);
+            entity.Comments.Add(newComment);
+            repository.Update(entity);
+
+            return mapper.Map<CommentDto>(newComment);
+        }
+
+        public CommentDto UpdateComment(int fraseMiticaId, int commentId, CommentDto dto)
+        {
+            FraseMitica entity = repository.Get(fraseMiticaId);
+            if (entity == null)
+                throw new EntityNotFoundException($"A FraseMitica with ID {fraseMiticaId} was not found");
+
+            var comment = entity.Comments.SingleOrDefault(e => e.Id == commentId);
+            if (comment == null)
+                throw new EntityNotFoundException($"A Comment with ID {commentId} was not found");
+            
+            comment.Text = dto.Text;
+
+            repository.Update(entity);
+
+            return mapper.Map<CommentDto>(comment);
+        }
+
+        public void DeleteComment(int fraseMiticaId, int commentId)
+        {
+            FraseMitica entity = repository.Get(fraseMiticaId);
+            if (entity == null)
+                throw new EntityNotFoundException($"A FraseMitica with ID {fraseMiticaId} was not found");
+
+            var comment = entity.Comments.SingleOrDefault(e => e.Id == commentId);
+            if (comment == null)
+                throw new EntityNotFoundException($"A Comment with ID {commentId} was not found");
+
+            entity.Comments.Remove(comment);
+
+            repository.Update(entity);
         }
     }
 }

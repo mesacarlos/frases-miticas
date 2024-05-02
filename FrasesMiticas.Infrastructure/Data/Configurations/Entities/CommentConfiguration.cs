@@ -1,0 +1,47 @@
+﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
+{
+    public class CommentConfiguration : EntityConfiguration<int, Comment>
+    {
+        public override void Configure(EntityTypeBuilder<Comment> builder)
+        {
+            builder.Property(a => a.Id)
+                .HasColumnName("id")
+                .IsRequired();
+
+            builder.Property(a => a.UserId)
+                .HasColumnName("user_id")
+                .IsRequired();
+
+            builder.Property(a => a.PhraseId)
+                .HasColumnName("phrase_id")
+                .IsRequired();
+
+            builder.Property(a => a.Date)
+                .HasColumnName("comment_date")
+                .IsRequired()
+                .HasConversion(
+                    v => DateTimeToUnixSeconds(v),
+                    v => UnixSecondsToDateTime(v));
+
+            builder.Property(a => a.Text)
+                .HasColumnName("comment_text");
+
+            builder.HasOne(e => e.User)
+                .WithMany()
+                .HasForeignKey(e => e.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(e => e.FraseMitica)
+                .WithMany(e => e.Comments)
+                .HasForeignKey(e => e.PhraseId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            base.Configure(builder);
+            builder.ToTable("comments");
+        }
+    }
+}

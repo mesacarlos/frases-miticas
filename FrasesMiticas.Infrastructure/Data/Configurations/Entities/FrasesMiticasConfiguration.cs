@@ -27,9 +27,6 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
             builder.Property(a => a.Context)
                 .HasColumnName("phrase_context");
 
-            builder.Property(a => a.Subtitle)
-                .HasColumnName("phrase_subtitle");
-
             base.Configure(builder);
             builder.ToTable("frases");
         }

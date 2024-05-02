@@ -1,5 +1,6 @@
 ﻿using FrasesMiticas.Core.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace FrasesMiticas.Core.Aggregates.FrasesMiticas
 {
@@ -13,6 +14,6 @@ namespace FrasesMiticas.Core.Aggregates.FrasesMiticas
 
         public string Context { get; set; }
 
-        public string Subtitle { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

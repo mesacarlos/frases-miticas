@@ -40,5 +40,29 @@ namespace FrasesMiticas.Core.Interfaces.Services
         /// </summary>
         /// <param name="id">Identifier of the FraseMitica to delete.</param>
         void Delete(int id);
+
+        /// <summary>
+        /// Add a new Comment to a FraseMitica.
+        /// </summary>
+        /// <param name="fraseMiticaId">If of the Frase Mitica.</param>
+        /// <param name="dto">Data of the comment.</param>
+        /// <returns>Added comment.</returns>
+        public CommentDto AddComment(int fraseMiticaId, CommentDto dto);
+
+        /// <summary>
+        /// Updates an existing comment.
+        /// </summary>
+        /// <param name="fraseMiticaId">Frase mitica identifier.</param>
+        /// <param name="commentId">Comment identifier.</param>
+        /// <param name="dto">Data to update.</param>
+        /// <returns>Updated comment.</returns>
+        public CommentDto UpdateComment(int fraseMiticaId, int commentId, CommentDto dto);
+
+        /// <summary>
+        /// Deletes a comment.
+        /// </summary>
+        /// <param name="fraseMiticaId">Frase mitica identifier.</param>
+        /// <param name="commentId">Comment identifier.</param>
+        public void DeleteComment(int fraseMiticaId, int commentId);
     }
 }

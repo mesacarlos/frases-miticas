@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FrasesMiticas.Core.Dtos.FrasesMiticas
 {
@@ -12,7 +13,6 @@ namespace FrasesMiticas.Core.Dtos.FrasesMiticas
 
         public string Context { get; set; }
 
-        public string Subtitle { get; set; }
-
+        public IEnumerable<CommentDto> Comments { get; set; }
     }
 }

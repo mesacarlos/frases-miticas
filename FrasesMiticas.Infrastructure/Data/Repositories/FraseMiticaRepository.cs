@@ -1,5 +1,6 @@
 ﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
 using FrasesMiticas.Core.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,11 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
 
         public IEnumerable<FraseMitica> Get() => repository.Get().OrderByDescending(e => e.Date);
 
-        public FraseMitica Get(int id) => repository.Where(e => e.Id == id).SingleOrDefault();
+        public FraseMitica Get(int id) => repository
+                                            .Where(e => e.Id == id)
+                                            .Include(e => e.Comments)
+                                            .ThenInclude(e => e.User)
+                                            .SingleOrDefault();
 
         public void Delete(int id) => repository.Delete(id);
     }
