@@ -33,19 +33,19 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpGet("user")]
         [Authorization]
-        public ActionResult<IEnumerable<AppUserFullResponse>> GetAll()
+        public ActionResult<IEnumerable<AppUserAdminResponse>> GetAll()
         {
             IEnumerable<AppUserDto> result = appUserService.Get();
-            var response = result.Select(e => mapper.Map<AppUserSummaryResponse>(e));
+            var response = result.Select(e => mapper.Map<AppUserSummaryDto>(e));
             return Ok(response);
         }
 
         [HttpGet("user/self")]
         [Authorization]
-        public ActionResult<AppUserFullResponse> GetSelfUser()
+        public ActionResult<AppUserAdminResponse> GetSelfUser()
         {
             AppUserDto dto = appUserService.Get(userToken.UserId);
-            AppUserFullResponse response = mapper.Map<AppUserFullResponse>(dto);
+            AppUserAdminResponse response = mapper.Map<AppUserAdminResponse>(dto);
             return Ok(response);
         }
     }

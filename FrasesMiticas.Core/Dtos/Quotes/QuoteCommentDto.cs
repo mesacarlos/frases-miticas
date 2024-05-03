@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrasesMiticas.Core.Dtos.AppUsers;
+using System;
 
 namespace FrasesMiticas.Core.Dtos.Quotes
 {
@@ -12,10 +13,6 @@ namespace FrasesMiticas.Core.Dtos.Quotes
 
         public string Text { get; init; }
 
-        public string Username { get; init; }
-
-        public string UserFullName { get; init; }
-
-        public string ProfilePictureUrl { get; init; }
+        public AppUserSummaryDto User { get; init; }
     }
 }
