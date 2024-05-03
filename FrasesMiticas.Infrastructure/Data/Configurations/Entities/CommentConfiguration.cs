@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
 {
-    public class CommentConfiguration : EntityConfiguration<int, Comment>
+    public class CommentConfiguration : EntityConfiguration<int, QuoteComment>
     {
-        public override void Configure(EntityTypeBuilder<Comment> builder)
+        public override void Configure(EntityTypeBuilder<QuoteComment> builder)
         {
             builder.Property(a => a.Id)
                 .HasColumnName("id")

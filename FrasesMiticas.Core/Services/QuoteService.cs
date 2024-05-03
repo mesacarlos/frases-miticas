@@ -52,6 +52,16 @@ namespace FrasesMiticas.Core.Services
         {
             IEnumerable<Quote> entities = repository.Get();
 
+            // Apply filters
+            if (filter.FromDate != null)
+                entities = entities.Where(e => e.Date > filter.FromDate);
+
+            if (filter.ToDate != null)
+                entities = entities.Where(e => e.Date < filter.ToDate);
+
+            if (filter.InvolvedUsers.Any())
+                entities = entities.Where(e => e.InvolvedUsers.Any(e => filter.InvolvedUsers.Contains(e.Id)));
+
             int totalItems = entities.Count();
             //If PageNumber or PageSize are not valid, return all data
             if (filter.PageIndex <= 0 || filter.PageSize <= 0)
@@ -93,7 +103,7 @@ namespace FrasesMiticas.Core.Services
             if (entity == null)
                 throw new EntityNotFoundException($"A quote with ID {quoteId} was not found");
 
-            var newComment = mapper.Map<Comment>(dto);
+            var newComment = mapper.Map<QuoteComment>(dto);
             entity.Comments.Add(newComment);
             repository.Update(entity);
 

@@ -15,7 +15,7 @@ namespace FrasesMiticas.Core.Aggregates.Quotes
 
         public string Context { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<QuoteComment> Comments { get; set; }
         public virtual ICollection<AppUser> InvolvedUsers { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System;
 
 namespace FrasesMiticas.Core.Aggregates.Quotes
 {
-    public class Comment : Entity<int>
+    public class QuoteComment : Entity<int>
     {
         public int UserId { get; set; }
 
