@@ -32,7 +32,7 @@ namespace FrasesMiticas.Api.Controllers
         }
 
         [HttpGet("user")]
-        [Authorization(true)]
+        [Authorization]
         public ActionResult<IEnumerable<AppUserFullResponse>> GetAll()
         {
             IEnumerable<AppUserDto> result = appUserService.Get();
