@@ -1,0 +1,27 @@
+<app-navbar />
+
+<div class="flex justify-center align-middle">
+    <div class="w-full xl:w-2/4 mt-8">
+        <h2 class="text-white text-3xl">Cambiar contraseña</h2>
+
+        <mat-form-field>
+            <mat-label for="old-password">Contraseña antigua</mat-label>
+            <input id="old-password" type="password" matInput placeholder="Contraseña antigua" formControlName="old-password" required>
+            @if (emptyOldPassword) { <mat-error>Debes indicar tu antigua contraseña</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="new-password">Nueva contraseña</mat-label>
+            <input id="new-password" type="password" matInput placeholder="Nueva contraseña" formControlName="new-password" required>
+            @if (emptyNewPassword) { <mat-error>Debes indicar la nueva contraseña</mat-error> }
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label for="new-password-confirm">Repite la nueva contraseña</mat-label>
+            <input id="new-password-confirm" type="password" matInput placeholder="Repite la nueva contraseña" formControlName="new-password-confirm" required>
+            @if (emptyNewPasswordConfirm) { <mat-error>Debes repetir la nueva contraseña</mat-error> }
+            @if (error !== '') { <mat-error>{{ error }}</mat-error> }
+        </mat-form-field>
+    </div>
+</div>
+
