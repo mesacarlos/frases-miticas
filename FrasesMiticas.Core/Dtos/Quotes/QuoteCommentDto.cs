@@ -15,5 +15,7 @@ namespace FrasesMiticas.Core.Dtos.Quotes
         public string Username { get; init; }
 
         public string UserFullName { get; init; }
+
+        public string ProfilePictureUrl { get; init; }
     }
 }
