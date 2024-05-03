@@ -43,3 +43,10 @@ export interface Comment
         profilePictureUrl: string;
     }
 }
+
+export interface ChangePassword
+{
+    oldPassword: string;
+    newPassword: string;
+    newPasswordConfirm: string;
+}

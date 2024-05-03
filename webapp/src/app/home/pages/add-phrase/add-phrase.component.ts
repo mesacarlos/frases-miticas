@@ -7,7 +7,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModules } from '../../../../material/material.modules';
 import { AddPhrase } from '../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../services/phrases.service';
-import { AlertAddPhraseComponent } from '../alerts/alert-add-phrase/alert-add-phrase.component';
+import { AlertMessageComponent } from '../alerts/alert-message/alert-message.component';
 
 @Component({
     selector: 'app-add-phrase',
@@ -81,8 +81,9 @@ export class AddPhraseComponent
 
     public showAlert(): void
     {
-        this.snackBar.openFromComponent(AlertAddPhraseComponent, {
-            duration: 4000
+        this.snackBar.openFromComponent(AlertMessageComponent, {
+            duration: 4000,
+            data: '¡¡Frase añadida!!'
         });
     }
 }

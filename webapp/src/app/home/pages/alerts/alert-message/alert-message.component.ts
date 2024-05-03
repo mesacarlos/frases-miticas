@@ -10,10 +10,10 @@ import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
         CommonModule,
         ...MaterialModules
     ],
-    templateUrl: './alert-remove-comments.component.html',
+    templateUrl: './alert-message.component.html',
     styles: ``
 })
-export class AlertRemoveCommentsComponent
+export class AlertMessageComponent
 {
     constructor(@Inject(MAT_SNACK_BAR_DATA) public message: string) {}
 }

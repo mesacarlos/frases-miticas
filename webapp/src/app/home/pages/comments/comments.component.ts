@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MaterialModules } from '../../../../material/material.modules';
 import { PhrasesService } from '../../services/phrases.service';
 import { Comment } from '../../interfaces/phrases.interfaces';
-import { AlertRemoveCommentsComponent } from '../alerts/alert-remove-comments/alert-remove-comments.component';
+import { AlertMessageComponent } from '../alerts/alert-message/alert-message.component';
 import { AlertConfirmRemoveCommentComponent } from '../alerts/alert-confirm-remove-comment/alert-confirm-remove-comment.component';
 
 @Component({
@@ -75,7 +75,7 @@ export class CommentsComponent implements OnInit
 
     public showAlert(message: string): void
     {
-        this.snackBar.openFromComponent(AlertRemoveCommentsComponent, {
+        this.snackBar.openFromComponent(AlertMessageComponent, {
             duration: 4000,
             data: message
         });

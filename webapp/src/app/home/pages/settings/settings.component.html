@@ -1,27 +1,37 @@
 <app-navbar />
 
-<div class="flex justify-center align-middle">
-    <div class="w-full xl:w-2/4 mt-8">
-        <h2 class="text-white text-3xl">Cambiar contraseña</h2>
+<div class="fgrid content-center h-5/6">
+    <form [formGroup]="changePasswordForm" class="flex flex-col content-center mx-auto w-full p-2 xl:w-2/4">
+        <h2 class="text-white text-3xl mb-4">Cambiar contraseña</h2>
 
         <mat-form-field>
-            <mat-label for="old-password">Contraseña antigua</mat-label>
-            <input id="old-password" type="password" matInput placeholder="Contraseña antigua" formControlName="old-password" required>
+            <mat-label for="oldPassword">Contraseña antigua</mat-label>
+            <input id="oldPassword" type="password" matInput placeholder="Contraseña antigua" formControlName="oldPassword" required>
             @if (emptyOldPassword) { <mat-error>Debes indicar tu antigua contraseña</mat-error> }
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label for="new-password">Nueva contraseña</mat-label>
-            <input id="new-password" type="password" matInput placeholder="Nueva contraseña" formControlName="new-password" required>
+            <mat-label for="newPassword">Nueva contraseña</mat-label>
+            <input id="newPassword" type="password" matInput placeholder="Nueva contraseña" formControlName="newPassword" required>
             @if (emptyNewPassword) { <mat-error>Debes indicar la nueva contraseña</mat-error> }
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label for="new-password-confirm">Repite la nueva contraseña</mat-label>
-            <input id="new-password-confirm" type="password" matInput placeholder="Repite la nueva contraseña" formControlName="new-password-confirm" required>
+            <mat-label for="newPasswordConfirm">Repite la nueva contraseña</mat-label>
+            <input id="newPasswordConfirm" type="password" matInput placeholder="Repite la nueva contraseña" formControlName="newPasswordConfirm" required>
             @if (emptyNewPasswordConfirm) { <mat-error>Debes repetir la nueva contraseña</mat-error> }
             @if (error !== '') { <mat-error>{{ error }}</mat-error> }
         </mat-form-field>
-    </div>
+
+        <button
+            mat-button
+            mat-flat-button
+            color="primary"
+            (click)="onChangePassword()"
+        >
+            <mat-icon>edit</mat-icon>
+            Cambiar contraseña
+        </button>
+    </form>
 </div>
 
