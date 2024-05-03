@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { PageEvent } from '@angular/material/paginator';
@@ -23,6 +23,7 @@ import { PhrasesService } from '../../services/phrases.service';
 })
 export class PhrasesComponent implements OnInit
 {
+    @ViewChild('paginator', { static: true }) paginator: any;
     public phrases: Phrase[] = [];
     public loading: boolean = true;
 
@@ -81,13 +82,20 @@ export class PhrasesComponent implements OnInit
             });
     }
 
-    public handlePageEvent(e: PageEvent)
+    public handlePageEvent(e: PageEvent): void
     {
         this.length = e.length;
         this.itemsPerPage = e.pageSize;
         this.pageIndex = e.pageIndex + 1;
 
+        this.paginator.pageIndex = this.pageIndex;
+
         this.loadPhrases(this.itemsPerPage, this.pageIndex);
+    }
+
+    public scrollToTop(): void
+    {
+        window.scrollTo(0, 0);
     }
 
 }
