@@ -29,3 +29,17 @@ export interface GetPhrases
     phrases: Phrase[];
     totalItems: number;
 }
+
+export interface Comment
+{
+    id: number;
+    quoteId: number;
+    date: string;
+    text: string;
+    user: {
+        id: number;
+        username: string;
+        userFullName: string;
+        profilePictureUrl: string;
+    }
+}

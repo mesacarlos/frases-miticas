@@ -7,7 +7,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModules } from '../../../../material/material.modules';
 import { AddPhrase } from '../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../services/phrases.service';
-import { AlertAddPhraseComponent } from '../alert-add-phrase/alert-add-phrase.component';
+import { AlertAddPhraseComponent } from '../alerts/alert-add-phrase/alert-add-phrase.component';
 
 @Component({
     selector: 'app-add-phrase',

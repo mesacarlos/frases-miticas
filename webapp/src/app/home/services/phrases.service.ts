@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { AddPhrase, GetPhrases } from "../interfaces/phrases.interfaces";
+import { AddPhrase, Comment, GetPhrases } from "../interfaces/phrases.interfaces";
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
 
@@ -28,7 +28,7 @@ export class PhrasesService
                     const phrases: GetPhrases = {
                         phrases: response.data.data,
                         totalItems: response.data.totalItems
-                        };
+                    };
 
                     return phrases;
                 }
@@ -40,7 +40,7 @@ export class PhrasesService
     public addPhrase(phrase: AddPhrase): Observable<boolean>
     {
         return this.http.post<any>(
-            `${ environments.API_GATEWAY }/fquote`,
+            `${ environments.API_GATEWAY }/quote`,
             {
                 "author": phrase.author,
                 "date": phrase.date.toISOString(),
@@ -51,6 +51,28 @@ export class PhrasesService
         ).pipe(
             map(response => !!response
             ),
+            catchError(() => of(false))
+        );
+    }
+
+    public getCommentsByQuote(id: number): Observable<Comment[]>
+    {
+        return this.http.get<any>(
+            `${ environments.API_GATEWAY }/quote/${ id }`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => response.data.comments),
+            catchError(() => of([]))
+        );
+    }
+
+    public deleteComment(idQuote: number, idComment: number): Observable<boolean>
+    {
+        return this.http.delete<any>(
+            `${ environments.API_GATEWAY }/quote/${ idQuote }/comment/${ idComment }`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => response.success),
             catchError(() => of(false))
         );
     }

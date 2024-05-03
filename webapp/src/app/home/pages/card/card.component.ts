@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Phrase } from '../../interfaces/phrases.interfaces';
 import { MaterialModules } from '../../../../material/material.modules';
 import { NgFor } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
     selector: 'app-card',
@@ -16,14 +18,24 @@ import { NgFor } from '@angular/common';
 export class CardComponent
 {
     @Input()
-    phrase: Phrase = { id: 0, author: '', date: '', text: '', context: '', involvedUsers: [] };
+    phrase: Phrase = {
+        id: 0,
+        author: '',
+        date: '',
+        text: '',
+        context: '',
+        involvedUsers: []
+    };
 
     // implements on init and check if publication like
     public likeIcon: string = 'favorite_border';
     public numLikes: number = 0;
 
+    constructor(
+        private dialog: MatDialog
+    ) {}
 
-    public giveLike()
+    public giveLike(): void
     {
         if (this.likeIcon === 'favorite_border')
         {
@@ -34,5 +46,24 @@ export class CardComponent
 
         this.likeIcon ='favorite_border';
         this.numLikes--;
+    }
+
+    public viewComments(): void
+    {
+        let width: string = '';
+
+        if (window.innerWidth < 600)
+            width = '95%';
+        else
+            width = '60%';
+
+        this.openDialog(width);
+    }
+
+    private openDialog(width: string): void
+    {
+        const dialogRef = this.dialog.open(CommentsComponent, { width: width });
+
+        dialogRef.componentInstance.idQuote = this.phrase.id;
     }
 }

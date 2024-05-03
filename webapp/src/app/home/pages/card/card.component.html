@@ -1,18 +1,20 @@
 <mat-card class="example-card text-white">
-	<mat-card-header>
-		<mat-card-title>
-			<div>
-				{{ phrase.author }}
-			</div>
-			<div class="user-pic-container">
-				<ng-container *ngFor="let involvedUser of phrase.involvedUsers">
-					<img class="user-pic" [src]="involvedUser.profilePictureUrl" />
-				</ng-container>
-			</div>
-		</mat-card-title>
-		<mat-card-subtitle>
-			{{ phrase.date | date: 'dd/MM/yyyy' }} - {{ numLikes }} likes
-		</mat-card-subtitle>
+	<mat-card-header class="flex justify-between align-middle">
+        <mat-card-title>
+            <div>
+                {{ phrase.author }}
+            </div>
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ phrase.date | date: 'dd/MM/yyyy' }} - {{ numLikes }} likes
+        </mat-card-subtitle>
+		<div class="user-pic-container">
+            @for (involvedUser of phrase.involvedUsers; track $index) {
+                <ng-container>
+                    <img class="user-pic" [src]="involvedUser.profilePictureUrl" />
+                </ng-container>
+            }
+        </div>
 	</mat-card-header>
 	<mat-card-content>
 		<p class="text-center text-xl m-4">"{{ phrase.text }}"</p>
@@ -22,7 +24,7 @@
 		<button mat-button (click)="giveLike()">
 			<mat-icon class="text-red">{{ likeIcon }}</mat-icon>
 		</button>
-		<button mat-button>
+		<button mat-button (click)="viewComments()">
 			<mat-icon>question_answer</mat-icon>
 		</button>
 	</mat-card-actions>

@@ -2,7 +2,14 @@
     <mat-toolbar-row>
         <span>Frases míticas</span>
         <span class="spacer"></span>
-        <mat-icon class="icon mr-3">account_circle</mat-icon>
+        <button>
+            <mat-icon class="icon mr-3">account_circle</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="openDialog()">Open dialog</button>
+        </mat-menu>
+
         <button (click)="logout()" class="flex justify-center align-middle">
             <mat-icon class="icon">logout</mat-icon>
         </button>

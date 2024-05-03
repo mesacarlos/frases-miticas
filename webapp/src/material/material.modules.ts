@@ -14,8 +14,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import { DatePipe } from '@angular/common';
+import {MatMenuTrigger, MatMenuModule} from '@angular/material/menu';
 
 export const MaterialModules = [
     MatAutocompleteModule,
@@ -36,7 +37,9 @@ export const MaterialModules = [
     MatDatepickerModule,
     DatePipe,
     MatDatepickerModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuTrigger,
+    MatMenuModule
 ];
 
 export const appDateFormat = {
@@ -50,3 +53,12 @@ export const appDateFormat = {
         monthYearA11yLabel: 'MMMM YYYY'
     }
 };
+
+export const MyPaginator = () =>
+{
+    const myPaginatorIntl = new MatPaginatorIntl();
+
+    myPaginatorIntl.itemsPerPageLabel = '';
+
+    return myPaginatorIntl;
+  }

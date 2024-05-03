@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { Phrase } from '../../interfaces/phrases.interfaces';
 import { CardComponent } from '../card/card.component';
-import { MaterialModules } from '../../../../material/material.modules';
+import { MaterialModules, MyPaginator } from '../../../../material/material.modules';
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { PhrasesService } from '../../services/phrases.service';
 
@@ -16,7 +16,10 @@ import { PhrasesService } from '../../services/phrases.service';
         CommonModule,
         NavbarComponent,
         CardComponent,
-        ...MaterialModules
+        ...MaterialModules,
+    ],
+    providers: [
+        { provide: MatPaginatorIntl, useValue: MyPaginator() }
     ],
     templateUrl: './phrases.component.html',
     styleUrl: './phrases.component.css'

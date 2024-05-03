@@ -2,7 +2,7 @@
 
 <div class="flex justify-end m-4 xl:mr-64">
     <div class="flex flex-col justify-end">
-        <mat-paginator #paginator
+        <mat-paginator
             (page)="handlePageEvent($event)"
             [length]="length"
             [pageSize]="itemsPerPage"
