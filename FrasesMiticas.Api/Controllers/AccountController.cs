@@ -53,7 +53,7 @@ namespace FrasesMiticas.Api.Controllers
                 request.NewPassword);
 
             return succeeded
-                ? Ok()
+                ? Ok(null)
                 : Forbid();
         }
     }

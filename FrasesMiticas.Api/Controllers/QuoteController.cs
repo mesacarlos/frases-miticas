@@ -79,7 +79,7 @@ namespace FrasesMiticas.Api.Controllers
         public ActionResult Delete([FromRoute] int id)
         {
             quoteService.Delete(id);
-            return Ok();
+            return Ok(null);
         }
 
         [HttpPost("{quoteId}/comment")]
@@ -135,7 +135,7 @@ namespace FrasesMiticas.Api.Controllers
             }
 
             quoteService.DeleteComment(quoteId, id);
-            return Ok();
+            return Ok(null);
         }
     }
 }
