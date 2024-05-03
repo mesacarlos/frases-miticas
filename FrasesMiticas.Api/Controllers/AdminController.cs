@@ -5,7 +5,6 @@ using FrasesMiticas.Core.Dtos.AppUsers;
 using FrasesMiticas.Core.Interfaces;
 using FrasesMiticas.Core.Interfaces.Encryption;
 using FrasesMiticas.Core.Interfaces.Services;
-using FrasesMiticas.Core.Interfaces.Tokens;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -83,7 +82,7 @@ namespace FrasesMiticas.Api.Controllers
         public ActionResult Delete([FromRoute] int id)
         {
             appUserService.Delete(id);
-            return NoContent();
+            return Ok(null);
         }
     }
 }
