@@ -14,30 +14,30 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                 .IsRequired();
 
             builder.Property(a => a.Author)
-                .HasColumnName("phrase_author");
+                .HasColumnName("quote_author");
 
             builder.Property(a => a.Date)
-                .HasColumnName("phrase_date")
+                .HasColumnName("quote_date")
                 .HasConversion(
                     v => DateTimeToUnixSeconds(v),
                     v => UnixSecondsToDateTime(v));
 
             builder.Property(a => a.Text)
-                .HasColumnName("phrase_text");
+                .HasColumnName("quote_text");
 
             builder.Property(a => a.Context)
-                .HasColumnName("phrase_context");
+                .HasColumnName("quote_context");
 
             builder.HasMany(s => s.InvolvedUsers)
-                .WithMany(e => e.InvolvedPhrases)
+                .WithMany(e => e.InvolvedQuotes)
                 .UsingEntity(
-                    "user_phrases",
+                    "quotes_users",
                     l => l.HasOne(typeof(AppUser)).WithMany().HasForeignKey("user_id").HasPrincipalKey(nameof(AppUser.Id)),
-                    r => r.HasOne(typeof(Quote)).WithMany().HasForeignKey("phrase_id").HasPrincipalKey(nameof(Quote.Id)),
-                    j => j.HasKey("phrase_id", "user_id"));
+                    r => r.HasOne(typeof(Quote)).WithMany().HasForeignKey("quote_id").HasPrincipalKey(nameof(Quote.Id)),
+                    j => j.HasKey("quote_id", "user_id"));
 
             base.Configure(builder);
-            builder.ToTable("phrases");
+            builder.ToTable("quotes");
         }
     }
 }

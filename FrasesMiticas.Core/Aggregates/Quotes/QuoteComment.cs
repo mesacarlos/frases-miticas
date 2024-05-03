@@ -7,7 +7,7 @@ namespace FrasesMiticas.Core.Aggregates.Quotes
     {
         public int UserId { get; set; }
 
-        public int PhraseId { get; set; }
+        public int QuoteId { get; set; }
 
         public DateTime Date { get; set; }
 

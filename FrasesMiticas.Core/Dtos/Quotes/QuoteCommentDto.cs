@@ -6,7 +6,7 @@ namespace FrasesMiticas.Core.Dtos.Quotes
     {
         public int UserId { get; init; }
 
-        public int PhraseId { get; init; }
+        public int QuoteId { get; init; }
 
         public DateTime Date { get; init; }
 

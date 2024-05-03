@@ -16,8 +16,8 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                 .HasColumnName("user_id")
                 .IsRequired();
 
-            builder.Property(a => a.PhraseId)
-                .HasColumnName("phrase_id")
+            builder.Property(a => a.QuoteId)
+                .HasColumnName("quote_id")
                 .IsRequired();
 
             builder.Property(a => a.Date)
@@ -37,7 +37,7 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
 
             builder.HasOne(e => e.Quote)
                 .WithMany(e => e.Comments)
-                .HasForeignKey(e => e.PhraseId)
+                .HasForeignKey(e => e.QuoteId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             base.Configure(builder);

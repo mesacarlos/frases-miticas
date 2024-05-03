@@ -47,6 +47,7 @@ namespace FrasesMiticas.Core.Services
             entity.Date = dto.Date;
             entity.Text = dto.Text;
             entity.Context = dto.Context;
+            entity.InvolvedUsers = appUserRepository.GetByIds(dto.InvolvedUsers.Select(e => e.Id).ToList());
 
             //Save to persistence
             repository.Update(entity);

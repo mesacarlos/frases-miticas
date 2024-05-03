@@ -18,6 +18,6 @@ namespace FrasesMiticas.Core.Aggregates.AppUsers
 
         public string ProfilePictureUrl { get; set; }
 
-        public virtual ICollection<Quote> InvolvedPhrases { get; set; }
+        public virtual ICollection<Quote> InvolvedQuotes { get; set; }
     }
 }

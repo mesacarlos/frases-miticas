@@ -89,7 +89,7 @@ namespace FrasesMiticas.Api.Controllers
             QuoteCommentDto dto = new QuoteCommentDto()
             {
                 UserId = userToken.UserId,
-                PhraseId = quoteId,
+                QuoteId = quoteId,
                 Date = DateTime.Now,
                 Text = request.Text
             };
