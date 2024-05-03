@@ -1,6 +1,6 @@
 ﻿namespace FrasesMiticas.Api.ViewModels.Responses
 {
-    public record AppUserFullResponse
+    public record AppUserAdminResponse
     {
         public int Id { get; init; }
         public string Username { get; init; }

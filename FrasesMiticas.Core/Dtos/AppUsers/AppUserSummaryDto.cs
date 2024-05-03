@@ -1,6 +1,6 @@
-﻿namespace FrasesMiticas.Api.ViewModels.Responses
+﻿namespace FrasesMiticas.Core.Dtos.AppUsers
 {
-    public record AppUserSummaryResponse
+    public record AppUserSummaryDto
     {
         public int Id { get; init; }
         public string Username { get; init; }

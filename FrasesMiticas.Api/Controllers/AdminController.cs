@@ -32,7 +32,7 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpPost("user")]
         [Authorization(true)]
-        public ActionResult<AppUserFullResponse> Create([FromBody] AdminAppUserCreateRequest request)
+        public ActionResult<AppUserAdminResponse> Create([FromBody] AdminAppUserCreateRequest request)
         {
             var dto = new AppUserDto()
             {
@@ -44,37 +44,37 @@ namespace FrasesMiticas.Api.Controllers
             };
 
             var result = appUserService.Add(dto);
-            AppUserFullResponse response = mapper.Map<AppUserFullResponse>(result);
+            AppUserAdminResponse response = mapper.Map<AppUserAdminResponse>(result);
             return StatusCode(StatusCodes.Status201Created, response);
         }
 
         [HttpPut("user/{id}")]
         [Authorization(true)]
-        public ActionResult<AppUserFullResponse> Update([FromRoute] int id, [FromBody] AdminAppUserUpdateRequest request)
+        public ActionResult<AppUserAdminResponse> Update([FromRoute] int id, [FromBody] AdminAppUserUpdateRequest request)
         {
             AppUserDto dto = mapper.Map<AppUserDto>(request);
 
             var result = appUserService.Update(id, dto);
 
-            AppUserFullResponse response = mapper.Map<AppUserFullResponse>(result);
+            AppUserAdminResponse response = mapper.Map<AppUserAdminResponse>(result);
             return Ok(response);
         }
 
         [HttpGet("user")]
         [Authorization(true)]
-        public ActionResult<IEnumerable<AppUserFullResponse>> GetAll()
+        public ActionResult<IEnumerable<AppUserAdminResponse>> GetAll()
         {
             IEnumerable<AppUserDto> result = appUserService.Get();
-            var response = result.Select(e => mapper.Map<AppUserFullResponse>(e));
+            var response = result.Select(e => mapper.Map<AppUserAdminResponse>(e));
             return Ok(response);
         }
 
         [HttpGet("user/{id}")]
         [Authorization(true)]
-        public ActionResult<AppUserFullResponse> GetById([FromRoute] int id)
+        public ActionResult<AppUserAdminResponse> GetById([FromRoute] int id)
         {
             AppUserDto dto = appUserService.Get(id);
-            AppUserFullResponse response = mapper.Map<AppUserFullResponse>(dto);
+            AppUserAdminResponse response = mapper.Map<AppUserAdminResponse>(dto);
             return Ok(response);
         }
 

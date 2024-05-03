@@ -11,6 +11,8 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
         {
             CreateMap<AppUser, AppUserDto>().ReverseMap();
             CreateMap<AppUser, InvolvedUserDto>();
+            CreateMap<AppUserDto, AppUserSummaryDto>();
+            CreateMap<AppUser, AppUserSummaryDto>();
         }
     }
 }
