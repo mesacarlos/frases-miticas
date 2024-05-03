@@ -5,6 +5,15 @@ export interface Phrase
     date: string;
     text: string;
     context: string | null;
+	involvedUsers : InvolvedUser[];
+}
+
+export interface InvolvedUser
+{
+	id: number;
+	username: string;
+	fullname: string;
+	profilePictureUrl: string;
 }
 
 export interface AddPhrase

@@ -20,7 +20,7 @@ export class PhrasesService
     public getPhrases(pageSize: number = -1, pageIndex: number = 1): Observable<GetPhrases | null>
     {
         return this.http.get<any>(
-            `${ environments.API_GATEWAY }/frases-miticas?PageSize=${ pageSize }&PageIndex=${ pageIndex }`,
+            `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }`,
             { headers: this.headers }
         ).pipe(
             map(response =>
@@ -40,7 +40,7 @@ export class PhrasesService
     public addPhrase(phrase: AddPhrase): Observable<boolean>
     {
         return this.http.post<any>(
-            `${ environments.API_GATEWAY }/frases-miticas`,
+            `${ environments.API_GATEWAY }/fquote`,
             {
                 "author": phrase.author,
                 "date": phrase.date.toISOString(),

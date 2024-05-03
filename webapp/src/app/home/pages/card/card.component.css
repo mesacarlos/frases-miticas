@@ -1,0 +1,19 @@
+mat-card-title {
+	display: flex;
+	justify-content: space-between;
+}
+
+.user-pic-container{
+    display: flex;
+	align-items: right;
+}
+
+.user-pic {
+	border-radius: 50%;
+	width: 50px;
+}
+
+.user-pic+.user-pic {
+	position: relative;
+	left: -15px;
+}
