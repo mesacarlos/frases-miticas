@@ -1,13 +1,13 @@
 using FrasesMiticas.Core.Aggregates.AppUsers;
-using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+using FrasesMiticas.Core.Aggregates.Quotes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
 {
-    public class FrasesMiticasConfiguration : EntityConfiguration<int, FraseMitica>
+    public class FrasesMiticasConfiguration : EntityConfiguration<int, Quote>
     {
-        public override void Configure(EntityTypeBuilder<FraseMitica> builder)
+        public override void Configure(EntityTypeBuilder<Quote> builder)
         {
             builder.Property(a => a.Id)
                 .HasColumnName("id")
@@ -33,7 +33,7 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                 .UsingEntity(
                     "user_phrases",
                     l => l.HasOne(typeof(AppUser)).WithMany().HasForeignKey("user_id").HasPrincipalKey(nameof(AppUser.Id)),
-                    r => r.HasOne(typeof(FraseMitica)).WithMany().HasForeignKey("phrase_id").HasPrincipalKey(nameof(FraseMitica.Id)),
+                    r => r.HasOne(typeof(Quote)).WithMany().HasForeignKey("phrase_id").HasPrincipalKey(nameof(Quote.Id)),
                     j => j.HasKey("phrase_id", "user_id"));
 
             base.Configure(builder);

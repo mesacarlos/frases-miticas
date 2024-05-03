@@ -2,7 +2,7 @@
 
 namespace FrasesMiticas.Api.ViewModels.Requests
 {
-    public record FraseMiticaCreateRequest(
+    public record QuoteUpdateRequest(
         string Author,
         DateTime Date,
         string Text,

@@ -1,4 +1,4 @@
-﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -35,7 +35,7 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(e => e.FraseMitica)
+            builder.HasOne(e => e.Quote)
                 .WithMany(e => e.Comments)
                 .HasForeignKey(e => e.PhraseId)
                 .OnDelete(DeleteBehavior.Cascade);

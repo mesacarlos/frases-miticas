@@ -2,5 +2,5 @@
 
 namespace FrasesMiticas.Api.ViewModels.Requests
 {
-    public record CommentCreateRequest(string Text);
+    public record QuoteCommentUpdateRequest(string Text);
 }

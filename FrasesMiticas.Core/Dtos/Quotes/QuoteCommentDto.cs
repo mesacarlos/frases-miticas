@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace FrasesMiticas.Core.Dtos.FrasesMiticas
+namespace FrasesMiticas.Core.Dtos.Quotes
 {
-    public record CommentDto : EntityDto<int>
+    public record QuoteCommentDto : EntityDto<int>
     {
         public int UserId { get; init; }
 

@@ -1,10 +1,10 @@
-﻿using FrasesMiticas.Core.Dtos.FrasesMiticas;
+﻿using FrasesMiticas.Core.Dtos.Quotes;
 using System.Collections.Generic;
 using System;
 
 namespace FrasesMiticas.Api.ViewModels.Responses
 {
-    public record FraseMiticaResponse(
+    public record QuoteResponse(
         int Id,
         string Author,
         DateTime Date,

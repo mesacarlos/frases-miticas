@@ -57,14 +57,14 @@ namespace FrasesMiticas.Api.Extensions
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<IAppUserRepository, AppUserRepository>();
-            services.AddScoped<IFraseMiticaRepository, FraseMiticaRepository>();
+            services.AddScoped<IQuoteRepository, QuoteRepository>();
         }
 
 
         private static void AddBusinessServices(this IServiceCollection services)
         {
             services.AddScoped<IAppUserService, AppUserService>();
-            services.AddScoped<IFraseMiticaService, FraseMiticaService>();
+            services.AddScoped<IQuoteService, QuoteService>();
 
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IHashingService, HashingService>();

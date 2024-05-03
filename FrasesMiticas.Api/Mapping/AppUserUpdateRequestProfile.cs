@@ -8,7 +8,7 @@ namespace FrasesMiticas.Api.Mapping
     {
         public AppUserUpdateRequestProfile()
         {
-            CreateMap<AppUserUpdateRequest, AppUserDto>();
+            CreateMap<AdminAppUserUpdateRequest, AppUserDto>();
         }
     }
 }

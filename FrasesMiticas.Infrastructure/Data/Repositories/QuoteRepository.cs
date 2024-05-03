@@ -1,4 +1,4 @@
-﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
 using FrasesMiticas.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -6,25 +6,25 @@ using System.Linq;
 
 namespace FrasesMiticas.Infrastructure.Data.Repositories
 {
-    public class FraseMiticaRepository : IFraseMiticaRepository
+    public class QuoteRepository : IQuoteRepository
     {
-        private readonly IRepository<FraseMitica> repository;
+        private readonly IRepository<Quote> repository;
 
-        public FraseMiticaRepository(IRepository<FraseMitica> repository)
+        public QuoteRepository(IRepository<Quote> repository)
         {
             this.repository = repository;
         }
 
-        public void Add(FraseMitica entity) => repository.Add(entity);
+        public void Add(Quote entity) => repository.Add(entity);
 
-        public void Update(FraseMitica entity) => repository.Update(entity);
+        public void Update(Quote entity) => repository.Update(entity);
 
-        public IEnumerable<FraseMitica> Get() => repository
+        public IEnumerable<Quote> Get() => repository
                                                     .Get()
                                                     .Include(e => e.InvolvedUsers)
                                                     .OrderByDescending(e => e.Date);
 
-        public FraseMitica Get(int id) => repository
+        public Quote Get(int id) => repository
                                             .Where(e => e.Id == id)
                                             .Include(e => e.InvolvedUsers)
                                             .Include(e => e.Comments)

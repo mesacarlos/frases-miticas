@@ -1,7 +1,7 @@
 ﻿using FrasesMiticas.Core.Aggregates.AppUsers;
 using System;
 
-namespace FrasesMiticas.Core.Aggregates.FrasesMiticas
+namespace FrasesMiticas.Core.Aggregates.Quotes
 {
     public class Comment : Entity<int>
     {
@@ -14,6 +14,6 @@ namespace FrasesMiticas.Core.Aggregates.FrasesMiticas
         public string Text { get; set; }
 
         public virtual AppUser User { get; set; }
-        public virtual FraseMitica FraseMitica { get; set; }
+        public virtual Quote Quote { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FrasesMiticas.Core.Dtos.FrasesMiticas
+﻿namespace FrasesMiticas.Core.Dtos.Quotes
 {
     public record InvolvedUserDto
     {

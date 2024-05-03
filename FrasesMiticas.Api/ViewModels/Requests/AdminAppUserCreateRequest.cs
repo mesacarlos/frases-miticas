@@ -2,7 +2,7 @@
 
 namespace FrasesMiticas.Api.ViewModels.Requests
 {
-    public record AppUserCreateRequest
+    public record AdminAppUserCreateRequest
     {
         public string Username { get; init; }
         public string Email { get; init; }

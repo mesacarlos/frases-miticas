@@ -24,7 +24,7 @@ builder.Services.AddControllers(configuration => {
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v2", new OpenApiInfo { Title = "FrasesMiticas.Api", Version = "v2.2" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "FrasesMiticas.Api", Version = "v1.0" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -51,10 +51,10 @@ builder.Services.AddApplicationDependencies(builder.Configuration);
 
 var app = builder.Build();
 
-app.UseSwagger(c => c.RouteTemplate = "api/swagger/{documentName}/swagger.json");
+app.UseSwagger(c => c.RouteTemplate = "swagger/{documentName}/swagger.json");
 app.UseSwaggerUI(c => {
-    c.SwaggerEndpoint("v2/swagger.json", "FrasesMiticas.Api v2");
-    c.RoutePrefix = "api/swagger";
+    c.SwaggerEndpoint("v1/swagger.json", "FrasesMiticas.Api v1");
+    c.RoutePrefix = "swagger";
 });
 
 app.UseCors(corsPolicyBuilder =>

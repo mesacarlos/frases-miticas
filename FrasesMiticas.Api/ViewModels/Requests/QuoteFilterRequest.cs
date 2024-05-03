@@ -1,6 +1,6 @@
 ﻿namespace FrasesMiticas.Api.ViewModels.Requests
 {
-    public record FraseMiticaFilterRequest(
+    public record QuoteFilterRequest(
         int PageSize,
         int PageIndex);
 }

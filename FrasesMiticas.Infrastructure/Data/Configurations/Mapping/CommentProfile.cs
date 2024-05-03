@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FrasesMiticas.Core.Aggregates.FrasesMiticas;
-using FrasesMiticas.Core.Dtos.FrasesMiticas;
+using FrasesMiticas.Core.Aggregates.Quotes;
+using FrasesMiticas.Core.Dtos.Quotes;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
 {
@@ -8,11 +8,11 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
     {
         public CommentProfile()
         {
-            CreateMap<Comment, CommentDto>()
+            CreateMap<Comment, QuoteCommentDto>()
                 .ForMember(e => e.Username, e => e.MapFrom(c => c.User.Username))
                 .ForMember(e => e.UserFullName, e => e.MapFrom(c => c.User.FullName));
 
-            CreateMap<CommentDto, Comment>();
+            CreateMap<QuoteCommentDto, Comment>();
         }
     }
 }

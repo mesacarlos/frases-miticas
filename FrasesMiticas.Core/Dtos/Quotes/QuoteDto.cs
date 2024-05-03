@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FrasesMiticas.Core.Dtos.FrasesMiticas
+namespace FrasesMiticas.Core.Dtos.Quotes
 {
-    public record FraseMiticaDto : EntityDto<int>
+    public record QuoteDto : EntityDto<int>
     {
         public string Author { get; init; }
 
@@ -13,7 +13,7 @@ namespace FrasesMiticas.Core.Dtos.FrasesMiticas
 
         public string Context { get; init; }
 
-        public IEnumerable<CommentDto> Comments { get; init; }
+        public IEnumerable<QuoteCommentDto> Comments { get; init; }
         public IEnumerable<InvolvedUserDto> InvolvedUsers { get; init; }
     }
 }

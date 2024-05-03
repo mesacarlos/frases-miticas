@@ -1,4 +1,4 @@
-﻿using FrasesMiticas.Core.Aggregates.FrasesMiticas;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
 using FrasesMiticas.Core.Interfaces;
 using System.Collections.Generic;
 
@@ -18,6 +18,6 @@ namespace FrasesMiticas.Core.Aggregates.AppUsers
 
         public string ProfilePictureUrl { get; set; }
 
-        public virtual ICollection<FraseMitica> InvolvedPhrases { get; set; }
+        public virtual ICollection<Quote> InvolvedPhrases { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FrasesMiticas.Core.Aggregates.AppUsers;
 using FrasesMiticas.Core.Dtos.AppUsers;
-using FrasesMiticas.Core.Dtos.FrasesMiticas;
+using FrasesMiticas.Core.Dtos.Quotes;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
 {

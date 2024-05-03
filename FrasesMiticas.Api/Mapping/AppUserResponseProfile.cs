@@ -8,7 +8,8 @@ namespace FrasesMiticas.Api.Mapping
     {
         public AppUserResponseProfile()
         {
-            CreateMap<AppUserDto, AppUserResponse>();
+            CreateMap<AppUserDto, AppUserFullResponse>();
+            CreateMap<AppUserDto, AppUserSummaryResponse>();
         }
     }
 }
