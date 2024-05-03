@@ -8,7 +8,10 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
     {
         public QuoteProfile()
         {
-            CreateMap<Quote, QuoteDto>().ReverseMap();
+            CreateMap<Quote, QuoteDto>();
+
+            CreateMap<QuoteDto, Quote>()
+                .ForMember(e => e.InvolvedUsers, e => e.Ignore());
         }
     }
 }

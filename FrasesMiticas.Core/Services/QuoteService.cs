@@ -1,10 +1,12 @@
-﻿using FrasesMiticas.Core.Aggregates.Quotes;
+﻿using FrasesMiticas.Core.Aggregates.AppUsers;
+using FrasesMiticas.Core.Aggregates.Quotes;
 using FrasesMiticas.Core.Dtos;
 using FrasesMiticas.Core.Dtos.Quotes;
 using FrasesMiticas.Core.Exceptions;
 using FrasesMiticas.Core.Interfaces;
 using FrasesMiticas.Core.Interfaces.Repositories;
 using FrasesMiticas.Core.Interfaces.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,17 +16,21 @@ namespace FrasesMiticas.Core.Services
     {
         private readonly IMapper mapper;
         private readonly IQuoteRepository repository;
+        private readonly IAppUserRepository appUserRepository;
 
         public QuoteService(IMapper mapper,
-                                IQuoteRepository repository)
+                                IQuoteRepository repository,
+                                IAppUserRepository appUserRepository)
         {
             this.mapper = mapper;
             this.repository = repository;
+            this.appUserRepository = appUserRepository;
         }
 
         public QuoteDto Add(QuoteDto dto)
         {
             Quote entity = mapper.Map<Quote>(dto);
+            entity.InvolvedUsers = appUserRepository.GetByIds(dto.InvolvedUsers.Select(e => e.Id).ToList());
             repository.Add(entity);
 
             return mapper.Map<QuoteDto>(entity);

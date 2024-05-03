@@ -1,5 +1,4 @@
 ﻿using FrasesMiticas.Core.Aggregates.AppUsers;
-using FrasesMiticas.Core.Dtos.AppUsers;
 using System.Collections.Generic;
 
 namespace FrasesMiticas.Core.Interfaces.Repositories
@@ -39,6 +38,13 @@ namespace FrasesMiticas.Core.Interfaces.Repositories
         /// <param name="username">Username of the user to get.</param>
         /// <returns>User gotten</returns>
         public AppUser GetByUsername(string username);
+
+        /// <summary>
+        /// Get users by identifier list
+        /// </summary>
+        /// <param name="ids">list of ids</param>
+        /// <returns>Users matching the given identifiers.</returns>
+        public ICollection<AppUser> GetByIds(List<int> ids);
 
         /// <summary>
         /// Deletes an user.

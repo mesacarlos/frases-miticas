@@ -9,6 +9,10 @@ namespace FrasesMiticas.Api.Mapping
         public QuoteCreateRequestProfile()
         {
             CreateMap<QuoteCreateRequest, QuoteDto>();
+            CreateMap<int, InvolvedUserDto>().ConstructUsing(i => new InvolvedUserDto()
+            {
+                Id = i
+            });
         }
     }
 }

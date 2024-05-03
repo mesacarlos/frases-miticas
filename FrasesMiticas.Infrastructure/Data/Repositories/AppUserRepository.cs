@@ -24,6 +24,8 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
 
         public AppUser GetByUsername(string username) => repository.Where(e => e.Username == username).FirstOrDefault();
 
+        public ICollection<AppUser> GetByIds(List<int> ids) => repository.Where(e => ids.Contains(e.Id)).ToList();
+
         public void Delete(int id) => repository.Delete(id);
     }
 }

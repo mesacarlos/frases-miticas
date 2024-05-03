@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
 {
-    public class FrasesMiticasConfiguration : EntityConfiguration<int, Quote>
+    public class QuotesConfiguration : EntityConfiguration<int, Quote>
     {
         public override void Configure(EntityTypeBuilder<Quote> builder)
         {

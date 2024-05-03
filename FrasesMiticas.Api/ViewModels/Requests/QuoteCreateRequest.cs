@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FrasesMiticas.Api.ViewModels.Requests
 {
@@ -6,5 +7,6 @@ namespace FrasesMiticas.Api.ViewModels.Requests
         string Author,
         DateTime Date,
         string Text,
-        string Context);
+        string Context,
+        IEnumerable<int> InvolvedUsers);
 }
