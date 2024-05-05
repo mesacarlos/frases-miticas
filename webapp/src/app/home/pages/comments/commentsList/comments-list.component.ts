@@ -10,6 +10,7 @@ import { MaterialModules } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { UpdateCommentComponent } from '../update-comment/update-comment.component';
 
 @Component({
     standalone: true,
@@ -56,7 +57,7 @@ export class CommentsListComponent implements OnInit
         });
     }
 
-    public openDialog(idQuote: number, idComment: number)
+    public openDialogDelete(idQuote: number, idComment: number)
     {
         const dialogRef = this.dialog.open(AlertConfirmComponent, {
             data: { title: '¿Quieres eliminar este comentario?', message: 'No podrás deshacer el cambio' }
@@ -79,6 +80,25 @@ export class CommentsListComponent implements OnInit
                 message = 'Se ha borrado el comentario';
 
             this.showAlert(message);
+            this.loadComments();
+        });
+    }
+
+    public editComment(idQuote: number, idComment: number, message: string): void
+    {
+        let width: string = '60%';
+
+        if (window.innerWidth < 600)
+            width = '95%';
+
+        const dialogRef = this.dialog.open(UpdateCommentComponent, {
+            data: { idQuote: idQuote, idComment: idComment, message: message },
+            width: width
+        });
+
+        dialogRef.componentInstance.sendEvent.subscribe(() =>
+        {
+            dialogRef.close();
             this.loadComments();
         });
     }

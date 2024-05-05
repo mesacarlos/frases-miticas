@@ -36,8 +36,11 @@
                     </mat-card-content>
                     <mat-card-actions>
                         @if (username === comment.user.username) {
-                            <button mat-button (click)="openDialog(comment.quoteId, comment.id)">
+                            <button mat-button (click)="openDialogDelete(comment.quoteId, comment.id)">
                                 <mat-icon>delete</mat-icon>
+                            </button>
+                            <button mat-button (click)="editComment(comment.quoteId, comment.id, comment.text)">
+                                <mat-icon>edit</mat-icon>
                             </button>
                         }
 

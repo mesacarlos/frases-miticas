@@ -1,0 +1,20 @@
+<div class="h-5/6 grid content-center" id="form">
+    <form [formGroup]="commentForm" class="flex flex-col content-center w-full p-5">
+
+        <mat-form-field>
+            <mat-label for="comment">Comentario</mat-label>
+            <textarea matInput placeholder="Escribe aquí tu comentario..." formControlName="comment" required>{{ data.message }}</textarea>
+            @if (errorEmptyComment) { <mat-error>El comentario no puede estar vacío</mat-error> }
+        </mat-form-field>
+
+        <button
+            mat-button
+            mat-flat-button
+            color="primary"
+            (click)="updateComment()"
+        >
+            <mat-icon>edit</mat-icon>
+            Actualizar
+        </button>
+    </form>
+</div>

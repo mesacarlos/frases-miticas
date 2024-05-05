@@ -77,6 +77,17 @@ export class PhrasesService
         );
     }
 
+    public updateComment(idQuote: number, idComment: number, message: string): Observable<boolean>
+    {
+        return this.http.put<any>(`${ environments.API_GATEWAY }/quote/${ idQuote }/comment/${ idComment }`,
+        { "text": message },
+        { headers: this.headers }
+    ).pipe(
+        map(response => response.success),
+        catchError(() => of(false))
+    );
+    }
+
     public deleteComment(idQuote: number, idComment: number): Observable<boolean>
     {
         return this.http.delete<any>(
