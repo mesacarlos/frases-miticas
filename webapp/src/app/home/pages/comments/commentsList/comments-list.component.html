@@ -35,9 +35,12 @@
                         <p class="text-center text-xl m-4">"{{ comment.text }}"</p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button (click)="openDialog(comment.quoteId, comment.id)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        @if (username === comment.user.username) {
+                            <button mat-button (click)="openDialog(comment.quoteId, comment.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        }
+
                     </mat-card-actions>
                 </mat-card>
                 @if ($index < comments.length - 1) {

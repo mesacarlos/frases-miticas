@@ -9,6 +9,7 @@ import { Comment } from '../../../interfaces/phrases.interfaces';
 import { MaterialModules } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
 import { AddCommentComponent } from '../add-comment/add-comment.component';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
     standalone: true,
@@ -24,16 +25,24 @@ export class CommentsListComponent implements OnInit
     @Input()
     public idQuote: number = 0;
     public comments: Comment[] = [];
+    public username: string = '';
     public loading: boolean = true;
 
     constructor(
         private phrasesService: PhrasesService,
+        private authService: AuthService,
         private snackBar: MatSnackBar,
         public dialog: MatDialog,
     ) {}
 
     ngOnInit(): void
     {
+        this.authService.getUsername()
+            .subscribe(response =>
+            {
+                this.username = response;
+            });
+
         this.loadComments();
     }
 
