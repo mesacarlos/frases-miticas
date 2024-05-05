@@ -26,7 +26,6 @@ import { PhrasesService } from '../../services/phrases.service';
 })
 export class PhrasesComponent implements OnInit
 {
-    @ViewChild('paginator', { static: true }) paginator: any;
     public phrases: Phrase[] = [];
     public loading: boolean = true;
 
@@ -90,8 +89,6 @@ export class PhrasesComponent implements OnInit
         this.length = e.length;
         this.itemsPerPage = e.pageSize;
         this.pageIndex = e.pageIndex + 1;
-
-        this.paginator.pageIndex = this.pageIndex;
 
         this.loadPhrases(this.itemsPerPage, this.pageIndex);
     }
