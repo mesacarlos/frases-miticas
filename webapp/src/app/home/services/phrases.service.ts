@@ -17,10 +17,14 @@ export class PhrasesService
         'Authorization': `Bearer ${ localStorage.getItem('token') }`
     });
 
-    public getPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = ''): Observable<GetPhrases | null>
+    public getPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = '', authors: number[] = []): Observable<GetPhrases | null>
     {
+        const authorsQuery: string = authors.map(a => `&InvolvedUsers=${ a }`).join('');
+
+        const URI = `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }&Text=${ search }${ authorsQuery }`;
+
         return this.http.get<any>(
-            `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }&Text=${ search }`,
+            URI,
             { headers: this.headers }
         ).pipe(
             map(response =>

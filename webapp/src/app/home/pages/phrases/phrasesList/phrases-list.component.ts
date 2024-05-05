@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
@@ -10,6 +11,8 @@ import { MaterialModules, MyPaginator } from '../../../../../material/material.m
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
+import { User } from '../../../../auth/interfaces/user.interfaces';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
     standalone: true,
@@ -30,6 +33,8 @@ export class PhrasesListComponent implements OnInit
 {
     public phrases: Phrase[] = [];
     public loading: boolean = true;
+    public usersList: User[] = [];
+    public userFilter: User[] = [];
 
     public length: number = 0;
     public itemsPerPage: number = 25;
@@ -38,10 +43,14 @@ export class PhrasesListComponent implements OnInit
     constructor (
         public dialog: MatDialog,
         private phrasesService: PhrasesService,
+        private userService: UsersService
     ) {}
 
     ngOnInit(): void
     {
+        this.userService.getUsers()
+            .subscribe(response => this.usersList = response);
+
         this.loadPhrases(this.itemsPerPage, this.pageIndex);
     }
 
@@ -70,11 +79,11 @@ export class PhrasesListComponent implements OnInit
         });
     }
 
-    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search = '')
+    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search = '', authors: number[] = this.usersList.map(u => u.id))
     {
         this.loading = true;
 
-        this.phrasesService.getPhrases(pageSize, pageIndex, search)
+        this.phrasesService.getPhrases(pageSize, pageIndex, search, authors)
             .subscribe(response =>
             {
                 if (response)
@@ -112,6 +121,13 @@ export class PhrasesListComponent implements OnInit
             return;
 
         this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
+    }
+
+    public onFilter(event: MatSelectChange)
+    {
+        this.userFilter = event.value;
+
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.userFilter.map(u => u.id));
     }
 
 }
