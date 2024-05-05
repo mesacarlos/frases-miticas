@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { MaterialModules } from '../../../../../material/material.modules';
 
 @Component({
@@ -13,11 +15,18 @@ import { MaterialModules } from '../../../../../material/material.modules';
 })
 export class AlertConfirmComponent
 {
-    public title: string = '';
-    public message: string = '';
+    constructor (
+        @Inject(MAT_DIALOG_DATA) public data: Data
+    ) {}
 
     public deleteConfirm(): boolean
     {
         return true;
     }
+}
+
+export interface Data
+{
+    title: string;
+    message: string;
 }
