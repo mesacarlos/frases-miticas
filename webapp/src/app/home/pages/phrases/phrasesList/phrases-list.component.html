@@ -3,7 +3,7 @@
 <div class="w-full">
     <form [formGroup]="searchForm" class="flex justify-center mt-5">
         <mat-form-field class="w-11/12 xl:w-2/4">
-            <input id="search" (keydown)="search()" matInput type="search" placeholder="Búsqueda por texto o autor..." formControlName="search">
+            <input id="search" (keyup)="search()" matInput type="search" placeholder="Búsqueda por texto o autor..." formControlName="search">
             <button matSuffix (click)="search()" class="pr-3">
                 <mat-icon class="text-white">search</mat-icon>
             </button>

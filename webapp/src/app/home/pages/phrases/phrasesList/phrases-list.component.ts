@@ -108,6 +108,7 @@ export class PhrasesListComponent implements OnInit
 
     public search(): void
     {
+        console.log(this.currentPhrase.search);
         this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
     }
 
