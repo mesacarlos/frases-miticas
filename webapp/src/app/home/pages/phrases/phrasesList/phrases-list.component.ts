@@ -106,9 +106,11 @@ export class PhrasesListComponent implements OnInit
         return this.searchForm.value as Search;
     }
 
-    public search(): void
+    public search(keypress: boolean): void
     {
-        console.log(this.currentPhrase.search);
+        if (this.currentPhrase.search === '' && !keypress)
+            return;
+
         this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
     }
 
