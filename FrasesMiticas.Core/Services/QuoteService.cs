@@ -60,6 +60,9 @@ namespace FrasesMiticas.Core.Services
             IEnumerable<Quote> entities = repository.Get();
 
             // Apply filters
+            if (filter.Text != null)
+                entities = entities.Where(e => e.Text.Contains(filter.Text));
+
             if (filter.FromDate != null)
                 entities = entities.Where(e => e.Date > filter.FromDate);
 
