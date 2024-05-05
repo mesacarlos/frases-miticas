@@ -3,11 +3,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
-import { MaterialModules } from '../../../../material/material.modules';
-import { PhrasesService } from '../../services/phrases.service';
-import { Comment } from '../../interfaces/phrases.interfaces';
-import { AlertMessageComponent } from '../alerts/alert-message/alert-message.component';
-import { AlertConfirmRemoveCommentComponent } from '../alerts/alert-confirm-remove-comment/alert-confirm-remove-comment.component';
+import { MaterialModules } from '../../../../../material/material.modules';
+import { PhrasesService } from '../../../services/phrases.service';
+import { Comment } from '../../../interfaces/phrases.interfaces';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
 
 @Component({
     standalone: true,
@@ -15,10 +15,10 @@ import { AlertConfirmRemoveCommentComponent } from '../alerts/alert-confirm-remo
         CommonModule,
         ...MaterialModules
     ],
-    templateUrl: './comments.component.html',
-    styleUrl: './comments.component.css'
+    templateUrl: './comments-list.component.html',
+    styleUrl: './comments-list.component.css'
 })
-export class CommentsComponent implements OnInit
+export class CommentsListComponent implements OnInit
 {
     @Input()
     public idQuote: number = 0;
@@ -48,7 +48,9 @@ export class CommentsComponent implements OnInit
 
     public openDialog(idQuote: number, idComment: number)
     {
-        const dialogRef = this.dialog.open(AlertConfirmRemoveCommentComponent);
+        const dialogRef = this.dialog.open(AlertConfirmComponent, {
+            data: { title: '¿Quieres eliminar este comentario?', message: 'No podrás deshacer el cambio' }
+        });
 
         dialogRef.afterClosed().subscribe(result =>
         {
@@ -61,12 +63,10 @@ export class CommentsComponent implements OnInit
     {
         this.phrasesService.deleteComment(idQuote, idComment).subscribe(response =>
         {
-            let message = '';
+            let message = 'No se ha podido borrar el comentario';
 
             if (response)
                 message = 'Se ha borrado el comentario';
-            else
-                message = 'No se ha podido borrar el comentario';
 
             this.showAlert(message);
             this.loadComments();

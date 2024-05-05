@@ -8,11 +8,14 @@ import { MaterialModules } from '../../../../../material/material.modules';
         CommonModule,
         ...MaterialModules
     ],
-    templateUrl: './alert-confirm-remove-comment.component.html',
+    templateUrl: './alert-confirm.component.html',
     styles: ``
 })
-export class AlertConfirmRemoveCommentComponent
+export class AlertConfirmComponent
 {
+    public title: string = '';
+    public message: string = '';
+
     public deleteConfirm(): boolean
     {
         return true;

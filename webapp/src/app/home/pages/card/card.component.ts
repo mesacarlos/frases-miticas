@@ -3,7 +3,7 @@ import { Phrase } from '../../interfaces/phrases.interfaces';
 import { MaterialModules } from '../../../../material/material.modules';
 import { NgFor } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { CommentsComponent } from '../comments/comments.component';
+import { CommentsListComponent } from '../comments/commentsList/comments-list.component';
 
 @Component({
     selector: 'app-card',
@@ -50,19 +50,17 @@ export class CardComponent
 
     public viewComments(): void
     {
-        let width: string = '';
+        let width: string = '60%';
 
         if (window.innerWidth < 600)
             width = '95%';
-        else
-            width = '60%';
 
         this.openDialog(width);
     }
 
     private openDialog(width: string): void
     {
-        const dialogRef = this.dialog.open(CommentsComponent, { width: width });
+        const dialogRef = this.dialog.open(CommentsListComponent, { width: width });
 
         dialogRef.componentInstance.idQuote = this.phrase.id;
     }

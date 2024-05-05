@@ -4,10 +4,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { MaterialModules } from '../../../../material/material.modules';
-import { AddPhrase } from '../../interfaces/phrases.interfaces';
-import { PhrasesService } from '../../services/phrases.service';
-import { AlertMessageComponent } from '../alerts/alert-message/alert-message.component';
+import { MaterialModules } from '../../../../../material/material.modules';
+import { AddPhrase } from '../../../interfaces/phrases.interfaces';
+import { PhrasesService } from '../../../services/phrases.service';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 
 @Component({
     selector: 'app-add-phrase',
