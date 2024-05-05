@@ -70,7 +70,7 @@ export class SettingsComponent
 
         this.authService.changePassword(this.currentChangePassword).subscribe(response =>
         {
-            let message = 'No se ha podido cambiar la contraseña';
+            let message = 'No se ha podido cambiar la contraseña. Contraseña antigua incorrecta';
 
             if (response)
                 message = 'Se ha cambiado con éxito la contraseña';
