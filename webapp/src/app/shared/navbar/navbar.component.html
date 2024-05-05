@@ -1,13 +1,13 @@
 <mat-toolbar color="bg-navbar">
     <mat-toolbar-row>
-        <span><a [href]="['/home']">Frases míticas</a></span>
+        <span><a [routerLink]="['/home']">Frases míticas</a></span>
         <span class="spacer"></span>
         <button [matMenuTriggerFor]="menu" #menuTrigger class="mr-5 flex justify-center align-middle">
             <mat-icon class="icon">account_circle</mat-icon>
         </button>
 
         <mat-menu class="text-center" #menu="matMenu">
-            <a class="text-white" [href]="['/settings']">Ajustes</a>
+            <a class="text-white" [routerLink]="['/settings']">Ajustes</a>
         </mat-menu>
 
         <button (click)="logout()" class="mr-5 flex justify-center align-middle">
