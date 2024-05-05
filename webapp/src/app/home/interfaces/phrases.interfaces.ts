@@ -1,3 +1,5 @@
+import { User } from "../../auth/interfaces/user.interfaces";
+
 export interface Phrase
 {
     id: number;
@@ -22,6 +24,7 @@ export interface AddPhrase
     date: Date;
     text: string;
     context: string;
+    users: User[]
 }
 
 export interface GetPhrases

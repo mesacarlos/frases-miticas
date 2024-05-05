@@ -7,6 +7,28 @@
         </mat-form-field>
 
         <mat-form-field>
+            <mat-label>Usuarios involucrados</mat-label>
+            <mat-select formControlName="users" multiple (selectionChange)="autocompleteAuthors($event)">
+                <mat-select-trigger>
+                    {{ currentPhrase.users && currentPhrase.users.length > 0 ? currentPhrase.users[0].username : '' }}
+                    @if (currentPhrase.users && currentPhrase.users.length > 1) {
+                        <span>
+                            (+{{(currentPhrase.users.length) - 1}} {{currentPhrase.users.length === 2 ? 'otro' : 'otros'}})
+                        </span>
+                    }
+                </mat-select-trigger>
+                @for (user of usersList; track $index) {
+                    <mat-option [value]="user">
+                        <div class="flex align-middle">
+                            <img class="rounded-xl w-5 mr-2" [src]="user.profilePictureUrl" [alt]="user.username">
+                            <span>{{ user.username }}</span>
+                        </div>
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
             <mat-label>Fecha</mat-label>
             <input matInput [matDatepicker]="picker">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

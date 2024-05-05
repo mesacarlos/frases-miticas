@@ -45,7 +45,8 @@ export class PhrasesService
                 "author": phrase.author,
                 "date": phrase.date.toISOString(),
                 "text": phrase.text,
-                "context": phrase.text
+                "context": phrase.context,
+                "involvedUsers": phrase.users.map(user => user.id)
             },
             { headers: this.headers }
         ).pipe(

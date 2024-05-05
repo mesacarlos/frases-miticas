@@ -20,3 +20,12 @@ export interface Auth
     success: boolean;
     message: string | null;
 }
+
+export interface User
+{
+    id: number;
+    username: string;
+    fullName: string;
+    isSuperAdmin: boolean;
+    profilePictureUrl: string;
+}
