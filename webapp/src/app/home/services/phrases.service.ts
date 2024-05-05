@@ -17,10 +17,10 @@ export class PhrasesService
         'Authorization': `Bearer ${ localStorage.getItem('token') }`
     });
 
-    public getPhrases(pageSize: number = -1, pageIndex: number = 1): Observable<GetPhrases | null>
+    public getPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = ''): Observable<GetPhrases | null>
     {
         return this.http.get<any>(
-            `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }`,
+            `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }&Text=${ search }`,
             { headers: this.headers }
         ).pipe(
             map(response =>

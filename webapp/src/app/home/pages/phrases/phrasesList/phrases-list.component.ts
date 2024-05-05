@@ -2,21 +2,23 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
 import { MaterialModules, MyPaginator } from '../../../../../material/material.modules';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
-import { Phrase } from '../../../interfaces/phrases.interfaces';
+import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
 
 @Component({
     standalone: true,
     imports: [
+        ...MaterialModules,
+        CardComponent,
         CommonModule,
         NavbarComponent,
-        CardComponent,
-        ...MaterialModules,
+        ReactiveFormsModule
     ],
     providers: [
         { provide: MatPaginatorIntl, useValue: MyPaginator() }
@@ -36,13 +38,16 @@ export class PhrasesListComponent implements OnInit
     constructor (
         public dialog: MatDialog,
         private phrasesService: PhrasesService,
-
     ) {}
 
     ngOnInit(): void
     {
         this.loadPhrases(this.itemsPerPage, this.pageIndex);
     }
+
+    public searchForm = new FormGroup({
+        search:     new FormControl<string>('')
+    });
 
     public addPhrase()
     {
@@ -65,11 +70,11 @@ export class PhrasesListComponent implements OnInit
         });
     }
 
-    private loadPhrases(pageSize: number = -1, pageIndex: number = 1)
+    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search = '')
     {
         this.loading = true;
 
-        this.phrasesService.getPhrases(pageSize, pageIndex)
+        this.phrasesService.getPhrases(pageSize, pageIndex, search)
             .subscribe(response =>
             {
                 if (response)
@@ -94,6 +99,16 @@ export class PhrasesListComponent implements OnInit
     public scrollToTop(): void
     {
         window.scrollTo(0, 0);
+    }
+
+    get currentPhrase(): Search
+    {
+        return this.searchForm.value as Search;
+    }
+
+    public search(): void
+    {
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
     }
 
 }

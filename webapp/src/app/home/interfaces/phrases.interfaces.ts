@@ -55,3 +55,8 @@ export interface ChangePassword
     newPassword: string;
     newPasswordConfirm: string;
 }
+
+export interface Search
+{
+    search: string;
+}
