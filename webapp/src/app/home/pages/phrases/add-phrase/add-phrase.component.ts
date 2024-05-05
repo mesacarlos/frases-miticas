@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { provideNativeDateAdapter } from '@angular/material/core';
 
-import { MaterialModules } from '../../../../../material/material.modules';
 import { AddPhrase } from '../../../interfaces/phrases.interfaces';
-import { PhrasesService } from '../../../services/phrases.service';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { MaterialModules } from '../../../../../material/material.modules';
+import { PhrasesService } from '../../../services/phrases.service';
 
 @Component({
     selector: 'app-add-phrase',
@@ -66,15 +66,8 @@ export class AddPhraseComponent
 
     private thereAreEmptyFields(): boolean
     {
-        if (this.currentPhrase.author === '')
-            this.errorEmptyAuthor = true;
-        else
-            this.errorEmptyAuthor = false;
-
-        if (this.currentPhrase.text === '')
-            this.errorEmptyText = true;
-        else
-            this.errorEmptyText = false;
+        this.errorEmptyAuthor = this.currentPhrase.author === '';
+        this.errorEmptyText = this.currentPhrase.text === '';
 
         return this.errorEmptyAuthor || this.errorEmptyText;
     }

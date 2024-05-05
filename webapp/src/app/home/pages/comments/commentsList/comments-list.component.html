@@ -4,7 +4,12 @@
             <mat-spinner></mat-spinner>
         </div>
     } @else {
-        <h2 mat-dialog-title>Comentarios</h2>
+        <div class="flex justify-between align-middle">
+            <h2 mat-dialog-title>Comentarios</h2>
+            <button mat-button (click)="openCommentForm(idQuote)" class="mt-2">
+                <mat-icon class="scale-150">add</mat-icon>
+            </button>
+        </div>
         <mat-dialog-content>
             @if (comments.length === 0) {
                 <h2 class="text-center text-white">No hay ningún comentario</h2>

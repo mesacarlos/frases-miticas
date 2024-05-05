@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 
-import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
-import { Phrase } from '../../../interfaces/phrases.interfaces';
+import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
 import { MaterialModules, MyPaginator } from '../../../../../material/material.modules';
-import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
+import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
+import { Phrase } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
 
 @Component({

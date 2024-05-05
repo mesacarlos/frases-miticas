@@ -44,6 +44,11 @@ export interface Comment
     }
 }
 
+export interface AddComment
+{
+    comment: string;
+}
+
 export interface ChangePassword
 {
     oldPassword: string;

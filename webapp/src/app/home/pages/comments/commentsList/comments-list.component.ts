@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { Comment } from '../../../interfaces/phrases.interfaces';
 import { MaterialModules } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
-import { Comment } from '../../../interfaces/phrases.interfaces';
-import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
-import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
+import { AddCommentComponent } from '../add-comment/add-comment.component';
 
 @Component({
     standalone: true,
@@ -78,6 +79,25 @@ export class CommentsListComponent implements OnInit
         this.snackBar.openFromComponent(AlertMessageComponent, {
             duration: 4000,
             data: message
+        });
+    }
+
+    public openCommentForm(idQuote: number): void
+    {
+        let width: string = '60%';
+
+        if (window.innerWidth < 600)
+            width = '95%';
+
+        const dialogRef = this.dialog.open(AddCommentComponent, {
+            data: idQuote,
+            width: width
+        });
+
+        dialogRef.componentInstance.sendEvent.subscribe(() =>
+        {
+            dialogRef.close();
+            this.loadComments();
         });
     }
 }

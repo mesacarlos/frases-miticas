@@ -33,6 +33,17 @@ export class AuthService
             );
     }
 
+    public getUsername(): Observable<string>
+    {
+        return this.http.get<any>(
+            `${ environments.API_GATEWAY }/user/self`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => response.data.username),
+            catchError(() => of(''))
+        );
+    }
+
     public isAuthenticated(): boolean
     {
         return !!localStorage.getItem('token');
@@ -40,28 +51,24 @@ export class AuthService
 
     public changePassword(changePassword: ChangePassword): Observable<boolean>
     {
-        return this.http.get<any>(
-            `${ environments.API_GATEWAY }/user/self`,
-            { headers: this.headers }
-        ).pipe(
-            switchMap(response =>
-            {
-                const username: string = response.data.username;
-
-                return this.http.post<any>(
-                    `${ environments.API_GATEWAY }/account/change-password`,
-                    {
-                        "username": username,
-                        "oldPassword": changePassword.oldPassword,
-                        "newPassword": changePassword.newPassword
-                    },
-                    { headers: this.headers }
-                ).pipe(
-                    map(response => response.success),
-                    catchError(() => of(false))
-                );
-            }),
-            catchError(() => of(false))
-        );
+        return this.getUsername()
+            .pipe(
+                switchMap(username =>
+                {
+                    return this.http.post<any>(
+                        `${ environments.API_GATEWAY }/account/change-password`,
+                        {
+                            "username": username,
+                            "oldPassword": changePassword.oldPassword,
+                            "newPassword": changePassword.newPassword
+                        },
+                        { headers: this.headers }
+                    ).pipe(
+                        map(response => response.success),
+                        catchError(() => of(false))
+                    );
+                }),
+                catchError(() => of(false))
+            );
     }
 }
