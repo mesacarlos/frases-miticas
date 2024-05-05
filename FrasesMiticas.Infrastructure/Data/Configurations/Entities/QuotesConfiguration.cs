@@ -32,8 +32,14 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
                 .WithMany(e => e.InvolvedQuotes)
                 .UsingEntity(
                     "quotes_users",
-                    l => l.HasOne(typeof(AppUser)).WithMany().HasForeignKey("user_id").HasPrincipalKey(nameof(AppUser.Id)),
-                    r => r.HasOne(typeof(Quote)).WithMany().HasForeignKey("quote_id").HasPrincipalKey(nameof(Quote.Id)),
+                    l => l.HasOne(typeof(AppUser))
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade),
+                    r => r.HasOne(typeof(Quote))
+                        .WithMany()
+                        .HasForeignKey("quote_id")
+                        .OnDelete(DeleteBehavior.Cascade),
                     j => j.HasKey("quote_id", "user_id"));
 
             base.Configure(builder);
