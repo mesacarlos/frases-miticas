@@ -79,7 +79,7 @@ export class PhrasesListComponent implements OnInit
         });
     }
 
-    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search = '', authors: number[] = this.usersList.map(u => u.id))
+    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = '', authors: number[] = this.usersList.map(u => u.id))
     {
         this.loading = true;
 

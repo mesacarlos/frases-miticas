@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { AddPhrase } from '../../../interfaces/phrases.interfaces';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
-import { MaterialModules } from '../../../../../material/material.modules';
+import { MaterialModules, appDateFormat } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
 import { User } from '../../../../auth/interfaces/user.interfaces';
 import { UsersService } from '../../../services/users.service';
-import { MatSelectChange } from '@angular/material/select';
+
 
 @Component({
     selector: 'app-add-phrase',
@@ -18,10 +20,13 @@ import { MatSelectChange } from '@angular/material/select';
     imports: [
         ...MaterialModules,
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [
-        provideNativeDateAdapter()
+        provideNativeDateAdapter(),
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: appDateFormat }
     ],
     templateUrl: './add-phrase.component.html',
     styles: ``
@@ -33,6 +38,7 @@ export class AddPhraseComponent implements OnInit
     public errorEmptyAuthor: boolean = false;
     public errorEmptyText: boolean = false;
     public usersList: User[] = [];
+    public date: Date = new Date();
 
     constructor(
         private phrasesService: PhrasesService,

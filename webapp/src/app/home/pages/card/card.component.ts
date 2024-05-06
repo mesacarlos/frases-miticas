@@ -1,15 +1,14 @@
 import { Component, Input } from '@angular/core';
-import { Phrase } from '../../interfaces/phrases.interfaces';
-import { MaterialModules } from '../../../../material/material.modules';
-import { NgFor } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
+
 import { CommentsListComponent } from '../comments/commentsList/comments-list.component';
+import { MaterialModules } from '../../../../material/material.modules';
+import { Phrase } from '../../interfaces/phrases.interfaces';
 
 @Component({
     selector: 'app-card',
     standalone: true,
     imports: [
-		NgFor,
         ...MaterialModules
     ],
     templateUrl: './card.component.html',
