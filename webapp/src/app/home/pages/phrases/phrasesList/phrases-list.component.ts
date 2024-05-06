@@ -4,15 +4,18 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
-import { MaterialModules, MyPaginator } from '../../../../../material/material.modules';
+import { MaterialModules, MyPaginator, appDateFormat } from '../../../../../material/material.modules';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
 import { User } from '../../../../auth/interfaces/user.interfaces';
 import { UsersService } from '../../../services/users.service';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
     standalone: true,
@@ -24,7 +27,10 @@ import { UsersService } from '../../../services/users.service';
         ReactiveFormsModule
     ],
     providers: [
-        { provide: MatPaginatorIntl, useValue: MyPaginator() }
+        provideNativeDateAdapter(),
+        { provide: MatPaginatorIntl, useValue: MyPaginator() },
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
+        { provide: MAT_DATE_FORMATS, useValue: appDateFormat }
     ],
     templateUrl: './phrases-list.component.html',
     styleUrl: './phrases-list.component.css'
@@ -35,6 +41,8 @@ export class PhrasesListComponent implements OnInit
     public loading: boolean = true;
     public usersList: User[] = [];
     public userFilter: User[] = [];
+    public dateFrom: Date = new Date();
+    public dateTo: Date = new Date();
 
     public length: number = 0;
     public itemsPerPage: number = 25;
@@ -79,11 +87,18 @@ export class PhrasesListComponent implements OnInit
         });
     }
 
-    private loadPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = '', authors: number[] = this.usersList.map(u => u.id))
+    private loadPhrases(
+        pageSize: number = -1,
+        pageIndex: number = 1,
+        search: string = '',
+        from: Date = new Date(0),
+        to: Date = new Date(),
+        authors: number[] = this.usersList.map(u => u.id)
+    )
     {
         this.loading = true;
 
-        this.phrasesService.getPhrases(pageSize, pageIndex, search, authors)
+        this.phrasesService.getPhrases(pageSize, pageIndex, search, from, to, authors)
             .subscribe(response =>
             {
                 if (response)
@@ -127,7 +142,27 @@ export class PhrasesListComponent implements OnInit
     {
         this.userFilter = event.value;
 
-        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.userFilter.map(u => u.id));
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+    }
+
+    public filterFrom(event: MatDatepickerInputEvent<Date>): void
+    {
+        if (event.value === null)
+            return;
+
+        this.dateFrom = new Date(event.value);
+
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+    }
+
+    public filterTo(event: MatDatepickerInputEvent<Date>): void
+    {
+        if (event.value === null)
+            return;
+
+        this.dateTo = new Date(event.value);
+
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
     }
 
 }

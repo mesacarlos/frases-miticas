@@ -17,11 +17,23 @@ export class PhrasesService
         'Authorization': `Bearer ${ localStorage.getItem('token') }`
     });
 
-    public getPhrases(pageSize: number = -1, pageIndex: number = 1, search: string = '', authors: number[] = []): Observable<GetPhrases | null>
+    public getPhrases(
+        pageSize: number = -1,
+        pageIndex: number = 1,
+        search: string = '',
+        from: Date = new Date(0),
+        to: Date = new Date(),
+        authors: number[] = []
+    ): Observable<GetPhrases | null>
     {
+        const pageSizeQuery = `PageSize=${ pageSize }`;
+        const pageIndexQuery = `PageIndex=${ pageIndex }`;
+        const searchQuery = `Text=${ search }`;
+        const fromQuery = `FromDate=${ from.toISOString() }`;
+        const toQuery = `ToDate=${ to.toISOString() }`;
         const authorsQuery: string = authors.map(a => `&InvolvedUsers=${ a }`).join('');
 
-        const URI = `${ environments.API_GATEWAY }/quote?PageSize=${ pageSize }&PageIndex=${ pageIndex }&Text=${ search }${ authorsQuery }`;
+        const URI = `${ environments.API_GATEWAY }/quote?${ pageSizeQuery }&${ pageIndexQuery }&${ searchQuery }&${ fromQuery }&${ toQuery }${ authorsQuery }`;
 
         return this.http.get<any>(
             URI,

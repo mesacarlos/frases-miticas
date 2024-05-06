@@ -3,7 +3,7 @@
 <div class="w-full">
     <form [formGroup]="searchForm" class="flex justify-center mt-5">
         <mat-form-field class="w-11/12 xl:w-2/4">
-            <input id="search" (keyup)="search(true)" matInput type="search" placeholder="Búsqueda por texto o autor..." formControlName="search">
+            <input id="search" (keyup)="search(true)" matInput type="search" placeholder="Búsqueda por texto..." formControlName="search">
             <button matSuffix (click)="search(false)" class="pr-3">
                 <mat-icon class="text-white">search</mat-icon>
             </button>
@@ -12,29 +12,7 @@
 </div>
 
 <div class="flex flex-col xl:flex-row justify-center align-middle xl:justify-end xl:mr-64">
-    <div class="m-auto xl:m-0">
-        <mat-form-field>
-            <mat-label>Autor</mat-label>
-            <mat-select multiple (selectionChange)="onFilter($event)">
-                <mat-select-trigger>
-                    {{ userFilter.length > 0 ? userFilter[0].username : '' }}
-                    @if (userFilter.length > 1) {
-                        <span>
-                            (+{{(userFilter.length) - 1}} {{ userFilter.length === 2 ? 'otro' : 'otros'}})
-                        </span>
-                    }
-                </mat-select-trigger>
-                @for (user of usersList; track $index) {
-                    <mat-option [value]="user">
-                        <div class="flex align-middle">
-                            <img class="rounded-xl w-5 mr-2" [src]="user.profilePictureUrl" [alt]="user.username">
-                            <span>{{ user.username }}</span>
-                        </div>
-                    </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-    </div>
+
     <div class="flex flex-col justify-end p-4 xl:p-0">
         <mat-paginator
             (page)="handlePageEvent($event)"
@@ -46,7 +24,48 @@
         >
         </mat-paginator>
         <br>
-        <button mat-flat-button color="primary" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
+        <div class="flex flex-1 justify-center align-middle">
+            <button mat-flat-button color="primary" class="w-full mr-1" [matMenuTriggerFor]="menu">Filtrar <mat-icon>filter_list</mat-icon></button>
+            <mat-menu #menu="matMenu" xPosition="after">
+                <mat-form-field class="w-full">
+                    <mat-label>Autor</mat-label>
+                    <mat-select multiple (selectionChange)="onFilter($event)" (click)="$event.stopPropagation()">
+                        <mat-select-trigger>
+                            {{ userFilter.length > 0 ? userFilter[0].username : '' }}
+                            @if (userFilter.length > 1) {
+                                <span>
+                                    (+{{(userFilter.length) - 1}} {{ userFilter.length === 2 ? 'otro' : 'otros'}})
+                                </span>
+                            }
+                        </mat-select-trigger>
+                        @for (user of usersList; track $index) {
+                            <mat-option [value]="user">
+                                <div class="flex align-middle">
+                                    <img class="rounded-xl w-5 mr-2" [src]="user.profilePictureUrl" [alt]="user.username">
+                                    <span>{{ user.username }}</span>
+                                </div>
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Desde</mat-label>
+                    <input matInput [matDatepicker]="pickerFrom" [value]="dateFrom" (dateChange)="filterFrom($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFrom></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Hasta</mat-label>
+                    <input matInput [matDatepicker]="pickerTo" [value]="dateTo" (dateChange)="filterTo($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo></mat-datepicker>
+                </mat-form-field>
+            </mat-menu>
+
+            <button mat-flat-button color="primary" class="w-full ml-1" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
+        </div>
     </div>
 </div>
 
