@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { MatSelectChange } from '@angular/material/select';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
@@ -14,8 +16,7 @@ import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
 import { User } from '../../../../auth/interfaces/user.interfaces';
 import { UsersService } from '../../../services/users.service';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatInput } from '@angular/material/input';
 
 @Component({
     standalone: true,
@@ -41,12 +42,14 @@ export class PhrasesListComponent implements OnInit
     public loading: boolean = true;
     public usersList: User[] = [];
     public userFilter: User[] = [];
-    public dateFrom: Date = new Date();
+    public dateFrom: Date = new Date("2015-01-01");
     public dateTo: Date = new Date();
 
     public length: number = 0;
     public itemsPerPage: number = 25;
     public pageIndex: number = 1;
+
+    @ViewChild('authorSelect') authorSelect!: MatSelect;
 
     constructor (
         public dialog: MatDialog,
@@ -163,6 +166,15 @@ export class PhrasesListComponent implements OnInit
         this.dateTo = new Date(event.value);
 
         this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+    }
+
+    public clearFilter(): void
+    {
+        this.userFilter = [];
+        this.dateFrom = new Date("2015-01-01");
+        this.dateTo = new Date();
+
+        this.authorSelect.writeValue(this.userFilter);
     }
 
 }

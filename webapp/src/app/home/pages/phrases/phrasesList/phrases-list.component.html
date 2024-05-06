@@ -29,7 +29,7 @@
             <mat-menu #menu="matMenu" xPosition="after">
                 <mat-form-field class="w-full">
                     <mat-label>Autor</mat-label>
-                    <mat-select multiple (selectionChange)="onFilter($event)" (click)="$event.stopPropagation()">
+                    <mat-select #authorSelect multiple (selectionChange)="onFilter($event)" (click)="$event.stopPropagation()">
                         <mat-select-trigger>
                             {{ userFilter.length > 0 ? userFilter[0].username : '' }}
                             @if (userFilter.length > 1) {
@@ -51,17 +51,19 @@
 
                 <mat-form-field class="w-full">
                     <mat-label>Desde</mat-label>
-                    <input matInput [matDatepicker]="pickerFrom" [value]="dateFrom" (dateChange)="filterFrom($event)">
+                    <input #inputFrom matInput [matDatepicker]="pickerFrom" [value]="dateFrom" (dateChange)="filterFrom($event)">
                     <mat-datepicker-toggle matIconSuffix [for]="pickerFrom"></mat-datepicker-toggle>
                     <mat-datepicker #pickerFrom></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="w-full">
                     <mat-label>Hasta</mat-label>
-                    <input matInput [matDatepicker]="pickerTo" [value]="dateTo" (dateChange)="filterTo($event)">
+                    <input #inputTo matInput [matDatepicker]="pickerTo" [value]="dateTo" (dateChange)="filterTo($event)">
                     <mat-datepicker-toggle matIconSuffix [for]="pickerTo"></mat-datepicker-toggle>
                     <mat-datepicker #pickerTo></mat-datepicker>
                 </mat-form-field>
+
+                <button class="w-full" mat-flat-button color="accent" (click)="clearFilter()">Limpiar</button>
             </mat-menu>
 
             <button mat-flat-button color="primary" class="w-full ml-1" (click)="addPhrase()">Añadir frase <mat-icon>add</mat-icon></button>
