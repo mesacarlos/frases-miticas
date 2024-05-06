@@ -174,6 +174,7 @@ export class PhrasesListComponent implements OnInit
         this.dateTo = new Date();
 
         this.authorSelect.writeValue(this.userFilter);
+        this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
     }
 
 }
