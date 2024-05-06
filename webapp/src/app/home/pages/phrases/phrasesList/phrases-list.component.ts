@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MatDatepicker, MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
@@ -16,7 +16,6 @@ import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
 import { PhrasesService } from '../../../services/phrases.service';
 import { User } from '../../../../auth/interfaces/user.interfaces';
 import { UsersService } from '../../../services/users.service';
-import { MatInput } from '@angular/material/input';
 
 @Component({
     standalone: true,
