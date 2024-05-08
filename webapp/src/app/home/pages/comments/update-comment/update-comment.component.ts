@@ -1,12 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PhrasesService } from '../../../services/phrases.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MaterialModules } from '../../../../../material/material.modules';
-import { AddComment } from '../../../interfaces/phrases.interfaces';
+
+import { AddComment } from '../../../interfaces/comments.interface';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { CommentsService } from '../../../services/comments.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModules } from '../../../../../material/material.modules';
 
 @Component({
     standalone: true,
@@ -26,7 +27,7 @@ export class UpdateCommentComponent
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: Data,
-        private phrasesService: PhrasesService,
+        private commentsService: CommentsService,
         private snackBar: MatSnackBar
     ) {}
 
@@ -44,7 +45,7 @@ export class UpdateCommentComponent
         if (this.thereAreEmptyFields())
             return;
 
-        this.phrasesService.updateComment(this.data.idQuote, this.data.idComment, this.currentComment.comment)
+        this.commentsService.updateComment(this.data.idQuote, this.data.idComment, this.currentComment.comment)
             .subscribe( response =>
             {
                 let message = 'No se ha podido actualizar el comentario';

@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-import { AddComment } from '../../../interfaces/phrases.interfaces';
-import { MaterialModules } from '../../../../../material/material.modules';
-import { PhrasesService } from '../../../services/phrases.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AddComment } from '../../../interfaces/comments.interface';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { CommentsService } from '../../../services/comments.service';
+import { MaterialModules } from '../../../../../material/material.modules';
 
 @Component({
     standalone: true,
@@ -27,7 +27,7 @@ export class AddCommentComponent
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public idQuote: number,
-        private phrasesService: PhrasesService,
+        private commentsService: CommentsService,
         private snackBar: MatSnackBar
     ) {}
 
@@ -45,7 +45,7 @@ export class AddCommentComponent
         if (this.thereAreEmptyFields())
             return;
 
-        this.phrasesService.addComment(this.idQuote, this.currentComment.comment)
+        this.commentsService.addComment(this.idQuote, this.currentComment.comment)
             .subscribe( response =>
             {
                 let message = 'No se ha podido añadir el comentario';

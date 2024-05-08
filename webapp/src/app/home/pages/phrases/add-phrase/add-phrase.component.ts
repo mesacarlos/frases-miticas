@@ -6,11 +6,11 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
-import { AddPhrase } from '../../../interfaces/phrases.interfaces';
+import { AddPhrase } from '../../../interfaces/phrases.interface';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 import { MaterialModules, appDateFormat } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
-import { User } from '../../../../auth/interfaces/user.interfaces';
+import { User } from '../../../../auth/interfaces/user.interface';
 import { UsersService } from '../../../services/users.service';
 
 

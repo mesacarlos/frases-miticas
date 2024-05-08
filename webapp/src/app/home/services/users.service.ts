@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-
-import { AddPhrase, Comment, GetPhrases } from "../interfaces/phrases.interfaces";
-import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
-import { User } from "../../auth/interfaces/user.interfaces";
+
+import { environments } from "../../../environments/environments";
+import { User } from "../../auth/interfaces/user.interface";
 
 @Injectable({
     providedIn: 'root'

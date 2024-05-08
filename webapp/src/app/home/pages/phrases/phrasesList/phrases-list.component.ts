@@ -12,9 +12,9 @@ import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
 import { CardComponent } from '../../card/card.component';
 import { MaterialModules, MyPaginator, appDateFormat } from '../../../../../material/material.modules';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
-import { Phrase, Search } from '../../../interfaces/phrases.interfaces';
+import { Phrase, Search } from '../../../interfaces/phrases.interface';
 import { PhrasesService } from '../../../services/phrases.service';
-import { User } from '../../../../auth/interfaces/user.interfaces';
+import { User } from '../../../../auth/interfaces/user.interface';
 import { UsersService } from '../../../services/users.service';
 
 @Component({

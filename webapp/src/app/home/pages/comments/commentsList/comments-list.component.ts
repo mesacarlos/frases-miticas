@@ -3,13 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { AddCommentComponent } from '../add-comment/add-comment.component';
 import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
-import { Comment } from '../../../interfaces/phrases.interfaces';
-import { MaterialModules } from '../../../../../material/material.modules';
-import { PhrasesService } from '../../../services/phrases.service';
-import { AddCommentComponent } from '../add-comment/add-comment.component';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { Comment } from '../../../interfaces/comments.interface';
+import { CommentsService } from '../../../services/comments.service';
+import { MaterialModules } from '../../../../../material/material.modules';
 import { UpdateCommentComponent } from '../update-comment/update-comment.component';
 
 @Component({
@@ -30,7 +30,7 @@ export class CommentsListComponent implements OnInit
     public loading: boolean = true;
 
     constructor(
-        private phrasesService: PhrasesService,
+        private commentsService: CommentsService,
         private authService: AuthService,
         private snackBar: MatSnackBar,
         public dialog: MatDialog,
@@ -49,7 +49,7 @@ export class CommentsListComponent implements OnInit
 
     private loadComments(): void
     {
-        this.phrasesService.getCommentsByQuote(this.idQuote).subscribe(response =>
+        this.commentsService.getCommentsByQuote(this.idQuote).subscribe(response =>
         {
             this.comments = response;
 
@@ -72,7 +72,7 @@ export class CommentsListComponent implements OnInit
 
     public deleteComment(idQuote: number, idComment: number): void
     {
-        this.phrasesService.deleteComment(idQuote, idComment).subscribe(response =>
+        this.commentsService.deleteComment(idQuote, idComment).subscribe(response =>
         {
             let message = 'No se ha podido borrar el comentario';
 

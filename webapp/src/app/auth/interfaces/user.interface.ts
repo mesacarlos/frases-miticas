@@ -29,3 +29,18 @@ export interface User
     isSuperAdmin: boolean;
     profilePictureUrl: string;
 }
+
+export interface ChangePassword
+{
+    oldPassword: string;
+    newPassword: string;
+    newPasswordConfirm: string;
+}
+
+export interface InvolvedUser
+{
+	id: number;
+	username: string;
+	fullname: string;
+	profilePictureUrl: string;
+}

@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import { MaterialModules } from '../../../../material/material.modules';
-import { ChangePassword } from '../../interfaces/phrases.interfaces';
-import { AuthService } from '../../../auth/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { AlertMessageComponent } from '../alerts/alert-message/alert-message.component';
+import { AuthService } from '../../../auth/services/auth.service';
+import { ChangePassword } from '../../../auth/interfaces/user.interface';
+import { MaterialModules } from '../../../../material/material.modules';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
     standalone: true,

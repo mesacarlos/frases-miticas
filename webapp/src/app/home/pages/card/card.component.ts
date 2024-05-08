@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CommentsListComponent } from '../comments/commentsList/comments-list.component';
 import { MaterialModules } from '../../../../material/material.modules';
-import { Phrase } from '../../interfaces/phrases.interfaces';
+import { Phrase } from '../../interfaces/phrases.interface';
 
 @Component({
     selector: 'app-card',

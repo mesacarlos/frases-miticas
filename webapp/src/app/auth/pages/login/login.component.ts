@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
 import { MaterialModules } from '../../../../material/material.modules';
-import { UserLogin } from '../../interfaces/user.interfaces';
+import { UserLogin } from '../../interfaces/user.interface';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 import { AuthService } from '../../services/auth.service';
 
