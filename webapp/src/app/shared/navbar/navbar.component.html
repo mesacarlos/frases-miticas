@@ -1,6 +1,9 @@
 <mat-toolbar color="bg-navbar">
     <mat-toolbar-row>
-        <a [routerLink]="['/home']"><mat-icon>home</mat-icon> Frases míticas</a>
+        <div [routerLink]="['/home']" class="flex items-center">
+            <mat-icon class="mr-2">home</mat-icon>
+            <span>Frases míticas</span>
+        </div>
         <span class="spacer"></span>
         <button [matMenuTriggerFor]="menu" #menuTrigger class="mr-5 flex justify-center align-middle">
             <mat-icon class="icon">account_circle</mat-icon>
