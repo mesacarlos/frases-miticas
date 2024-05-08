@@ -95,7 +95,7 @@ export class PhrasesListComponent implements OnInit
         search: string = '',
         from: Date = new Date(0),
         to: Date = new Date(),
-        authors: number[] = this.usersList.map(u => u.id)
+        authors: number[] = []
     )
     {
         this.loading = true;
