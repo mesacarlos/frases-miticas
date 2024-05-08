@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { AddPhrase, Comment, GetPhrases } from "../interfaces/phrases.interfaces";
+import { AddPhrase, Comment, GetPhrases, Phrase } from "../interfaces/phrases.interfaces";
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
 
@@ -42,7 +42,7 @@ export class PhrasesService
             map(response =>
                 {
                     const phrases: GetPhrases = {
-                        phrases: response.data.data,
+                        phrases: this.formatPhrases(response.data.data),
                         totalItems: response.data.totalItems
                     };
 
@@ -70,6 +70,14 @@ export class PhrasesService
             ),
             catchError(() => of(false))
         );
+    }
+
+    private formatPhrases(phrases: Phrase[]): Phrase[]
+    {
+        for (let i = 0; i < phrases.length; i++)
+            phrases[i].text = phrases[i].text.replace('\\n', '\n');
+
+        return phrases;
     }
 
     public getCommentsByQuote(id: number): Observable<Comment[]>
