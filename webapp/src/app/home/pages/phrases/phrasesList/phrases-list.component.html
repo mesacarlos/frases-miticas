@@ -1,11 +1,11 @@
 <app-navbar />
 
 <div class="w-full">
-    <form [formGroup]="searchForm" class="flex justify-center mt-5">
+    <form [formGroup]="searchForm" class="flex justify-center pt-5">
         <mat-form-field class="w-11/12 xl:w-2/4">
             <input id="search" (keyup)="search(true)" matInput type="search" placeholder="Búsqueda por texto..." formControlName="search">
             <button matSuffix (click)="search(false)" class="pr-3">
-                <mat-icon class="text-white">search</mat-icon>
+                <mat-icon class="dark:text-white">search</mat-icon>
             </button>
         </mat-form-field>
     </form>
@@ -26,7 +26,7 @@
         <br>
         <div class="flex flex-1 justify-center align-middle">
             <button mat-flat-button color="primary" class="w-full mr-1" [matMenuTriggerFor]="menu">Filtrar <mat-icon>filter_list</mat-icon></button>
-            <mat-menu #menu="matMenu" xPosition="after">
+            <mat-menu class="p-2" #menu="matMenu" xPosition="after">
                 <mat-form-field class="w-full">
                     <mat-label>Autor</mat-label>
                     <mat-select #authorSelect multiple (selectionChange)="onFilter($event)" (click)="$event.stopPropagation()">
@@ -78,7 +78,7 @@
 }
 
 @if (phrases.length === 0 && !loading) {
-    <h1 class="text-center text-white text-5xl mt-20">No hay ninguna frase para mostrar</h1>
+    <h1 class="text-center text-light dark:text-white text-5xl mt-20">No hay ninguna frase para mostrar</h1>
 }
 
 <div class="mt-4 m-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-5 xl:max-w-screen-xl">
@@ -89,6 +89,6 @@
 
 <div class="flex justify-end align-middle mr-10 xl:mr-40">
     <button class="flex justify-center align-middle mb-10 p-5 up-button" (click)="scrollToTop()">
-        <mat-icon class="text-white up-icon">expand_less</mat-icon>
+        <mat-icon class="dark:text-white up-icon">expand_less</mat-icon>
     </button>
 </div>

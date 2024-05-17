@@ -12,10 +12,10 @@
         </div>
         <mat-dialog-content>
             @if (comments.length === 0) {
-                <h2 class="text-center text-white">No hay ningún comentario</h2>
+                <h2 class="text-center dark:text-white">No hay ningún comentario</h2>
             }
             @for (comment of comments; track $index) {
-                <mat-card class="example-card text-white flex mat-elevation-z0">
+                <mat-card class="example-card dark:text-white flex mat-elevation-z0">
                     <mat-card-header class="flex justify-between align-middle">
                         <mat-card-title>
                             <div>
