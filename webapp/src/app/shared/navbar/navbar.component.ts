@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { MaterialModules } from '../../../material/material.modules';
-import Theme from '../../utils/theme';
+import Theme, { DocsSiteTheme } from '../../utils/theme';
+import { StyleManager } from '../style-manager/style-manager';
 
 @Component({
     selector: 'app-navbar',
@@ -17,8 +18,12 @@ import Theme from '../../utils/theme';
 export class NavbarComponent implements OnInit
 {
     public themeIcon: string = '';
+    public currentTheme: DocsSiteTheme | undefined;
 
-    constructor(private router: Router) {}
+    constructor(
+        public styleManager: StyleManager,
+        private router: Router
+    ) {}
 
     ngOnInit(): void
     {
@@ -33,7 +38,12 @@ export class NavbarComponent implements OnInit
 
     public configTheme(): void
     {
-        this.themeIcon = Theme.isDarkMode() ? 'brightness_6' : 'brightness_2';
+        const isDarkMode: boolean = Theme.isDarkMode();
+        this.themeIcon = isDarkMode ? 'brightness_6' : 'brightness_2';
+
+        this.currentTheme = Theme.themes.find(t => t.isDark === isDarkMode);
+
+        this.styleManager.setStyle('theme', `${ this.currentTheme?.name }.css`)
     }
 
     public changeTheme(): void
@@ -41,4 +51,5 @@ export class NavbarComponent implements OnInit
         Theme.changeTheme();
         this.configTheme();
     }
+
 }

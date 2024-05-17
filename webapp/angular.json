@@ -25,8 +25,32 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.css"
+                {
+                    "input": "src/styles.css"
+                },
+                {
+                    "input": "@angular/material/prebuilt-themes/purple-green.css"
+                },
+                {
+                    "inject": false,
+                    "input": "src/styles/custom-themes/pink-bluegrey.css",
+                    "bundleName": "pink-bluegrey"
+                },
+                {
+                    "inject": false,
+                    "input": "src/styles/custom-themes/deeppurple-amber.css",
+                    "bundleName": "deeppurple-amber"
+                },
+                {
+                    "inject": false,
+                    "input": "src/styles/custom-themes/indigo-pink.css",
+                    "bundleName": "indigo-pink"
+                },
+                {
+                    "inject": false,
+                    "input": "src/styles/custom-themes/purple-green.css",
+                    "bundleName": "purple-green"
+                }
             ],
             "scripts": []
           },
