@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { MaterialModules } from '../../../material/material.modules';
+import Theme from '../../utils/theme';
 
 @Component({
     selector: 'app-navbar',
@@ -13,9 +14,16 @@ import { MaterialModules } from '../../../material/material.modules';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.css'
 })
-export class NavbarComponent
+export class NavbarComponent implements OnInit
 {
+    public themeIcon: string = '';
+
     constructor(private router: Router) {}
+
+    ngOnInit(): void
+    {
+        this.configTheme();
+    }
 
     public logout()
     {
@@ -23,8 +31,14 @@ export class NavbarComponent
         this.router.navigate(['/login']);
     }
 
-    public openDialog(): void
+    public configTheme(): void
     {
+        this.themeIcon = Theme.isDarkMode() ? 'brightness_6' : 'brightness_2';
+    }
 
+    public changeTheme(): void
+    {
+        Theme.changeTheme();
+        this.configTheme();
     }
 }
