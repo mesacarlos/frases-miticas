@@ -90,7 +90,7 @@ namespace FrasesMiticas.Api.Controllers
             {
                 UserId = userToken.UserId,
                 QuoteId = quoteId,
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 Text = request.Text
             };
 

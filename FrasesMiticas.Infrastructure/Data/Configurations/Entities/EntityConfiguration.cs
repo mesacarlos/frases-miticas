@@ -14,13 +14,14 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
 
         protected static long DateTimeToUnixSeconds(DateTime dateTime)
         {
-            return (long)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            DateTime baseDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            return (long)dateTime.Subtract(baseDateTime).TotalSeconds;
         }
 
         protected static DateTime UnixSecondsToDateTime(double unixTimeStamp)
         {
             DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dateTime = dateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            dateTime = dateTime.AddSeconds(unixTimeStamp).ToUniversalTime();
             return dateTime;
         }
     }
