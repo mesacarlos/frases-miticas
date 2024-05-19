@@ -29,7 +29,7 @@ namespace FrasesMiticas.Core.Services
         {
             logger.Information($"Logging In user {username}.");
 
-            var user = appUserRepository.GetByUsername(username);
+            var user = appUserRepository.GetByUsernameCaseInsensitive(username);
 
             if (user == null)
             {

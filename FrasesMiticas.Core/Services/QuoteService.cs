@@ -1,5 +1,4 @@
-﻿using FrasesMiticas.Core.Aggregates.AppUsers;
-using FrasesMiticas.Core.Aggregates.Quotes;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
 using FrasesMiticas.Core.Dtos;
 using FrasesMiticas.Core.Dtos.Quotes;
 using FrasesMiticas.Core.Exceptions;

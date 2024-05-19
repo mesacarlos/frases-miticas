@@ -22,7 +22,7 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
 
         public AppUser Get(int id) => repository.Where(e => e.Id == id).SingleOrDefault();
 
-        public AppUser GetByUsername(string username) => repository.Where(e => e.Username == username).FirstOrDefault();
+        public AppUser GetByUsernameCaseInsensitive(string username) => repository.Where(e => e.Username.ToLower() == username.ToLower()).FirstOrDefault();
 
         public ICollection<AppUser> GetByIds(List<int> ids) => repository.Where(e => ids.Contains(e.Id)).ToList();
 

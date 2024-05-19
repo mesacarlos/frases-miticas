@@ -37,7 +37,7 @@ namespace FrasesMiticas.Core.Interfaces.Repositories
         /// </summary>
         /// <param name="username">Username of the user to get.</param>
         /// <returns>User gotten</returns>
-        public AppUser GetByUsername(string username);
+        public AppUser GetByUsernameCaseInsensitive(string username);
 
         /// <summary>
         /// Get users by identifier list
