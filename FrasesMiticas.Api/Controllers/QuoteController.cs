@@ -53,15 +53,15 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpGet("")]
         [Authorization]
-        public ActionResult<PagedResultDto<QuoteResponse>> GetPaginated([FromQuery] QuoteFilterRequest request)
+        public ActionResult<PagedResultDto<QuoteWithNumberOfCommentsResponse>> GetPaginated([FromQuery] QuoteFilterRequest request)
         {
             QuoteFilterDto filterDto = mapper.Map<QuoteFilterDto>(request);
 
             PagedResultDto<QuoteDto> result = quoteService.GetPaginated(filterDto);
 
-            var data = result.Data.Select(e => mapper.Map<QuoteResponse>(e)).ToList();
+            var data = result.Data.Select(e => mapper.Map<QuoteWithNumberOfCommentsResponse>(e)).ToList();
 
-            var response = new PagedResultDto<QuoteResponse>(data, result.PageIndex, result.PageSize, result.TotalItems);
+            var response = new PagedResultDto<QuoteWithNumberOfCommentsResponse>(data, result.PageIndex, result.PageSize, result.TotalItems);
             
             return Ok(response);
         }
