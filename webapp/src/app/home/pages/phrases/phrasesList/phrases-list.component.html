@@ -83,7 +83,7 @@
 
 <div class="mt-4 m-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-5 xl:max-w-screen-xl">
     @for (phrase of phrases; track $index) {
-        <app-card [phrase]="phrase" />
+        <app-card [phrase]="phrase" (reloadPhrases)="onRealoadPhrases($event)" />
     }
 </div>
 

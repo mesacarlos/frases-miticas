@@ -8,6 +8,7 @@ export interface Phrase
     text: string;
     context: string | null;
 	involvedUsers : InvolvedUser[];
+    commentCount: number;
 }
 
 export interface AddPhrase

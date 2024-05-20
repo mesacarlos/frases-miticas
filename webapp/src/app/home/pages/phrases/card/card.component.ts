@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { CommentsListComponent } from '../comments/commentsList/comments-list.component';
-import { MaterialModules } from '../../../../material/material.modules';
-import { Phrase } from '../../interfaces/phrases.interface';
+import { CommentsListComponent } from '../../comments/commentsList/comments-list.component';
+import { MaterialModules } from '../../../../../material/material.modules';
+import { Phrase } from '../../../interfaces/phrases.interface';
 
 @Component({
     selector: 'app-card',
@@ -23,8 +23,10 @@ export class CardComponent
         date: '',
         text: '',
         context: '',
-        involvedUsers: []
+        involvedUsers: [],
+        commentCount: 0
     };
+    @Output() reloadPhrases = new EventEmitter<{ id: number, commentCount: number }>();
 
     // implements on init and check if publication like
     public likeIcon: string = 'favorite_border';
@@ -62,5 +64,14 @@ export class CardComponent
         const dialogRef = this.dialog.open(CommentsListComponent, { width: width });
 
         dialogRef.componentInstance.idQuote = this.phrase.id;
+
+        dialogRef.afterClosed().subscribe( () =>
+        {
+            if (dialogRef.componentInstance.emitChanges)
+            {
+                this.phrase.commentCount += dialogRef.componentInstance.numComments;
+                this.reloadPhrases.emit({ id: this.phrase.id, commentCount: this.phrase.commentCount })
+            }
+        });
     }
 }

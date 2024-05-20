@@ -9,7 +9,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
-import { CardComponent } from '../../card/card.component';
+import { CardComponent } from '../card/card.component';
 import { MaterialModules, MyPaginator, appDateFormat } from '../../../../../material/material.modules';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { Phrase, Search } from '../../../interfaces/phrases.interface';
@@ -175,6 +175,14 @@ export class PhrasesListComponent implements OnInit
 
         this.authorSelect.writeValue(this.userFilter);
         this.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
+    }
+
+    public onRealoadPhrases(event: { id: number, commentCount: number })
+    {
+        const phrase: Phrase | undefined = this.phrases.find(p => p.id === event.id);
+
+        if (phrase)
+            phrase.commentCount = event.commentCount;
     }
 
 }

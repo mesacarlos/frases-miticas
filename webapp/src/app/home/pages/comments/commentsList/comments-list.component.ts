@@ -28,6 +28,8 @@ export class CommentsListComponent implements OnInit
     public comments: Comment[] = [];
     public username: string = '';
     public loading: boolean = true;
+    public emitChanges: boolean = false;
+    public numComments: number = 0;
 
     constructor(
         private commentsService: CommentsService,
@@ -38,6 +40,8 @@ export class CommentsListComponent implements OnInit
 
     ngOnInit(): void
     {
+        this.emitChanges = false;
+
         this.authService.getUsername()
             .subscribe(response =>
             {
@@ -79,6 +83,8 @@ export class CommentsListComponent implements OnInit
             if (response)
                 message = 'Se ha borrado el comentario';
 
+            this.emitChanges = true;
+            this.numComments--;
             this.showAlert(message);
             this.loadComments();
         });
@@ -99,6 +105,7 @@ export class CommentsListComponent implements OnInit
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
             dialogRef.close();
+            this.emitChanges = false;
             this.loadComments();
         });
     }
@@ -125,6 +132,8 @@ export class CommentsListComponent implements OnInit
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
+            this.emitChanges = true;
+            this.numComments++;
             dialogRef.close();
             this.loadComments();
         });
