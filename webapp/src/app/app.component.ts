@@ -15,5 +15,7 @@ export class AppComponent implements OnInit
     ngOnInit(): void
     {
         Theme.checkTheme();
+
+        // check if token is expired (call auth service)
     }
 }

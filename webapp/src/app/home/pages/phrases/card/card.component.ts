@@ -69,7 +69,7 @@ export class CardComponent
         {
             if (dialogRef.componentInstance.emitChanges)
             {
-                this.phrase.commentCount += dialogRef.componentInstance.numComments;
+                this.phrase.commentCount += dialogRef.componentInstance.balanceOfComments;
                 this.reloadPhrases.emit({ id: this.phrase.id, commentCount: this.phrase.commentCount })
             }
         });

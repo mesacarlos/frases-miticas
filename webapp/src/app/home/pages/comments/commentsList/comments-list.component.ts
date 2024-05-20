@@ -29,7 +29,7 @@ export class CommentsListComponent implements OnInit
     public username: string = '';
     public loading: boolean = true;
     public emitChanges: boolean = false;
-    public numComments: number = 0;
+    public balanceOfComments: number = 0;
 
     constructor(
         private commentsService: CommentsService,
@@ -84,7 +84,7 @@ export class CommentsListComponent implements OnInit
                 message = 'Se ha borrado el comentario';
 
             this.emitChanges = true;
-            this.numComments--;
+            this.balanceOfComments--;
             this.showAlert(message);
             this.loadComments();
         });
@@ -118,7 +118,7 @@ export class CommentsListComponent implements OnInit
         });
     }
 
-    public openCommentForm(idQuote: number): void
+    public openAddCommentForm(idQuote: number): void
     {
         let width: string = '60%';
 
@@ -133,7 +133,7 @@ export class CommentsListComponent implements OnInit
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
             this.emitChanges = true;
-            this.numComments++;
+            this.balanceOfComments++;
             dialogRef.close();
             this.loadComments();
         });
