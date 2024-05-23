@@ -104,9 +104,9 @@ export class CommentsListComponent implements OnInit
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
-            dialogRef.close();
             this.emitChanges = false;
             this.loadComments();
+            dialogRef.close();
         });
     }
 
@@ -134,8 +134,8 @@ export class CommentsListComponent implements OnInit
         {
             this.emitChanges = true;
             this.balanceOfComments++;
-            dialogRef.close();
             this.loadComments();
+            dialogRef.close();
         });
     }
 }

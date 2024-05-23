@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit
 
     public logout()
     {
-        localStorage.clear();
+        localStorage.setItem('token', '');
         this.router.navigate(['/login']);
     }
 

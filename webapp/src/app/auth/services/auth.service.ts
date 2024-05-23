@@ -4,6 +4,7 @@ import { Observable, catchError, map, of, switchMap } from "rxjs";
 
 import { environments } from "../../../environments/environments";
 import { Auth, ChangePassword } from "../interfaces/user.interface";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 
 @Injectable({
     providedIn: 'root'
@@ -69,5 +70,23 @@ export class AuthService
                 }),
                 catchError(() => of(false))
             );
+    }
+
+    public verifyToken(): boolean
+    {
+        const token = localStorage.getItem('token');
+
+        if (!token)
+            return false;
+
+        try {
+            const decode: JwtPayload = jwtDecode(token);
+            const timeExpire: number = decode.exp ?? 0;
+
+            return !!decode && timeExpire - Date.now() > 0;
+
+        } catch (err) {
+            return false;
+        }
     }
 }

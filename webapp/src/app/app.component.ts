@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import Theme from './utils/theme';
+import { AuthService } from './auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,10 +13,19 @@ import Theme from './utils/theme';
 })
 export class AppComponent implements OnInit
 {
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ) {}
+
     ngOnInit(): void
     {
         Theme.checkTheme();
 
-        // check if token is expired (call auth service)
+        if (!this.authService.verifyToken())
+        {
+            localStorage.setItem('token', '');
+            this.router.navigate(['/login']);
+        }
     }
 }
