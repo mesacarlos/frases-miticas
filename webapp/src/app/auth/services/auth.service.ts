@@ -81,7 +81,7 @@ export class AuthService
 
         try {
             const decode: JwtPayload = jwtDecode(token);
-            const timeExpire: number = decode.exp ?? 0;
+            const timeExpire: number = (decode.exp ?? 0) * 1000;
 
             return !!decode && timeExpire - Date.now() > 0;
 

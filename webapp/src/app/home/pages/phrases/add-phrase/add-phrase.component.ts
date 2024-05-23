@@ -12,6 +12,7 @@ import { MaterialModules, appDateFormat } from '../../../../../material/material
 import { PhrasesService } from '../../../services/phrases.service';
 import { User } from '../../../../auth/interfaces/user.interface';
 import { UsersService } from '../../../services/users.service';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 
 @Component({
@@ -54,7 +55,6 @@ export class AddPhraseComponent implements OnInit
 
     public phraseForm = new FormGroup({
         author:     new FormControl<string>(''),
-        date:       new FormControl<Date>(new Date()),
         text:       new FormControl<string>(''),
         context:    new FormControl<string>(''),
         users:      new FormControl<User[]>([])
@@ -79,7 +79,11 @@ export class AddPhraseComponent implements OnInit
 
     get currentPhrase(): AddPhrase
     {
-        return this.phraseForm.value as AddPhrase;
+        const skeletonPhrase: AddPhrase = this.phraseForm.value as AddPhrase;
+
+        skeletonPhrase.date = this.date;
+
+        return skeletonPhrase;
     }
 
     private thereAreEmptyFields(): boolean
@@ -106,6 +110,12 @@ export class AddPhraseComponent implements OnInit
             this.phraseForm.get('author')?.setValue(selectedValue.map(user => user.fullName).join(', '));
         else
             this.phraseForm.get('author')?.setValue('');
+    }
+
+    public updateDate(event: MatDatepickerInputEvent<Date>): void
+    {
+        if (event.value)
+            this.date = new Date(event.value);
     }
 
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import Theme from './utils/theme';
 import { AuthService } from './auth/services/auth.service';
+import Theme from './utils/theme';
 
 @Component({
   selector: 'app-root',
