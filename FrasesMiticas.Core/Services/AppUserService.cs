@@ -40,6 +40,7 @@ namespace FrasesMiticas.Core.Services
             entity.Email = dto.Email;
             entity.FullName = dto.FullName;
             entity.IsSuperAdmin = dto.IsSuperAdmin;
+            entity.ProfilePictureUrl = dto.ProfilePictureUrl;
 
             //Save to persistence
             repository.Update(entity);
