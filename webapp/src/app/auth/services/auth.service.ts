@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
 import { Observable, catchError, map, of, switchMap } from "rxjs";
 
-import { environments } from "../../../environments/environments";
 import { Auth, ChangePassword } from "../interfaces/user.interface";
-import { JwtPayload, jwtDecode } from "jwt-decode";
+import { environments } from "../../../environments/environments";
+import { MyJwtPayload } from '../interfaces/auth.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +47,12 @@ export class AuthService
 
     public isAuthenticated(): boolean
     {
-        return !!localStorage.getItem('token');
+        return this.decodeToken() !== null;
+    }
+
+    public isAdmin(): boolean
+    {
+        return this.decodeToken()?.SuperUser ?? false;
     }
 
     public changePassword(changePassword: ChangePassword): Observable<boolean>
@@ -74,19 +80,33 @@ export class AuthService
 
     public verifyToken(): boolean
     {
-        const token = localStorage.getItem('token');
+        const decode = this.decodeToken();
 
-        if (!token)
+        if (decode === null)
             return false;
 
-        try {
-            const decode: JwtPayload = jwtDecode(token);
-            const timeExpire: number = (decode.exp ?? 0) * 1000;
+        const timeExpire: number = (decode.exp ?? 0) * 1000;
 
-            return !!decode && timeExpire - Date.now() > 0;
+        return !!decode && timeExpire - Date.now() > 0;
+    }
+
+    private decodeToken(): MyJwtPayload | null
+    {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token)
+                return null;
+
+            const decode: MyJwtPayload = jwtDecode(token);
+
+            if (decode)
+                return decode;
+
+            return null;
 
         } catch (err) {
-            return false;
+            return null;
         }
     }
 }

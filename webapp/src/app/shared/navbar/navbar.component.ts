@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { MaterialModules } from '../../../material/material.modules';
 import Theme, { DocsSiteTheme } from '../../utils/theme';
 import { StyleManager } from '../style-manager/style-manager';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
     selector: 'app-navbar',
@@ -19,15 +20,18 @@ export class NavbarComponent implements OnInit
 {
     public themeIcon: string = '';
     public currentTheme: DocsSiteTheme | undefined;
+    public isAdmin: boolean = false;
 
     constructor(
-        public styleManager: StyleManager,
+        private authService: AuthService,
+        private styleManager: StyleManager,
         private router: Router
     ) {}
 
     ngOnInit(): void
     {
         this.configTheme();
+        this.isAdmin = this.authService.isAdmin();
     }
 
     public logout()

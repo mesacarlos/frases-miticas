@@ -14,6 +14,10 @@ export class AuthGuard
   canActivate() {
     return this.authService.isAuthenticated();
   }
+
+  canActivateAdmin() {
+    return this.authService.isAdmin();
+  }
 }
 
 export const privateRoute: CanActivateFn = (
@@ -39,6 +43,20 @@ export const publicRoute: CanActivateFn = (
     const router = inject(Router);
 
     if (!guard.canActivate())
+        return true;
+
+    return router.navigateByUrl('/home').then(() => false);
+};
+
+export const adminRoute: CanActivateFn = (
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+) =>
+{
+    const guard = inject(AuthGuard);
+    const router = inject(Router);
+
+    if (guard.canActivateAdmin())
         return true;
 
     return router.navigateByUrl('/home').then(() => false);

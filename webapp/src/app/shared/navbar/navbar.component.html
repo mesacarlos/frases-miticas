@@ -14,10 +14,15 @@
             <mat-icon class="icon">account_circle</mat-icon>
         </button>
 
-        <mat-menu class="text-center" #menu="matMenu">
-            <a class="dark:text-white flex justify-center align-middle" [routerLink]="['/settings']">
+        <mat-menu class="text-center p-2" #menu="matMenu">
+            <a class="dark:text-white flex justify-start align-middle mb-2" [routerLink]="['/settings']">
                 <mat-icon class="icon mr-2 scale-90">settings</mat-icon>
                 Ajustes
+            </a>
+            <mat-divider></mat-divider>
+            <a class="dark:text-white flex justify-start align-middle mt-2" [routerLink]="['/settings']">
+                <mat-icon class="icon mr-2 scale-90">build</mat-icon>
+                Panel de control
             </a>
         </mat-menu>
 
