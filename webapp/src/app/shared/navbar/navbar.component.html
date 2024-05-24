@@ -15,15 +15,21 @@
         </button>
 
         <mat-menu class="text-center p-2 mt-1" #menu="matMenu">
-            <a class="dark:text-white flex justify-start align-middle mb-2" [routerLink]="['/settings']">
-                <mat-icon class="icon mr-2 scale-90">settings</mat-icon>
-                Ajustes
-            </a>
             @if (isAdmin) {
+                <a class="dark:text-white flex justify-start align-middle mb-2" [routerLink]="['/settings']">
+                    <mat-icon class="icon mr-2 scale-90">settings</mat-icon>
+                    Ajustes
+                </a>
                 <mat-divider></mat-divider>
                 <a class="dark:text-white flex justify-start align-middle mt-2" [routerLink]="['/control-panel']">
                     <mat-icon class="icon mr-2 scale-90">build</mat-icon>
                     Panel de control
+                </a>
+            }
+            @else {
+                <a class="dark:text-white flex justify-start align-middle" [routerLink]="['/settings']">
+                    <mat-icon class="icon mr-2 scale-90">settings</mat-icon>
+                    Ajustes
                 </a>
             }
         </mat-menu>
