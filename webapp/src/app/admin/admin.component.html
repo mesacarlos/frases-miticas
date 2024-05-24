@@ -1,4 +1,17 @@
 <app-navbar />
 
+<div class="flex justify-center align-middle">
+    <div class="w-6/12 mt-5 flex flex-col md:flex-row justify-center md:justify-between xl:justify-around align-middle">
+        <button mat-fab extended color="accent" (click)="onShowPhrases()">
+            <mat-icon>list</mat-icon>
+            Frases
+        </button>
 
-<p class="text-white">admin works!</p>
+        <button class="mt-5 md:ml-4 md:mt-0" mat-fab extended color="accent" (click)="onShowUsers()">
+            <mat-icon>group</mat-icon>
+            Usuarios
+        </button>
+    </div>
+</div>
+
+<router-outlet />
