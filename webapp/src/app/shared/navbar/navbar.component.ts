@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
-import { MaterialModules } from '../../../material/material.modules';
-import Theme, { DocsSiteTheme } from '../../utils/theme';
-import { StyleManager } from '../style-manager/style-manager';
 import { AuthService } from '../../auth/services/auth.service';
+import { MaterialModules } from '../../../material/material.modules';
+import { StyleManager } from '../style-manager/style-manager';
+import Theme, { DocsSiteTheme } from '../../utils/theme';
 
 @Component({
     selector: 'app-navbar',
