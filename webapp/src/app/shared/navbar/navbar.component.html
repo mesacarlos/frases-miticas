@@ -19,11 +19,13 @@
                 <mat-icon class="icon mr-2 scale-90">settings</mat-icon>
                 Ajustes
             </a>
-            <mat-divider></mat-divider>
-            <a class="dark:text-white flex justify-start align-middle mt-2" [routerLink]="['/settings']">
-                <mat-icon class="icon mr-2 scale-90">build</mat-icon>
-                Panel de control
-            </a>
+            @if (isAdmin) {
+                <mat-divider></mat-divider>
+                <a class="dark:text-white flex justify-start align-middle mt-2" [routerLink]="['/settings']">
+                    <mat-icon class="icon mr-2 scale-90">build</mat-icon>
+                    Panel de control
+                </a>
+            }
         </mat-menu>
 
         <button (click)="logout()" class="mr-5 flex justify-center align-middle">
