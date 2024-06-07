@@ -17,6 +17,8 @@ import { Phrase } from '../../../interfaces/phrases.interface';
 export class CardComponent
 {
     @Input()
+    public isAdmin: boolean = false;
+    @Input()
     phrase: Phrase = {
         id: 0,
         author: '',
@@ -73,5 +75,17 @@ export class CardComponent
                 this.reloadPhrases.emit({ id: this.phrase.id, commentCount: this.phrase.commentCount })
             }
         });
+    }
+
+    public delete(): void
+    {
+        if (!this.isAdmin)
+            return;
+    }
+
+    public edit(): void
+    {
+        if (!this.isAdmin)
+            return;
     }
 }
