@@ -34,10 +34,10 @@ import PhraseManagement from '../../../../utils/phraseManagement';
         { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
         { provide: MAT_DATE_FORMATS, useValue: appDateFormat }
     ],
-    templateUrl: './phrases-list.component.html',
-    styleUrl: './phrases-list.component.css'
+    templateUrl: './phrases.component.html',
+    styleUrl: './phrases.component.css'
 })
-export class PhrasesListComponent implements OnInit
+export class PhrasesComponent implements OnInit
 {
     public phraseMng: PhraseManagement = PhraseManagement.getInstance(this.phrasesService);
     public usersList: User[] = [];

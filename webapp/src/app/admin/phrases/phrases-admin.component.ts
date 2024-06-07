@@ -7,10 +7,10 @@ import { PhrasesService } from '../../home/services/phrases.service';
     selector: 'app-admin-phrases',
     standalone: true,
     imports: [],
-    templateUrl: './phrases.component.html',
+    templateUrl: './phrases-admin.component.html',
     styles: ``
 })
-export class PhrasesComponent
+export class PhrasesAdminComponent
 {
     public phraseMng: PhraseManagement = PhraseManagement.getInstance(this.phrasesService);
 

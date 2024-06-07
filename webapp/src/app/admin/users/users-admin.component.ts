@@ -4,9 +4,9 @@ import { Component } from '@angular/core';
     selector: 'app-admin-users',
     standalone: true,
     imports: [],
-    templateUrl: './users.component.html',
+    templateUrl: './users-admin.component.html',
     styles: ``
 })
-export class UsersComponent {
+export class UsersAdminComponent {
 
 }

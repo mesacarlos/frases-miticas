@@ -3,14 +3,14 @@ import { Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { adminRoute, privateRoute, publicRoute } from './auth/guards/auth.guard';
 import { LoginComponent } from './auth/pages/login/login.component';
-import { PhrasesComponent } from './admin/phrases/phrases.component';
-import { PhrasesListComponent } from './home/pages/phrases/phrasesList/phrases-list.component';
+import { PhrasesAdminComponent } from './admin/phrases/phrases-admin.component';
+import { PhrasesComponent } from './home/pages/phrases/phrases/phrases.component';
 import { SettingsComponent } from './settings/settings.component';
-import { UsersComponent } from './admin/users/users.component';
+import { UsersAdminComponent } from './admin/users/users-admin.component';
 
 export const routes: Routes =
 [
-    { path: 'home', component: PhrasesListComponent, canActivate: [privateRoute] },
+    { path: 'home', component: PhrasesComponent, canActivate: [privateRoute] },
     { path: 'login', component: LoginComponent, canActivate: [publicRoute] },
     { path: 'settings', component: SettingsComponent, canActivate: [privateRoute] },
     {
@@ -18,8 +18,8 @@ export const routes: Routes =
         component: AdminComponent,
         canActivate: [adminRoute],
         children: [
-            { path: 'phrases', component: PhrasesComponent },
-            { path: 'users', component: UsersComponent }
+            { path: 'phrases', component: PhrasesAdminComponent },
+            { path: 'users', component: UsersAdminComponent }
         ]
     },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
