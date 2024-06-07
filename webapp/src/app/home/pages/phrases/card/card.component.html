@@ -30,13 +30,15 @@
                 ({{ phrase.commentCount }})
             </button>
         </div>
-        <div>
-            <button mat-button (click)="edit()">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-button (click)="delete()">
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div>
+        @if (isAdmin) {
+            <div>
+                <button mat-button (click)="edit()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="delete()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        }
 	</mat-card-actions>
 </mat-card>
