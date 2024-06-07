@@ -66,8 +66,18 @@ export class PhrasesService
             },
             { headers: this.headers }
         ).pipe(
-            map(response => !!response
-            ),
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
+    public deletePhrase(id: number): Observable<boolean>
+    {
+        return this.http.delete<any>(
+            `${ environments.API_GATEWAY }/quote/${ id }`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
             catchError(() => of(false))
         );
     }

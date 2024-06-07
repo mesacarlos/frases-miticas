@@ -4,6 +4,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommentsListComponent } from '../../comments/commentsList/comments-list.component';
 import { MaterialModules } from '../../../../../material/material.modules';
 import { Phrase } from '../../../interfaces/phrases.interface';
+import { PhrasesService } from '../../../services/phrases.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
+import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
 
 @Component({
     selector: 'app-card',
@@ -35,7 +39,9 @@ export class CardComponent
     public numLikes: number = 0;
 
     constructor(
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private phrasesService: PhrasesService,
+        private snackBar: MatSnackBar
     ) {}
 
     public giveLike(): void
@@ -81,6 +87,30 @@ export class CardComponent
     {
         if (!this.isAdmin)
             return;
+
+        const dialogRef = this.dialog.open(AlertConfirmComponent, {
+            data: { title: '¿Quieres eliminar esta frase?', message: 'No podrás deshacer el cambio' }
+        });
+
+        dialogRef.afterClosed().subscribe(result =>
+        {
+            if (result)
+            {
+                this.phrasesService.deletePhrase(this.phrase.id)
+                    .subscribe(response =>
+                    {
+                        if (response)
+                        {
+                            this.snackBar.openFromComponent(AlertMessageComponent, {
+                                duration: 4000,
+                                data: 'Frase eliminada'
+                            });
+
+                            this.reloadPhrases.emit(undefined);
+                        }
+                });
+            }
+        });
     }
 
     public edit(): void

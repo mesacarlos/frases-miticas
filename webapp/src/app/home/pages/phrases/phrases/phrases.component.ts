@@ -157,8 +157,14 @@ export class PhrasesComponent implements OnInit
         this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
     }
 
-    public onRealoadPhrases(event: { id: number, commentCount: number })
+    public onRealoadPhrases(event: { id: number, commentCount: number } | undefined)
     {
+        if (event === undefined)
+        {
+            this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+            return;
+        }
+
         const phrase: Phrase | undefined = this.phraseMng.phrases.find(p => p.id === event.id);
 
         if (phrase)
