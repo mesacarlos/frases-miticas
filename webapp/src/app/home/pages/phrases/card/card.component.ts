@@ -8,6 +8,7 @@ import { PhrasesService } from '../../../services/phrases.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
+import { EditPhraseComponent } from '../edit/edit-phrase.component';
 
 @Component({
     selector: 'app-card',
@@ -117,5 +118,21 @@ export class CardComponent
     {
         if (!this.isAdmin)
             return;
+
+        let width: string = '60%';
+
+        if (window.innerWidth < 600)
+            width = '95%';
+
+        const dialogRef = this.dialog.open(EditPhraseComponent, {
+            width: width,
+            data: this.phrase
+        });
+
+        dialogRef.componentInstance.sendEvent.subscribe(() =>
+        {
+            dialogRef.close();
+            this.reloadPhrases.emit(undefined);
+        });
     }
 }

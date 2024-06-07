@@ -20,6 +20,16 @@ export interface AddPhrase
     users: User[]
 }
 
+export interface EditPhrase
+{
+    id: number;
+    author: string;
+    date: Date;
+    text: string;
+    context: string;
+    users: User[]
+}
+
 export interface GetPhrases
 {
     phrases: Phrase[];

@@ -8,7 +8,7 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
-import { AddPhraseComponent } from '../add-phrase/add-phrase.component';
+import { AddPhraseComponent } from '../add/add-phrase.component';
 import { CardComponent } from '../card/card.component';
 import { MaterialModules, MyPaginator, appDateFormat } from '../../../../../material/material.modules';
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';

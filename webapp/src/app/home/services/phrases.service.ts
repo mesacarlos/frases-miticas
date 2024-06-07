@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { AddPhrase, GetPhrases, Phrase } from "../interfaces/phrases.interface";
+import { AddPhrase, EditPhrase, GetPhrases, Phrase } from '../interfaces/phrases.interface';
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
 
@@ -57,6 +57,24 @@ export class PhrasesService
     {
         return this.http.post<any>(
             `${ environments.API_GATEWAY }/quote`,
+            {
+                "author": phrase.author,
+                "date": phrase.date.toISOString(),
+                "text": phrase.text,
+                "context": phrase.context,
+                "involvedUsers": phrase.users.map(user => user.id)
+            },
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
+    public editPhrase(phrase: EditPhrase): Observable<boolean>
+    {
+        return this.http.put<any>(
+            `${ environments.API_GATEWAY }/quote/${ phrase.id }`,
             {
                 "author": phrase.author,
                 "date": phrase.date.toISOString(),
