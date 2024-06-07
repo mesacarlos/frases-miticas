@@ -3,13 +3,17 @@ import { Router, RouterOutlet } from '@angular/router';
 
 import { AuthService } from './auth/services/auth.service';
 import Theme from './utils/theme';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styles: ``
+    selector: 'app-root',
+    standalone: true,
+    imports: [
+        RouterOutlet,
+        NavbarComponent
+    ],
+    templateUrl: './app.component.html',
+    styles: ``
 })
 export class AppComponent implements OnInit
 {

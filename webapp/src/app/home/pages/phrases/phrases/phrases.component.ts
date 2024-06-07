@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
@@ -20,6 +20,7 @@ import { UsersService } from '../../../services/users.service';
 import PhraseManagement from '../../../../utils/phraseManagement';
 
 @Component({
+    selector: 'app-list-phrases',
     standalone: true,
     imports: [
         ...MaterialModules,
@@ -39,6 +40,9 @@ import PhraseManagement from '../../../../utils/phraseManagement';
 })
 export class PhrasesComponent implements OnInit
 {
+    @Input()
+    public isAdmin: boolean = false;
+
     public phraseMng: PhraseManagement = PhraseManagement.getInstance(this.phrasesService);
     public usersList: User[] = [];
     public userFilter: User[] = [];

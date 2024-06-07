@@ -1,5 +1,3 @@
-<app-navbar />
-
 <div class="md:m-auto md:w-2/4">
     @if (loading) {
         <div class="flex justify-center align-middle mt-60">
@@ -26,8 +24,10 @@
                 Usuarios
             </button>
         </div>
-
-        <router-outlet />
     }
 
 </div>
+
+@if (!loading) {
+    <router-outlet />
+}
