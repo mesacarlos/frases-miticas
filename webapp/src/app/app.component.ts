@@ -22,6 +22,11 @@ export class AppComponent implements OnInit
     {
         Theme.checkTheme();
 
+        this.verifyToken();
+    }
+
+    private verifyToken(): void
+    {
         if (!this.authService.verifyToken())
         {
             localStorage.setItem('token', '');

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { jwtDecode } from "jwt-decode";
 import { Observable, catchError, map, of, switchMap } from "rxjs";
 
-import { Auth, ChangePassword } from "../interfaces/user.interface";
+import { Auth, ChangePassword, User } from "../interfaces/user.interface";
 import { environments } from "../../../environments/environments";
 import { MyJwtPayload } from '../interfaces/auth.interface';
 
@@ -42,6 +42,17 @@ export class AuthService
         ).pipe(
             map(response => response.data.username),
             catchError(() => of(''))
+        );
+    }
+
+    public getUserSelf(): Observable<User | null>
+    {
+        return this.http.get<any>(
+            `${ environments.API_GATEWAY }/user/self`,
+            { headers: this.headers }
+        ).pipe(
+            map( response => response.data ),
+            catchError(() => of(null))
         );
     }
 
