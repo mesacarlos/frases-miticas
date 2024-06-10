@@ -1,36 +1,43 @@
 <br>
 <mat-divider />
+<br>
 
 <div class="flex justify-center align-middle">
     <div>
-        <div class="mt-2 flex justify-center align-middle">
-            <button class="text-center" mat-fab extended color="">
+        <div class="flex justify-center align-middle">
+            <button class="text-center" mat-fab extended color="" (click)="onAddUser()">
                 <mat-icon>add</mat-icon>
                 Añadir
             </button>
         </div>
 
-        <div class="mt-5 mb-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            @for (user of users; track $index) {
-                <mat-card class="example-card">
-                    <mat-card-header>
-                        <mat-card-title-group>
-                        <mat-card-title class="dark:text-white">{{ user.username }}</mat-card-title>
-                        <mat-card-subtitle>{{ user.fullName }}</mat-card-subtitle>
-                        <img class="w-24 rounded-full" [src]="user.profilePictureUrl"  [alt]="user.profilePictureUrl">
-                        </mat-card-title-group>
-                    </mat-card-header>
-                    <mat-card-actions>
-                        <button mat-button>
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-button>
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
-            }
-        </div>
+        @if (loading) {
+            <div class="flex justify-center align-middle mt-60">
+                <mat-spinner></mat-spinner>
+            </div>
+        }
+        @else {
+            <div class="mt-5 mb-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                @for (user of users; track $index) {
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                            <mat-card-title-group>
+                            <mat-card-title class="dark:text-white">{{ user.username }}</mat-card-title>
+                            <mat-card-subtitle>{{ user.fullName }}</mat-card-subtitle>
+                            <img class="w-24 rounded-full" [src]="user.profilePictureUrl"  [alt]="user.profilePictureUrl">
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-card-actions>
+                            <button mat-button>
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-button>
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                }
+            </div>
+        }
     </div>
-
 </div>
