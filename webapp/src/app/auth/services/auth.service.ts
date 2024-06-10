@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { jwtDecode } from "jwt-decode";
 import { Observable, catchError, map, of, switchMap } from "rxjs";
 
-import { Auth, ChangePassword, User } from "../interfaces/user.interface";
+import { Auth, ChangePassword, User } from "../interfaces/users.interface";
 import { environments } from "../../../environments/environments";
 import { MyJwtPayload } from '../interfaces/auth.interface';
 

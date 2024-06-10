@@ -1,4 +1,4 @@
-import { InvolvedUser, User } from "../../auth/interfaces/user.interface";
+import { InvolvedUser, User } from "../../auth/interfaces/users.interface";
 
 export interface Phrase
 {

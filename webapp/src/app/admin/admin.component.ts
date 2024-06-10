@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialModules } from '../../material/material.modules';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { Router, RouterOutlet } from '@angular/router';
-import { User } from '../auth/interfaces/user.interface';
+import { User } from '../auth/interfaces/users.interface';
 import { AuthService } from '../auth/services/auth.service';
 
 @Component({

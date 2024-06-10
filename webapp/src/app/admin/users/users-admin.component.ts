@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../home/services/users.service';
 
 @Component({
     selector: 'app-admin-users',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
     templateUrl: './users-admin.component.html',
     styles: ``
 })
-export class UsersAdminComponent {
+export class UsersAdminComponent implements OnInit
+{
+    constructor(
+        private usersService: UsersService
+    ) {}
+
+    ngOnInit(): void
+    {
+
+    }
 
 }

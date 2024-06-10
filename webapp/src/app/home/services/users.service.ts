@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, catchError, map, of } from "rxjs";
 
 import { environments } from "../../../environments/environments";
-import { User } from "../../auth/interfaces/user.interface";
+import { User } from "../../auth/interfaces/users.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class UsersService
 
     public getUsers(): Observable<User[]>
     {
-        return this.http.get<GetUsers>(
+        return this.http.get<Users>(
             `${ environments.API_GATEWAY }/user`,
             { headers: this.headers }
         ).pipe(
@@ -48,16 +48,7 @@ export class UsersService
     }
 }
 
-export interface GetUsers
+export interface Users
 {
-    data: GetUser[];
-}
-
-export interface GetUser
-{
-    id: number,
-    username: string;
-    fullName: string;
-    isSuperAdmin: boolean;
-    profilePictureUrl: string;
+    data: User[];
 }

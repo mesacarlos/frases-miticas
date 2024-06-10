@@ -10,7 +10,7 @@ import { AddPhrase } from '../../../interfaces/phrases.interface';
 import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 import { MaterialModules, appDateFormat } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
-import { User } from '../../../../auth/interfaces/user.interface';
+import { User } from '../../../../auth/interfaces/users.interface';
 import { UsersService } from '../../../services/users.service';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 

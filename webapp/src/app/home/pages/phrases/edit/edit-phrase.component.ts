@@ -12,7 +12,7 @@ import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.
 import { EditPhrase, Phrase } from '../../../interfaces/phrases.interface';
 import { MaterialModules, appDateFormat } from '../../../../../material/material.modules';
 import { PhrasesService } from '../../../services/phrases.service';
-import { User, InvolvedUser } from '../../../../auth/interfaces/user.interface';
+import { User, InvolvedUser } from '../../../../auth/interfaces/users.interface';
 import { UsersService } from '../../../services/users.service';
 
 @Component({

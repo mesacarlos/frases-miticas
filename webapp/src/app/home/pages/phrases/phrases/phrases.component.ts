@@ -14,7 +14,7 @@ import { MaterialModules, MyPaginator, appDateFormat } from '../../../../../mate
 import { NavbarComponent } from '../../../../shared/navbar/navbar.component';
 import { Phrase, Search } from '../../../interfaces/phrases.interface';
 import { PhrasesService } from '../../../services/phrases.service';
-import { User } from '../../../../auth/interfaces/user.interface';
+import { User } from '../../../../auth/interfaces/users.interface';
 import { UsersService } from '../../../services/users.service';
 
 import PhraseManagement from '../../../../utils/phraseManagement';
