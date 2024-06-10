@@ -4,13 +4,17 @@ import { Injectable } from "@angular/core";
 import { AddPhrase, EditPhrase, GetPhrases, Phrase } from '../interfaces/phrases.interface';
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
+import { AuthService } from "../../auth/services/auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PhrasesService
 {
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private authService: AuthService
+    ) {}
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -73,6 +77,9 @@ export class PhrasesService
 
     public editPhrase(phrase: EditPhrase): Observable<boolean>
     {
+        if (!this.authService.isAdmin())
+            throw new Error("You don´t have permission to perform this operation");
+
         return this.http.put<any>(
             `${ environments.API_GATEWAY }/quote/${ phrase.id }`,
             {
@@ -91,6 +98,9 @@ export class PhrasesService
 
     public deletePhrase(id: number): Observable<boolean>
     {
+        if (!this.authService.isAdmin())
+            throw new Error("You don´t have permission to perform this operation");
+
         return this.http.delete<any>(
             `${ environments.API_GATEWAY }/quote/${ id }`,
             { headers: this.headers }
