@@ -37,8 +37,6 @@ export class AdminComponent implements OnInit
 
                 if (this.user == null)
                     this.router.navigateByUrl('/home');
-
-                this.router.navigateByUrl('control-panel/phrases');
             });
     }
 

@@ -19,7 +19,8 @@ export const routes: Routes =
         canActivate: [adminRoute],
         children: [
             { path: 'phrases', component: PhrasesAdminComponent },
-            { path: 'users', component: UsersAdminComponent }
+            { path: 'users', component: UsersAdminComponent },
+            { path: '', redirectTo: '/control-panel/phrases', pathMatch: 'full' }
         ]
     },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
