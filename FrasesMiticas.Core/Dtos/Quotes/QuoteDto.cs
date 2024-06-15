@@ -14,6 +14,7 @@ namespace FrasesMiticas.Core.Dtos.Quotes
         public string Context { get; init; }
 
         public IEnumerable<QuoteCommentDto> Comments { get; init; }
+        public IEnumerable<QuoteReactionDto> Reactions { get; init; }
         public IEnumerable<InvolvedUserDto> InvolvedUsers { get; init; }
     }
 }

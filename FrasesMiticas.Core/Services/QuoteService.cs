@@ -151,5 +151,36 @@ namespace FrasesMiticas.Core.Services
 
             repository.Update(entity);
         }
+
+        public QuoteReactionDto AddReaction(int quoteId, QuoteReactionDto dto)
+        {
+            Quote entity = repository.Get(quoteId);
+            if (entity == null)
+                throw new EntityNotFoundException($"A quote with ID {quoteId} was not found");
+
+            if (entity.Reactions.Any(e => e.UserId == dto.UserId && e.Type == dto.Type))
+                throw new EntityNotFoundException($"Quote with ID {quoteId} already reacted with this reaction type by this user.");
+
+            var newReaction = mapper.Map<QuoteReaction>(dto);
+            entity.Reactions.Add(newReaction);
+            repository.Update(entity);
+
+            return mapper.Map<QuoteReactionDto>(newReaction);
+        }
+
+        public void DeleteReaction(int quoteId, int userId, ReactionType type)
+        {
+            Quote entity = repository.Get(quoteId);
+            if (entity == null)
+                throw new EntityNotFoundException($"A quote with ID {quoteId} was not found");
+
+            var reaction = entity.Reactions.SingleOrDefault(e => e.UserId == userId && e.Type == type);
+            if (reaction == null)
+                throw new EntityNotFoundException($"No reaction with this information was found.");
+
+            entity.Reactions.Remove(reaction);
+
+            repository.Update(entity);
+        }
     }
 }

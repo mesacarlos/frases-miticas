@@ -1,4 +1,5 @@
-﻿using FrasesMiticas.Core.Dtos;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
+using FrasesMiticas.Core.Dtos;
 using FrasesMiticas.Core.Dtos.Quotes;
 using System.Collections.Generic;
 
@@ -64,5 +65,21 @@ namespace FrasesMiticas.Core.Interfaces.Services
         /// <param name="quoteId">Quote identifier.</param>
         /// <param name="commentId">Comment identifier.</param>
         public void DeleteComment(int quoteId, int commentId);
+
+        /// <summary>
+        /// Add a new reaction to a quote.
+        /// </summary>
+        /// <param name="quoteId">Quote identifier.</param>
+        /// <param name="dto">Reaction to add.</param>
+        /// <returns>Added reaction.</returns>
+        public QuoteReactionDto AddReaction(int quoteId, QuoteReactionDto dto);
+
+        /// <summary>
+        /// Delete a reaction from a quote.
+        /// </summary>
+        /// <param name="quoteId">Quote identifier.</param>
+        /// <param name="userId">User identifier.</param>
+        /// <param name="type">Reaction type.</param>
+        public void DeleteReaction(int quoteId, int userId, ReactionType type);
     }
 }

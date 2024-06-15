@@ -10,5 +10,7 @@ namespace FrasesMiticas.Api.ViewModels.Responses
         DateTime Date,
         string Text,
         string Context,
+        IEnumerable<QuoteCommentDto> Comments,
+        IEnumerable<QuoteReactionResponse> Reactions,
         IEnumerable<InvolvedUserDto> InvolvedUsers);
 }

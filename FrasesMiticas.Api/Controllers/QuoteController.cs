@@ -11,6 +11,7 @@ using System;
 using FrasesMiticas.Core.Interfaces.Tokens;
 using FrasesMiticas.Core.Exceptions;
 using System.Linq;
+using FrasesMiticas.Core.Aggregates.Quotes;
 
 namespace FrasesMiticas.Api.Controllers
 {
@@ -68,10 +69,10 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpGet("{id}")]
         [Authorization]
-        public ActionResult<QuoteDto> GetById([FromRoute] int id)
+        public ActionResult<QuoteResponse> GetById([FromRoute] int id)
         {
             QuoteDto dto = quoteService.Get(id);
-            return Ok(dto);
+            return Ok(mapper.Map<QuoteResponse>(dto));
         }
 
         [HttpDelete("{id}")]
@@ -135,6 +136,31 @@ namespace FrasesMiticas.Api.Controllers
             }
 
             quoteService.DeleteComment(quoteId, id);
+            return Ok(null);
+        }
+
+        [HttpPost("{quoteId}/reaction")]
+        [Authorization]
+        public ActionResult<QuoteReactionDto> CreateReaction([FromRoute] int quoteId, [FromBody] QuoteReactionCreateRequest request)
+        {
+            QuoteReactionDto dto = new QuoteReactionDto()
+            {
+                UserId = userToken.UserId,
+                QuoteId = quoteId,
+                Type = (ReactionType)request.Type
+            };
+
+            var result = quoteService.AddReaction(quoteId, dto);
+            return StatusCode(StatusCodes.Status201Created, result);
+        }
+
+        [HttpDelete("{quoteId}/reaction")]
+        [Authorization]
+        public ActionResult DeleteReaction([FromRoute] int quoteId, [FromQuery] int type)
+        {
+            var typeEnum = (ReactionType)type;
+
+            quoteService.DeleteReaction(quoteId, userToken.UserId, typeEnum);
             return Ok(null);
         }
     }
