@@ -20,13 +20,25 @@
 		<p class="text-center text-xl m-4">"{{ phrase.text }}"</p>
 		<p class="text-gray-700 dark:text-gray-300">{{ phrase.context }}</p>
 	</mat-card-content>
-	<mat-card-actions>
-		<button mat-button (click)="giveLike()">
-			<mat-icon class="text-red">{{ likeIcon }}</mat-icon>
-		</button>
-		<button mat-button (click)="viewComments()">
-			<mat-icon>question_answer</mat-icon>
-            ({{ phrase.commentCount }})
-		</button>
+	<mat-card-actions class="flex justify-between">
+        <div>
+            <button mat-button (click)="giveLike()">
+                <mat-icon class="text-red">{{ likeIcon }}</mat-icon>
+            </button>
+            <button mat-button (click)="viewComments()">
+                <mat-icon>question_answer</mat-icon>
+                ({{ phrase.commentCount }})
+            </button>
+        </div>
+        @if (isAdmin) {
+            <div>
+                <button mat-button (click)="edit()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="delete()">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        }
 	</mat-card-actions>
 </mat-card>

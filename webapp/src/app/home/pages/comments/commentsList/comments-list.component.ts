@@ -81,12 +81,14 @@ export class CommentsListComponent implements OnInit
             let message = 'No se ha podido borrar el comentario';
 
             if (response)
+            {
+                this.emitChanges = true;
                 message = 'Se ha borrado el comentario';
+                this.balanceOfComments--;
+                this.loadComments();
+            }
 
-            this.emitChanges = true;
-            this.balanceOfComments--;
             this.showAlert(message);
-            this.loadComments();
         });
     }
 
@@ -104,9 +106,9 @@ export class CommentsListComponent implements OnInit
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
-            dialogRef.close();
             this.emitChanges = false;
             this.loadComments();
+            dialogRef.close();
         });
     }
 
@@ -134,8 +136,8 @@ export class CommentsListComponent implements OnInit
         {
             this.emitChanges = true;
             this.balanceOfComments++;
-            dialogRef.close();
             this.loadComments();
+            dialogRef.close();
         });
     }
 }

@@ -1,4 +1,4 @@
-import { InvolvedUser, User } from "../../auth/interfaces/user.interface";
+import { InvolvedUser, User } from "../../auth/interfaces/users.interface";
 
 export interface Phrase
 {
@@ -13,6 +13,16 @@ export interface Phrase
 
 export interface AddPhrase
 {
+    author: string;
+    date: Date;
+    text: string;
+    context: string;
+    users: User[]
+}
+
+export interface EditPhrase
+{
+    id: number;
     author: string;
     date: Date;
     text: string;

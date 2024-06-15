@@ -1,16 +1,20 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { AddPhrase, GetPhrases, Phrase } from "../interfaces/phrases.interface";
+import { AddPhrase, EditPhrase, GetPhrases, Phrase } from '../interfaces/phrases.interface';
 import { environments } from "../../../environments/environments";
 import { Observable, catchError, map, of } from "rxjs";
+import { AuthService } from "../../auth/services/auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PhrasesService
 {
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private authService: AuthService
+    ) {}
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -66,8 +70,42 @@ export class PhrasesService
             },
             { headers: this.headers }
         ).pipe(
-            map(response => !!response
-            ),
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
+    public editPhrase(phrase: EditPhrase): Observable<boolean>
+    {
+        if (!this.authService.isAdmin())
+            throw new Error("You don´t have permission to perform this operation");
+
+        return this.http.put<any>(
+            `${ environments.API_GATEWAY }/quote/${ phrase.id }`,
+            {
+                "author": phrase.author,
+                "date": phrase.date.toISOString(),
+                "text": phrase.text,
+                "context": phrase.context,
+                "involvedUsers": phrase.users.map(user => user.id)
+            },
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
+    public deletePhrase(id: number): Observable<boolean>
+    {
+        if (!this.authService.isAdmin())
+            throw new Error("You don´t have permission to perform this operation");
+
+        return this.http.delete<any>(
+            `${ environments.API_GATEWAY }/quote/${ id }`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
             catchError(() => of(false))
         );
     }

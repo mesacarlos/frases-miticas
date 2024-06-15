@@ -5,7 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModules } from '../../../../material/material.modules';
 import { NavbarComponent } from '../../../shared/navbar/navbar.component';
-import { UserRegister } from '../../interfaces/user.interface';
+import { UserRegister } from '../../interfaces/users.interface';
 
 @Component({
     standalone: true,

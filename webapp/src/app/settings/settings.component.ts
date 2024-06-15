@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AlertMessageComponent } from '../home/pages/alerts/alert-message/alert-message.component';
 import { AuthService } from '../auth/services/auth.service';
-import { ChangePassword } from '../auth/interfaces/user.interface';
+import { ChangePassword } from '../auth/interfaces/users.interface';
 import { MaterialModules } from '../../material/material.modules';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 

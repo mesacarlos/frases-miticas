@@ -2,7 +2,7 @@
     <form [formGroup]="phraseForm" class="flex flex-col content-center w-full p-5">
         <mat-form-field>
             <mat-label for="author">Autor</mat-label>
-            <input id="author" type="text" matInput placeholder="Autor" formControlName="author" required>
+            <input id="author" type="text" matInput placeholder="Autor" formControlName="author" [value]="currentPhrase.author" required>
             @if (errorEmptyAuthor) { <mat-error>Debes indicar un autor</mat-error> }
         </mat-form-field>
 
@@ -30,30 +30,30 @@
 
         <mat-form-field>
             <mat-label>Fecha</mat-label>
-            <input matInput [matDatepicker]="picker" [value]="date">
+            <input matInput [matDatepicker]="picker" [value]="currentPhrase.date" (dateChange)="updateDate($event)">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label for="text">Frase mítica</mat-label>
-            <textarea matInput placeholder="Frase mítica..." formControlName="text" required></textarea>
+            <textarea matInput placeholder="Frase mítica..." formControlName="text" [value]="currentPhrase.text" required></textarea>
             @if (errorEmptyText) { <mat-error>Debes indicar la frase mítica</mat-error> }
         </mat-form-field>
 
         <mat-form-field>
             <mat-label for="context">Contexto</mat-label>
-            <textarea matInput placeholder="Contexto..." formControlName="context"></textarea>
+            <textarea matInput placeholder="Contexto..." formControlName="context" [value]="currentPhrase.context"></textarea>
         </mat-form-field>
 
         <button
             mat-button
             mat-flat-button
             color="primary"
-            (click)="addPhrase()"
+            (click)="editPhrase()"
         >
-            <mat-icon>add</mat-icon>
-            Añadir
+            <mat-icon>edit</mat-icon>
+            Editar
         </button>
     </form>
 </div>

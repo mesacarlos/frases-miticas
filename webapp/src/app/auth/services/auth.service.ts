@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { jwtDecode } from "jwt-decode";
 import { Observable, catchError, map, of, switchMap } from "rxjs";
 
+import { Auth, ChangePassword, User } from "../interfaces/users.interface";
 import { environments } from "../../../environments/environments";
-import { Auth, ChangePassword } from "../interfaces/user.interface";
+import { MyJwtPayload } from '../interfaces/auth.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -43,9 +45,25 @@ export class AuthService
         );
     }
 
+    public getUserSelf(): Observable<User | null>
+    {
+        return this.http.get<any>(
+            `${ environments.API_GATEWAY }/user/self`,
+            { headers: this.headers }
+        ).pipe(
+            map( response => response.data ),
+            catchError(() => of(null))
+        );
+    }
+
     public isAuthenticated(): boolean
     {
-        return !!localStorage.getItem('token');
+        return this.decodeToken() !== null;
+    }
+
+    public isAdmin(): boolean
+    {
+        return this.decodeToken()?.SuperUser ?? false;
     }
 
     public changePassword(changePassword: ChangePassword): Observable<boolean>
@@ -69,5 +87,37 @@ export class AuthService
                 }),
                 catchError(() => of(false))
             );
+    }
+
+    public verifyToken(): boolean
+    {
+        const decode = this.decodeToken();
+
+        if (decode === null)
+            return false;
+
+        const timeExpire: number = (decode.exp ?? 0) * 1000;
+
+        return !!decode && timeExpire - Date.now() > 0;
+    }
+
+    private decodeToken(): MyJwtPayload | null
+    {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token)
+                return null;
+
+            const decode: MyJwtPayload = jwtDecode(token);
+
+            if (decode)
+                return decode;
+
+            return null;
+
+        } catch (err) {
+            return null;
+        }
     }
 }

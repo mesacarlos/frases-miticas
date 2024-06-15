@@ -44,3 +44,12 @@ export interface InvolvedUser
 	fullname: string;
 	profilePictureUrl: string;
 }
+
+export interface NewUser
+{
+    username: string,
+    email: string,
+    password: string,
+    fullName: string,
+    isSuperAdmin: boolean
+}
