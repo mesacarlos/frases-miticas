@@ -65,7 +65,9 @@ export class PhrasesComponent implements OnInit
         this.userService.getUsers()
             .subscribe(response => this.usersList = response);
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex);
+        this.phraseMng.setPageSize(this.itemsPerPage)
+                        .setPageIndex(this.pageIndex)
+                        .loadPhrases();
     }
 
     public searchForm = new FormGroup({
@@ -89,7 +91,7 @@ export class PhrasesComponent implements OnInit
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {
             dialogRef.close();
-            this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex);
+            this.phraseMng.loadPhrases();
         });
     }
 
@@ -99,7 +101,9 @@ export class PhrasesComponent implements OnInit
         this.itemsPerPage = e.pageSize;
         this.pageIndex = e.pageIndex + 1;
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex);
+        this.phraseMng.setPageSize(this.itemsPerPage)
+                        .setPageIndex(this.pageIndex)
+                        .loadPhrases();
     }
 
     public scrollToTop(): void
@@ -117,14 +121,14 @@ export class PhrasesComponent implements OnInit
         if (this.currentPhrase.search === '' && !keypress)
             return;
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
+        this.phraseMng.setSearch(this.currentPhrase.search).loadPhrases();
     }
 
     public onFilter(event: MatSelectChange)
     {
         this.userFilter = event.value;
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+        this.phraseMng.setAuthors(this.userFilter.map(u => u.id)).loadPhrases();
     }
 
     public filterFrom(event: MatDatepickerInputEvent<Date>): void
@@ -134,7 +138,7 @@ export class PhrasesComponent implements OnInit
 
         this.dateFrom = new Date(event.value);
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+        this.phraseMng.setFrom(this.dateFrom).loadPhrases();
     }
 
     public filterTo(event: MatDatepickerInputEvent<Date>): void
@@ -144,7 +148,7 @@ export class PhrasesComponent implements OnInit
 
         this.dateTo = new Date(event.value);
 
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+        this.phraseMng.setTo(this.dateTo).loadPhrases();
     }
 
     public clearFilter(): void
@@ -154,14 +158,18 @@ export class PhrasesComponent implements OnInit
         this.dateTo = new Date();
 
         this.authorSelect.writeValue(this.userFilter);
-        this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search);
+
+        this.phraseMng.resetState()
+                        .setPageSize(this.itemsPerPage)
+                        .setPageIndex(this.pageIndex)
+                        .loadPhrases();
     }
 
     public onRealoadPhrases(event: { id: number, commentCount: number } | undefined)
     {
         if (event === undefined)
         {
-            this.phraseMng.loadPhrases(this.itemsPerPage, this.pageIndex, this.currentPhrase.search, this.dateFrom, this.dateTo, this.userFilter.map(u => u.id));
+            this.phraseMng.loadPhrases();
             return;
         }
 
