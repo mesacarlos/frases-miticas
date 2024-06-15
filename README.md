@@ -18,10 +18,5 @@ The web application follows the component-based standard that Angular indicates.
 # API Docuemntation
 The complete API documentation, following the OpenAPI standard, is available at [API Doc](https://fm-api.mesacarlos.es/swagger/index.html). You can access it to see details about endpoints, data schemas and usage examples.
 
-# Developers
-[Carlos Mesa](https://github.com/mesacarlos) - Back developer
-
-[Rubén Fernández](https://github.com/RubenFern) - Front developer
-
 # License
 This project is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/mesacarlos/frases-miticas/blob/main/LICENSE) file for more details.
