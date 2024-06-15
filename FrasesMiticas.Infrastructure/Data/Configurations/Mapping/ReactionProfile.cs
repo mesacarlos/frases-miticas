@@ -4,13 +4,13 @@ using FrasesMiticas.Core.Dtos.Quotes;
 
 namespace FrasesMiticas.Infrastructure.Data.Configurations.Mapping
 {
-    public class ReactionProfile : Profile
+    public class CommentProfile : Profile
     {
-        public ReactionProfile()
+        public CommentProfile()
         {
-            CreateMap<QuoteReaction, QuoteReactionDto>();
+            CreateMap<QuoteComment, QuoteCommentDto>();
 
-            CreateMap<QuoteReactionDto, QuoteReaction>();
+            CreateMap<QuoteCommentDto, QuoteComment>();
         }
     }
 }

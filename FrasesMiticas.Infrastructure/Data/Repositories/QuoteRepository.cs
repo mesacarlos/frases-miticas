@@ -22,12 +22,14 @@ namespace FrasesMiticas.Infrastructure.Data.Repositories
         public IEnumerable<Quote> Get() => repository
                                                     .Get()
                                                     .Include(e => e.InvolvedUsers)
+                                                    .Include(e => e.Reactions)
                                                     .Include(e => e.Comments)
                                                     .OrderByDescending(e => e.Date);
 
         public Quote Get(int id) => repository
                                             .Where(e => e.Id == id)
                                             .Include(e => e.InvolvedUsers)
+                                            .Include(e => e.Reactions)
                                             .Include(e => e.Comments)
                                                 .ThenInclude(e => e.User)
                                             .SingleOrDefault();

@@ -11,5 +11,6 @@ namespace FrasesMiticas.Api.ViewModels.Responses
         string Text,
         string Context,
         IEnumerable<InvolvedUserDto> InvolvedUsers,
+        IEnumerable<QuoteReactionResponse> Reactions,
         int CommentCount);
 }
