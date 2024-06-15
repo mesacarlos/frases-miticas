@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using FrasesMiticas.Core.Aggregates.Quotes;
 
 namespace FrasesMiticas.Core.Dtos.Quotes
 {
@@ -9,5 +10,6 @@ namespace FrasesMiticas.Core.Dtos.Quotes
         string Text,
         DateTime? FromDate,
         DateTime? ToDate,
-        IEnumerable<int> InvolvedUsers);
+        IEnumerable<int> InvolvedUsers,
+        IEnumerable<ReactionType> ReactedWith);
 }

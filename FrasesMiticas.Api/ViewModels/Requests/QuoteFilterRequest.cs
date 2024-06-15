@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FrasesMiticas.Core.Aggregates.Quotes;
+using System;
 using System.Collections.Generic;
 
 namespace FrasesMiticas.Api.ViewModels.Requests
@@ -9,5 +10,6 @@ namespace FrasesMiticas.Api.ViewModels.Requests
         string Text,
         DateTime? FromDate,
         DateTime? ToDate,
-        IEnumerable<int> InvolvedUsers);
+        IEnumerable<int> InvolvedUsers,
+        IEnumerable<ReactionType> ReactedWith);
 }

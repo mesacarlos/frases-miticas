@@ -72,6 +72,9 @@ namespace FrasesMiticas.Core.Services
             if (filter.InvolvedUsers.Any())
                 entities = entities.Where(e => e.InvolvedUsers.Any(e => filter.InvolvedUsers.Contains(e.Id)));
 
+            if (filter.ReactedWith.Any())
+                entities = entities.Where(e => e.Reactions.Any(r => filter.ReactedWith.Contains(r.Type)));
+
             int totalItems = entities.Count();
             //If PageNumber or PageSize are not valid, return all data
             if (filter.PageIndex <= 0 || filter.PageSize <= 0)
