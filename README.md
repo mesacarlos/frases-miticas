@@ -1,4 +1,4 @@
-# Arquitechture
+# Architecture
 The application is divided into two parts:
 
 - An API in the backend part to work with business logic and persistence.
