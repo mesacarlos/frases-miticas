@@ -8,7 +8,7 @@ namespace FrasesMiticas.Infrastructure.Data.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<QuoteReaction> builder)
         {
-            builder.HasKey(e => new { e.UserId, e.QuoteId });
+            builder.HasKey(e => new { e.UserId, e.QuoteId, e.Type });
 
             builder.Property(a => a.UserId)
                 .HasColumnName("user_id")

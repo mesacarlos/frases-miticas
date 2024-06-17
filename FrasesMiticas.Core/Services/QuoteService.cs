@@ -162,7 +162,7 @@ namespace FrasesMiticas.Core.Services
                 throw new EntityNotFoundException($"A quote with ID {quoteId} was not found");
 
             if (entity.Reactions.Any(e => e.UserId == dto.UserId && e.Type == dto.Type))
-                throw new EntityNotFoundException($"Quote with ID {quoteId} already reacted with this reaction type by this user.");
+                throw new InvalidRequestException($"Quote with ID {quoteId} already reacted with this reaction type by this user.");
 
             var newReaction = mapper.Map<QuoteReaction>(dto);
             entity.Reactions.Add(newReaction);

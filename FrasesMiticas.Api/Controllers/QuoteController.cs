@@ -143,11 +143,18 @@ namespace FrasesMiticas.Api.Controllers
         [Authorization]
         public ActionResult<QuoteReactionDto> CreateReaction([FromRoute] int quoteId, [FromBody] QuoteReactionCreateRequest request)
         {
+            var validEnum = Enum.TryParse(request.Type, true, out ReactionType reactionType);
+
+            if (!validEnum)
+            {
+                return BadRequest("Invalid reaction type.");
+            }
+
             QuoteReactionDto dto = new QuoteReactionDto()
             {
                 UserId = userToken.UserId,
                 QuoteId = quoteId,
-                Type = (ReactionType)request.Type
+                Type = reactionType
             };
 
             var result = quoteService.AddReaction(quoteId, dto);
@@ -156,11 +163,16 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpDelete("{quoteId}/reaction")]
         [Authorization]
-        public ActionResult DeleteReaction([FromRoute] int quoteId, [FromQuery] int type)
+        public ActionResult DeleteReaction([FromRoute] int quoteId, [FromQuery] string type)
         {
-            var typeEnum = (ReactionType)type;
+            var validEnum = Enum.TryParse(type, true, out ReactionType reactionType);
 
-            quoteService.DeleteReaction(quoteId, userToken.UserId, typeEnum);
+            if (!validEnum)
+            {
+                return BadRequest("Invalid reaction type.");
+            }
+
+            quoteService.DeleteReaction(quoteId, userToken.UserId, reactionType);
             return Ok(null);
         }
     }
