@@ -34,12 +34,14 @@ namespace FrasesMiticas.Api.Controllers
 
         [HttpPost()]
         [Authorization]
-        public ActionResult<QuoteDto> Create([FromBody] QuoteCreateRequest request)
+        public ActionResult<QuoteResponse> Create([FromBody] QuoteCreateRequest request)
         {
             QuoteDto dto = mapper.Map<QuoteDto>(request);
 
             var result = quoteService.Add(dto);
-            return StatusCode(StatusCodes.Status201Created, result);
+            return StatusCode(
+                StatusCodes.Status201Created,
+                mapper.Map<QuoteResponse>(result));
         }
 
         [HttpPut("{id}")]

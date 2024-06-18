@@ -166,9 +166,33 @@ namespace FrasesMiticas.Core.Services
 
             var newReaction = mapper.Map<QuoteReaction>(dto);
             entity.Reactions.Add(newReaction);
+            RemoveInvalidReactions(dto, entity.Reactions);
             repository.Update(entity);
 
             return mapper.Map<QuoteReactionDto>(newReaction);
+        }
+
+        private void RemoveInvalidReactions(QuoteReactionDto newReaction, ICollection<QuoteReaction> reactions)
+        {
+            switch (newReaction.Type)
+            {
+                case ReactionType.Like:
+                case ReactionType.Love:
+                    RemoveReactions(reactions, ReactionType.Dislike);
+                    break;
+                case ReactionType.Dislike:
+                    RemoveReactions(reactions, ReactionType.Like, ReactionType.Love);
+                    break;
+            }
+        }
+
+        private void RemoveReactions(ICollection<QuoteReaction> reactions, params ReactionType[] reactionsToDelete)
+        {
+            foreach (var r in reactionsToDelete)
+            {
+                var oldReaction = reactions.FirstOrDefault(e => e.Type == r);
+                reactions.Remove(oldReaction);
+            }
         }
 
         public void DeleteReaction(int quoteId, int userId, ReactionType type)

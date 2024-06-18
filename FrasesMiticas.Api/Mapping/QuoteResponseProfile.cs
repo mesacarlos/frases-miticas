@@ -10,6 +10,7 @@ namespace FrasesMiticas.Api.Mapping
         public QuoteResponseProfile()
         {
             CreateMap<QuoteDto, QuoteResponse>();
+
             CreateMap<QuoteDto, QuoteWithNumberOfCommentsResponse>()
                 .ForCtorParam(
                     nameof(QuoteWithNumberOfCommentsResponse.CommentCount),
