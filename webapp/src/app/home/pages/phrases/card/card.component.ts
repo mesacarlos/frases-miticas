@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
+import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
 import { CommentsListComponent } from '../../comments/commentsList/comments-list.component';
+import { EditPhraseComponent } from '../edit/edit-phrase.component';
 import { MaterialModules } from '../../../../../material/material.modules';
 import { Phrase } from '../../../interfaces/phrases.interface';
 import { PhrasesService } from '../../../services/phrases.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlertMessageComponent } from '../../alerts/alert-message/alert-message.component';
-import { AlertConfirmComponent } from '../../alerts/alert-confirm/alert-confirm.component';
-import { EditPhraseComponent } from '../edit/edit-phrase.component';
+import { ReactionComponent } from '../reaction/reaction.component';
 
 @Component({
     selector: 'app-card',
     standalone: true,
     imports: [
-        ...MaterialModules
+        ...MaterialModules,
+        ReactionComponent
     ],
     templateUrl: './card.component.html',
     styleUrl: './card.component.css'
@@ -31,32 +33,20 @@ export class CardComponent
         text: '',
         context: '',
         involvedUsers: [],
+        reactions: [],
         commentCount: 0
     };
     @Output() reloadPhrases = new EventEmitter<{ id: number, commentCount: number }>();
 
-    // implements on init and check if publication like
-    public likeIcon: string = 'favorite_border';
+    public reactionIcon: string = 'favorite_border';
     public numLikes: number = 0;
+    public userHasReacted: boolean = false;
 
     constructor(
         private dialog: MatDialog,
         private phrasesService: PhrasesService,
         private snackBar: MatSnackBar
     ) {}
-
-    public giveLike(): void
-    {
-        if (this.likeIcon === 'favorite_border')
-        {
-            this.likeIcon = 'favorite';
-            this.numLikes++;
-            return;
-        }
-
-        this.likeIcon ='favorite_border';
-        this.numLikes--;
-    }
 
     public viewComments(): void
     {

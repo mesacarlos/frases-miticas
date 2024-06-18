@@ -1,0 +1,19 @@
+<div class="dropdown dropdown-top">
+    @if (userHasReacted) {
+
+    } @else {
+        <button mat-button><mat-icon>favorite</mat-icon></button>
+    }
+    <div tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-dark-mode rounded-box">
+        @for (reaction of currentReactions; track $index) {
+            <span
+                [innerHTML]="reaction.icon"
+                [ngClass]="{
+                    'cursor-pointer mb-2 hover:bg-base-100 rounded-xl p-2': true,
+                    'bg-stone-700': reaction.selected
+                }"
+                (click)="onReaction(reaction.type)"
+            ></span>
+        }
+    </div>
+</div>

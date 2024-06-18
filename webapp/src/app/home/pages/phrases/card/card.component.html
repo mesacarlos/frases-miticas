@@ -22,9 +22,11 @@
 	</mat-card-content>
 	<mat-card-actions class="flex justify-between">
         <div>
-            <button mat-button (click)="giveLike()">
-                <mat-icon class="text-red">{{ likeIcon }}</mat-icon>
-            </button>
+            <app-reaction-button
+                [idPhrase]="phrase.id"
+                [reactions]="phrase.reactions"
+            />
+
             <button mat-button (click)="viewComments()">
                 <mat-icon>question_answer</mat-icon>
                 ({{ phrase.commentCount }})

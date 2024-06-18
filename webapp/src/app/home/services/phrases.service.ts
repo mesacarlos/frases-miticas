@@ -110,6 +110,31 @@ export class PhrasesService
         );
     }
 
+    public addReactionPhrase(idPhrase: number, reaction: string): Observable<boolean>
+    {
+        return this.http.post<any>(
+            `${ environments.API_GATEWAY }/quote/${ idPhrase }/reaction`,
+            {
+                "type": reaction
+            },
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
+    public removeReactionPhrase(idPhrase: number, reaction: string): Observable<boolean>
+    {
+        return this.http.delete<any>(
+            `${ environments.API_GATEWAY }/quote/${ idPhrase }/reaction?type=${ reaction }`,
+            { headers: this.headers }
+        ).pipe(
+            map(response => !!response),
+            catchError(() => of(false))
+        );
+    }
+
     private formatPhrases(phrases: Phrase[]): Phrase[]
     {
         for (let i = 0; i < phrases.length; i++)

@@ -8,6 +8,7 @@ export interface Phrase
     text: string;
     context: string | null;
 	involvedUsers : InvolvedUser[];
+    reactions: Reaction[];
     commentCount: number;
 }
 
@@ -39,4 +40,10 @@ export interface GetPhrases
 export interface Search
 {
     search: string;
+}
+
+export interface Reaction
+{
+    userId: number;
+    type: string;
 }
