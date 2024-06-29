@@ -12,6 +12,8 @@ import { CommentsService } from '../../../services/comments.service';
 import { MaterialModules } from '../../../../../material/material.modules';
 import { UpdateCommentComponent } from '../update-comment/update-comment.component';
 
+import Util from '../../../../utils/util';
+
 @Component({
     standalone: true,
     imports: [
@@ -94,14 +96,9 @@ export class CommentsListComponent implements OnInit
 
     public editComment(idQuote: number, idComment: number, message: string): void
     {
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
         const dialogRef = this.dialog.open(UpdateCommentComponent, {
             data: { idQuote: idQuote, idComment: idComment, message: message },
-            width: width
+            width: Util.getWindowWidth()
         });
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>
@@ -122,14 +119,9 @@ export class CommentsListComponent implements OnInit
 
     public openAddCommentForm(idQuote: number): void
     {
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
         const dialogRef = this.dialog.open(AddCommentComponent, {
             data: idQuote,
-            width: width
+            width: Util.getWindowWidth()
         });
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>

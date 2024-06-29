@@ -18,6 +18,7 @@ import { User } from '../../../../auth/interfaces/users.interface';
 import { UsersService } from '../../../services/users.service';
 
 import PhraseManagement from '../../../../utils/phraseManagement';
+import Util from '../../../../utils/util';
 
 @Component({
     selector: 'app-list-phrases',
@@ -76,12 +77,7 @@ export class PhrasesComponent implements OnInit
 
     public addPhrase()
     {
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
-        this.openDialog(width);
+        this.openDialog(Util.getWindowWidth());
     }
 
     private openDialog(width: string): void

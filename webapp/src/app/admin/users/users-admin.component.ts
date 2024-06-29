@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
-import { UsersService } from '../../home/services/users.service';
+import { AddUserComponent } from '../add-user/add-user.component';
 import { MaterialModules } from '../../../material/material.modules';
 import { User } from '../../auth/interfaces/users.interface';
-import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from '../add-user/add-user.component';
+import { UsersService } from '../../home/services/users.service';
+
+import Util from '../../utils/util';
 
 @Component({
     selector: 'app-admin-users',
@@ -32,12 +34,7 @@ export class UsersAdminComponent implements OnInit
 
     public onAddUser(): void
     {
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
-        const dialogRef = this.dialog.open(AddUserComponent, { width: width });
+        const dialogRef = this.dialog.open(AddUserComponent, { width: Util.getWindowWidth() });
 
         dialogRef.componentInstance.sendEvent.subscribe(() =>
         {

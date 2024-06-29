@@ -42,5 +42,13 @@
                 </button>
             </div>
         }
+        @else {
+            <div>
+                @for (icon of getKeys(); track $index) {
+                    <span [innerHTML]="iconReactions[icon]"></span>
+                    <span class="mr-2">x{{ reactions[icon] }}</span>
+                }
+            </div>
+        }
 	</mat-card-actions>
 </mat-card>

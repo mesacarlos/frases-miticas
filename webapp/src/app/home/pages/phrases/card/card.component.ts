@@ -11,6 +11,8 @@ import { Phrase } from '../../../interfaces/phrases.interface';
 import { PhrasesService } from '../../../services/phrases.service';
 import { ReactionComponent } from '../reaction/reaction.component';
 
+import Util, { SkeletonReaction } from '../../../../utils/util';
+
 @Component({
     selector: 'app-card',
     standalone: true,
@@ -21,7 +23,7 @@ import { ReactionComponent } from '../reaction/reaction.component';
     templateUrl: './card.component.html',
     styleUrl: './card.component.css'
 })
-export class CardComponent
+export class CardComponent implements OnInit
 {
     @Input()
     public isAdmin: boolean = false;
@@ -41,6 +43,14 @@ export class CardComponent
     public reactionIcon: string = 'favorite_border';
     public numLikes: number = 0;
     public userHasReacted: boolean = false;
+    public reactions: DisplayReaction = {
+        "like": 0,
+        "dislike": 0,
+        "love": 0,
+        "fire": 0
+    };
+
+    public iconReactions: SkeletonReaction = Util.getReactions();
 
     constructor(
         private dialog: MatDialog,
@@ -48,14 +58,14 @@ export class CardComponent
         private snackBar: MatSnackBar
     ) {}
 
+    ngOnInit(): void
+    {
+        this.countReactions();
+    }
+
     public viewComments(): void
     {
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
-        this.openDialog(width);
+        this.openDialog(Util.getWindowWidth());
     }
 
     private openDialog(width: string): void
@@ -109,13 +119,8 @@ export class CardComponent
         if (!this.isAdmin)
             return;
 
-        let width: string = '60%';
-
-        if (window.innerWidth < 600)
-            width = '95%';
-
         const dialogRef = this.dialog.open(EditPhraseComponent, {
-            width: width,
+            width: Util.getWindowWidth(),
             data: this.phrase
         });
 
@@ -125,4 +130,23 @@ export class CardComponent
             this.reloadPhrases.emit(undefined);
         });
     }
+
+    private countReactions(): void
+    {
+        this.phrase.reactions.forEach(element =>
+        {
+            this.reactions[element.type]++;
+        });
+    }
+
+    public getKeys(): string[]
+    {
+        return Object.keys(this.reactions);
+    }
+
+}
+
+interface DisplayReaction
+{
+    [icon: string]: number;
 }
