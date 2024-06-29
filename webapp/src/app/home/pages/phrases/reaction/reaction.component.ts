@@ -39,13 +39,13 @@ export class ReactionComponent implements OnInit
 
     ngOnInit(): void
     {
-        this.authService.getUserSelf().subscribe(res =>
+        this.authService.getUserSelf().subscribe(response =>
             {
-                if (res)
-                    this.userSelf = res;
-            });
+                if (response)
+                    this.userSelf = response;
 
-        this.loadReactions();
+                this.loadReactions();
+            });
     }
 
     public onReaction(reaction: string): void
@@ -82,6 +82,9 @@ export class ReactionComponent implements OnInit
 
     private userReactedTo(type: string): boolean
     {
+        if (!this.userSelf)
+            return false;
+
         return this.reactions.some(r => r.type === type && r.userId === this.userSelf.id);
     }
 
