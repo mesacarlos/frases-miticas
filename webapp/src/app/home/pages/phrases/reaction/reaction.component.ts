@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
 
 import { AuthService } from '../../../../auth/services/auth.service';
 import { MaterialModules } from '../../../../../material/material.modules';
@@ -13,8 +12,7 @@ import { User } from '../../../../auth/interfaces/users.interface';
     standalone: true,
     imports: [
         ...MaterialModules,
-        CommonModule,
-        RouterModule
+        CommonModule
     ],
     templateUrl: './reaction.component.html',
     styles: ``
@@ -37,7 +35,6 @@ export class ReactionComponent implements OnInit
     constructor(
         private phraseService: PhrasesService,
         private authService: AuthService,
-        private router: Router
     ) {}
 
     ngOnInit(): void
@@ -45,13 +42,10 @@ export class ReactionComponent implements OnInit
         this.authService.getUserSelf().subscribe(res =>
             {
                 if (res)
-                {
                     this.userSelf = res;
-                    this.loadReactions();
-                }
-
-                this.router.navigateByUrl('/home');
             });
+
+        this.loadReactions();
     }
 
     public onReaction(reaction: string): void
