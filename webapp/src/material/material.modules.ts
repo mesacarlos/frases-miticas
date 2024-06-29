@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 export const MaterialModules = [
     MatAutocompleteModule,
@@ -39,7 +41,8 @@ export const MaterialModules = [
     MatDatepickerModule,
     MatPaginatorModule,
     MatMenuTrigger,
-    MatMenuModule
+    MatMenuModule,
+    MatBadgeModule
 ];
 
 export const appDateFormat = {

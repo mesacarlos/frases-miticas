@@ -45,8 +45,9 @@
         @else {
             <div>
                 @for (icon of getKeys(); track $index) {
-                    <span [innerHTML]="iconReactions[icon]"></span>
-                    <span class="mr-2">x{{ reactions[icon] }}</span>
+                    @if (reactions[icon] != 0) {
+                        <span class="mr-4" [innerHTML]="iconReactions[icon]" matBadge="{{ reactions[icon] }}"></span>
+                    }
                 }
             </div>
         }
